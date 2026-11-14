@@ -30,7 +30,10 @@ flowchart LR
 |---|---|
 | `shared/types.ts`, `shared/schemas.ts` | Contracts and validation |
 | `shared/domain.ts` | Dates, demand, FEFO projection, risk, quality |
-| `shared/planner.ts` | Candidate generation, constraints, adaptive greedy selection, simulation |
+| `shared/planner.ts` | Candidate generation, safety constraints, exact MILP orchestration, simulation |
+| `shared/optimizer.ts` | HiGHS fixed-charge integer-flow MILP, optimality certificate, feasibility re-check |
+| `shared/countries.ts`, `shared/imports.ts` | Country profiles, authorized aggregate pack validation/privacy preview |
+| `shared/clinical-policy.ts` | Safety guardrails, local approval gate, prioritization weights |
 | `shared/evidence.ts` | Bounded retrieval and grounded briefing |
 | `shared/export.ts` | Formula-safe CSV |
 | `server/repository.ts` | SQLite schema, transactions, plan snapshots, audit |
@@ -45,7 +48,7 @@ flowchart LR
 UI requests `/api/overview`, `/api/risks`, or `/api/meta` → server validates query → loads validated in-memory snapshot → shared engine computes results → JSON response. The fixed snapshot date, not the wall clock, drives calculations.
 
 ### Scenario path
-UI posts budget/horizon/buffer/scope → Zod validation → server computes a fresh preview → returns selected/unfunded actions, assumptions, dataset hash, and before/after estimates. Saving posts the scenario and an idempotency key; the server recomputes rather than trusting client costs.
+UI posts budget/horizon/buffer/scope/country → Zod validation → country/data/clinical gates → candidate generation → exact HiGHS MILP → independent feasibility check → selected/unfunded actions, optimality certificate, assumptions, dataset hash, and before/after estimates. Saving posts the scenario and an idempotency key; the server recomputes rather than trusting client costs.
 
 ### Workflow path
 Save creates a plan and item snapshots in one transaction. Approval and item advancement use expected-state checks and append audit events atomically. There are no external side effects. The actor is the explicit `Demo analyst`; this is not authenticated identity.
@@ -60,12 +63,12 @@ Development uses Vite middleware inside Express. Production serves `dist/client`
 
 ## Deliberate limitations
 
-One shared demo workspace, no auth/roles/tenant isolation, no live connectors, no background jobs, no real routing, no LLM provider, and no production migration/backup service. The SQLite adapter and file-based dataset are replaceable boundaries, not claims of production readiness.
+One shared demo workspace, no auth/roles/tenant isolation, no live government API connectors, no background jobs, no real routing, no LLM provider, and no production migration/backup service. Operator-controlled authorized aggregate file ingestion exists but is disabled in the public demo. The SQLite adapter and file-based dataset are replaceable boundaries, not claims of production readiness.
 
 ## Extension points
 
-1. Ingestion adapter → validated observations + quarantine + lineage.
+1. Ingestion adapter → authorized aggregate observations + quarantine + lineage + country custodian authentication.
 2. Forecast adapter → backtested model with the same risk contract.
-3. Allocation adapter → constrained optimizer with equity requirements.
+3. Allocation adapter → locally approved equity/clinical constraints over the exact MILP contract.
 4. LLM adapter → retrieved evidence + deterministic tool results; validated citations; no action authority.
 5. Identity/workflow adapters → authenticated roles and authoritative procurement/finance systems.

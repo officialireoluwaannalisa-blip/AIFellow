@@ -11,7 +11,8 @@ StockSense helps a district planner move from stockout risk to a budget-aware ac
 - Network overview and filterable stockout-risk register.
 - FEFO-aware stock projection, expiry exposure, confirmed inbound shipments, and Unknown-data handling.
 - Explainable risk calculations and item-level evidence.
-- Budget-constrained replenishment/transfer scenarios with donor, shelf-life, route, and cold-chain checks.
+- Exact HiGHS MILP replenishment/transfer scenarios with optimality certificates, donor, shelf-life, route, and cold-chain checks.
+- Country/location profiles, authorized aggregate import preview, and gated clinical-policy configuration.
 - Saved plans, explicit demo approval, stepwise funding trace, and append-only audit history in SQLite.
 - CSV exports, grounded briefing, searchable evidence library, and a bounded retrieval assistant.
 - Data-quality/provenance and methodology pages.
@@ -57,6 +58,7 @@ A facilitator-friendly walkthrough is in [Demo script](docs/DEMO_SCRIPT.md).
 | [Architecture](docs/ARCHITECTURE.md) | Stack, modules, data flow, deployment boundary |
 | [API](docs/API.md) | Endpoints, validation, errors, examples |
 | [Data contract](docs/DATA_CONTRACT.md) | Schemas, units, provenance, quality gates |
+| [Country data](docs/COUNTRY_DATA.md) | Location profiles, authorized aggregate ingestion, privacy gates |
 | [Model card](docs/MODEL_CARD.md) | Formulas, assumptions, evaluation, limitations |
 | [Responsible AI](docs/RESPONSIBLE_AI.md) | Equity, privacy, human oversight, LLM gates |
 | [Security & privacy](docs/SECURITY.md) | Demo threat model and production blockers |
@@ -84,6 +86,6 @@ docs/                Product, engineering, safety, and teaching documents
 
 ## Important limits
 
-The forecast is a transparent baseline, not a calibrated probability. Allocation is an adaptive greedy heuristic, not a global optimum or clinical priority rule. Transfers are limited to exact products within fictional same-district routes. The funding workflow is a simulation. Authentication, real-data governance, integrations, and prospective evaluation are required before any pilot.
+The forecast is a transparent baseline, not a calibrated probability. Allocation is an exact fixed-charge integer-flow MILP, globally optimal for the modeled problem and objective—not a clinical priority rule or real-world impact guarantee. The public demo uses synthetic data; real-country use requires authorized aggregate data and a locally approved clinical policy. Patient-level records are rejected. Transfers are limited to exact products within configured routes. The funding workflow is a simulation. Authentication, live custodian connectors, and prospective evaluation are required before any pilot.
 
 See the [model card](docs/MODEL_CARD.md) and [security boundary](docs/SECURITY.md) before adapting this project.

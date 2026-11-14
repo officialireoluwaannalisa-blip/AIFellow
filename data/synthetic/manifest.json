@@ -4,7 +4,7 @@
   "generator": "scripts/generate-data.ts",
   "seed": null,
   "sourceFile": "data/synthetic/seed.json",
-  "sha256": "b91d3ea7e7cee57d152686df238d5c047891fb6b23feff6f55da3525d092b751",
+  "sha256": "a0282a6f1f7e56599ed96d3616f7d8cb6cb1a59227be6287b501da989545274a",
   "synthetic": true,
   "counts": {
     "districts": 3,

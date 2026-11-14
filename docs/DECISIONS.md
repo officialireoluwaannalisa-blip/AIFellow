@@ -10,7 +10,7 @@
 
 ## ADR-003 — Deterministic core before LLM
 
-**Status:** accepted. **Decision:** transparent demand/FEFO/risk/greedy engines; bounded retrieval assistant; no connected LLM. **Why:** arithmetic and constraints must be auditable and reproducible without credentials. **Consequence:** future LLM is an optional summarization layer behind citation/action gates.
+**Status:** accepted. **Decision:** transparent demand/FEFO/risk engines, exact MILP allocation, bounded retrieval assistant; no connected LLM. **Why:** arithmetic and constraints must be auditable and reproducible without credentials. **Consequence:** future LLM is an optional summarization layer behind citation/action gates.
 
 ## ADR-004 — TypeScript monorepo with one origin
 
@@ -20,9 +20,9 @@
 
 **Status:** accepted. **Decision:** persist plans/items/audit in SQLite via `node:sqlite`; dataset remains versioned files. **Why:** durable local workflow without external services. **Consequence:** API is experimental in Node 22; isolate repository adapter and harden/replace before production.
 
-## ADR-006 — Adaptive greedy allocation, not “AI optimizer” branding
+## ADR-006 — Adaptive greedy allocation (superseded)
 
-**Status:** accepted. **Decision:** rank affordable candidates by marginal priority units per dollar, recompute state, expose unfunded needs. **Why:** understandable, testable, fast for the demo. **Consequence:** not globally optimal or normatively fair; future constrained optimization and equity rules required.
+**Status:** superseded by ADR-010. **Decision:** v0.1 ranked affordable candidates by marginal priority units per dollar. **Why:** understandable initial baseline. **Consequence:** retained only as historical context; the active engine is exact MILP.
 
 ## ADR-007 — Procurement cannot repair pre-lead-time unmet demand
 
@@ -35,3 +35,15 @@
 ## ADR-009 — Project-local browser QA without global installs
 
 **Status:** accepted. **Decision:** `agent-browser` and `@sparticuz/chromium` as dev dependencies; smoke test starts an isolated server/temporary DB. **Why:** reproducible QA in a restricted network sandbox. **Consequence:** browser package is large but excluded from Git via node_modules; normal Chrome can be supplied by environment variable.
+
+## ADR-010 — Exact fixed-charge integer-flow MILP
+
+**Status:** accepted. **Decision:** replace greedy selection with HiGHS WASM MILP. Stage 1 maximizes weighted units; stage 2 minimizes cost without reducing benefit. Require `Optimal`, zero gap, and independent integer feasibility checks. **Why:** the user requested global optimality; fixed charges and shared batch caps make greedy selection insufficient. **Consequence:** optimality is scoped to the modeled problem, not real-world clinical utility; solver timing is excluded from determinism comparisons.
+
+## ADR-011 — Country-aware authorized aggregate ingestion only
+
+**Status:** accepted. **Decision:** add country profiles, location setting, aggregate-pack preview, and operator-controlled file ingestion. Reject patient-level records and direct identifiers. Public demo remains synthetic; real-country activation requires authorization attestation and a non-public deployment. **Why:** nation/location-aware data is required, but patient records and unapproved government extracts cannot be safely ingested. **Consequence:** live government API connectors remain unconnected until custodian endpoints and agreements are supplied.
+
+## ADR-012 — Clinical policy is a gated governance artifact
+
+**Status:** accepted. **Decision:** separate enforceable safety guardrails from locally approved prioritization weights. Synthetic demo weights are labeled; real-country allocation requires an approved jurisdiction-matched policy. Autonomous execution is always disabled. **Why:** clinical prioritization is a local governance decision, not an invented app default. **Consequence:** real-country planning fails closed until policy and data gates pass.

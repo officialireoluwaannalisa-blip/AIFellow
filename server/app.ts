@@ -1,9 +1,12 @@
 import express, { type NextFunction, type Request, type Response } from 'express';
 import helmet from 'helmet';
 import { ZodError, z } from 'zod';
+import { AllocationGateError, allocationGate, DEMO_CLINICAL_POLICY, type ClinicalPolicy } from '../shared/clinical-policy';
+import { COUNTRY_PROFILES, getCountryProfile, isCountryCode } from '../shared/countries';
 import { assessDataset, assessStock, buildOverview, DEFAULT_SCENARIO, qualityReport } from '../shared/domain';
 import { answerQuestion, buildBriefing, searchEvidence } from '../shared/evidence';
 import { planCsv, risksCsv } from '../shared/export';
+import { previewAggregateImport } from '../shared/imports';
 import { runScenario } from '../shared/planner';
 import { advanceSchema, approveSchema, assistantSchema, riskQuerySchema, savePlanSchema, scenarioSchema } from '../shared/schemas';
 import type { Dataset, DatasetManifest } from '../shared/types';
@@ -14,14 +17,23 @@ const scopeQuery = z.object({
   districtId: z.string().max(80).optional(),
   horizonDays: z.preprocess((v) => v === undefined ? 30 : Number(v), z.union([z.literal(14), z.literal(30), z.literal(60)])),
 }).strict();
+const locationSchema = z.object({ countryCode: z.string().refine(isCountryCode, 'Unknown country/location') }).strict();
 
-export function createApp(options: { dataset: Dataset; manifest: DatasetManifest; hash: string; repository: PlanRepository }) {
+export function createApp(options: {
+  dataset: Dataset; manifest: DatasetManifest; hash: string; repository: PlanRepository;
+  policy?: ClinicalPolicy; dataAuthorized?: boolean;
+}) {
   const { dataset, manifest, hash, repository } = options;
+  const policy = options.policy ?? DEMO_CLINICAL_POLICY;
+  const dataAuthorized = options.dataAuthorized ?? false;
+  const dataMode = manifest.synthetic ? 'synthetic' : 'authorized_aggregate';
+  const datasetCountry = dataset.countryCode ?? 'DEMO';
   const app = express();
   app.disable('x-powered-by');
   // Demo is embedded by the Arena live preview. Production must replace this with
   // an explicit CSP frame-ancestors policy and authenticated access controls.
   app.use(helmet({ contentSecurityPolicy: false, crossOriginEmbedderPolicy: false, frameguard: false }));
+  app.use('/api/imports/preview', express.json({ limit: '2mb' }));
   app.use(express.json({ limit: '32kb' }));
   app.use('/api', (_req, res, next) => { res.setHeader('Cache-Control', 'no-store'); next(); });
   app.use('/api', (req, _res, next) => {
@@ -41,13 +53,38 @@ export function createApp(options: { dataset: Dataset; manifest: DatasetManifest
   const assertProduct = (id: string | null | undefined) => {
     if (id && !dataset.products.some((p) => p.id === id)) throw new NotFoundError('Product not found');
   };
+  const activeLocation = () => repository.getSetting('countryCode') ?? datasetCountry;
+  const policySummary = () => ({
+    version: policy.version, jurisdiction: policy.jurisdiction, approvalStatus: policy.approvalStatus,
+    autonomousExecution: false as const, safetyConstraintsEnforced: true as const,
+    prioritizationSource: policy.prioritization.source,
+  });
 
-  app.get('/api/health', (_req, res) => res.json({ ok: true, demo: true, datasetVersion: dataset.version, asOf: dataset.asOf }));
+  app.get('/api/health', (_req, res) => res.json({ ok: true, demo: manifest.synthetic, dataMode, countryCode: datasetCountry, datasetVersion: dataset.version, asOf: dataset.asOf }));
   app.get('/api/meta', (_req, res) => res.json({
-    country: dataset.country, asOf: dataset.asOf, version: dataset.version, currency: dataset.currency,
+    country: dataset.country, countryCode: datasetCountry, dataMode, asOf: dataset.asOf, version: dataset.version, currency: dataset.currency,
     districts: dataset.districts, facilities: dataset.facilities, products: dataset.products,
-    manifest, quality: qualityReport(dataset), defaultScenario: DEFAULT_SCENARIO,
+    manifest, quality: qualityReport(dataset), defaultScenario: { ...DEFAULT_SCENARIO, countryCode: activeLocation() },
+    location: activeLocation(), clinicalPolicy: policySummary(),
   }));
+  app.get('/api/countries', (_req, res) => res.json({
+    countries: COUNTRY_PROFILES.map((profile) => ({
+      ...profile,
+      connectionState: profile.code === datasetCountry && dataAuthorized ? 'authorized_aggregate_active'
+        : profile.code === 'DEMO' && manifest.synthetic ? 'synthetic_demo_active' : 'not_connected',
+      allocationGate: allocationGate(profile.code, policy, dataAuthorized && profile.code === datasetCountry),
+    })),
+  }));
+  app.get('/api/location', (_req, res) => {
+    const code = activeLocation(); const profile = getCountryProfile(code)!;
+    res.json({ countryCode: code, profile, allocationGate: allocationGate(code, policy, dataAuthorized && code === datasetCountry) });
+  });
+  app.put('/api/location', (req, res) => {
+    const input = locationSchema.parse(req.body); repository.setSetting('countryCode', input.countryCode);
+    const profile = getCountryProfile(input.countryCode)!;
+    res.json({ countryCode: input.countryCode, profile, allocationGate: allocationGate(input.countryCode, policy, dataAuthorized && input.countryCode === datasetCountry) });
+  });
+  app.post('/api/imports/preview', (req, res) => res.json(previewAggregateImport(req.body)));
   app.get('/api/overview', (req, res) => {
     const query = scopeQuery.parse(req.query); assertDistrict(query.districtId);
     res.json(buildOverview(dataset, query.horizonDays, query.districtId));
@@ -66,14 +103,14 @@ export function createApp(options: { dataset: Dataset; manifest: DatasetManifest
     if (!stock) throw new NotFoundError('Stock record not found');
     res.json(assessStock(dataset, stock));
   });
-  app.post('/api/scenarios/preview', (req, res) => {
+  app.post('/api/scenarios/preview', async (req, res) => {
     const input = scenarioSchema.parse(req.body); assertDistrict(input.districtId);
-    res.json(runScenario(dataset, input, hash));
+    res.json(await runScenario(dataset, input, hash, policy, dataAuthorized));
   });
   app.get('/api/plans', (_req, res) => res.json({ plans: repository.listPlans() }));
-  app.post('/api/plans', (req, res) => {
+  app.post('/api/plans', async (req, res) => {
     const input = savePlanSchema.parse(req.body); assertDistrict(input.scenario.districtId);
-    const result = runScenario(dataset, input.scenario, hash);
+    const result = await runScenario(dataset, input.scenario, hash, policy, dataAuthorized);
     const plan = repository.createPlan(input.name, input.scenario, result, input.idempotencyKey);
     res.status(201).json({ plan });
   });
@@ -99,7 +136,7 @@ export function createApp(options: { dataset: Dataset; manifest: DatasetManifest
   app.get('/api/briefing', (req, res) => {
     const query = z.object({ districtId: z.string().max(80).optional() }).strict().parse(req.query); assertDistrict(query.districtId);
     res.setHeader('Content-Type', 'text/markdown; charset=utf-8');
-    res.setHeader('Content-Disposition', 'attachment; filename="stocksense-demo-briefing.md"');
+    res.setHeader('Content-Disposition', `attachment; filename="stocksense-${manifest.synthetic ? 'demo' : 'authorized-aggregate'}-briefing.md"`);
     res.send(buildBriefing(dataset, query.districtId));
   });
   app.get('/api/export/risks.csv', (req, res) => {
@@ -107,23 +144,24 @@ export function createApp(options: { dataset: Dataset; manifest: DatasetManifest
     const rows = assessDataset(dataset, query.horizonDays, DEFAULT_SCENARIO.bufferDays, query.districtId)
       .filter((a) => (!query.productId || a.productId === query.productId) && (query.risk === 'all' || a.risk === query.risk));
     res.setHeader('Content-Type', 'text/csv; charset=utf-8');
-    res.setHeader('Content-Disposition', 'attachment; filename="stocksense-synthetic-risks.csv"');
-    res.send(risksCsv(rows, dataset.asOf, dataset.version));
+    res.setHeader('Content-Disposition', `attachment; filename="stocksense-${manifest.synthetic ? 'synthetic' : 'authorized-aggregate'}-risks.csv"`);
+    res.send(risksCsv(rows, dataset.asOf, dataset.version, manifest.synthetic));
   });
   app.get('/api/export/plans/:id.csv', (req, res) => {
     const plan = repository.getPlan(idParam.parse(req.params.id)); if (!plan) throw new NotFoundError('Plan not found');
     res.setHeader('Content-Type', 'text/csv; charset=utf-8');
-    res.setHeader('Content-Disposition', `attachment; filename="stocksense-demo-plan-${plan.id.slice(0, 8)}.csv"`);
-    res.send(planCsv(plan));
+    res.setHeader('Content-Disposition', `attachment; filename="stocksense-${manifest.synthetic ? 'demo' : 'authorized-aggregate'}-plan-${plan.id.slice(0, 8)}.csv"`);
+    res.send(planCsv(plan, manifest.synthetic));
   });
   app.get('/api/data/manifest', (_req, res) => res.json({ manifest }));
   app.get('/api/data/seed.json', (_req, res) => {
-    res.setHeader('Content-Disposition', 'attachment; filename="stocksense-synthetic-seed.json"');
+    res.setHeader('Content-Disposition', `attachment; filename="stocksense-${manifest.synthetic ? 'synthetic-seed' : 'authorized-aggregate'}.json"`);
     res.json(dataset);
   });
   app.use('/api', (_req, _res, next) => next(new NotFoundError('API endpoint not found')));
   app.use((error: unknown, _req: Request, res: Response, _next: NextFunction) => {
     if (error instanceof ZodError) return res.status(400).json({ error: { code: 'VALIDATION_ERROR', message: 'Invalid request', details: error.issues.map((i) => ({ path: i.path.join('.'), message: i.message })) } });
+    if (error instanceof AllocationGateError) return res.status(409).json({ error: { code: 'ALLOCATION_BLOCKED', message: error.message } });
     if (error instanceof NotFoundError) return res.status(404).json({ error: { code: 'NOT_FOUND', message: error.message } });
     if (error instanceof ConflictError) return res.status(409).json({ error: { code: 'CONFLICT', message: error.message } });
     if (error instanceof SyntaxError && 'body' in error) return res.status(400).json({ error: { code: 'INVALID_JSON', message: 'Malformed JSON body' } });

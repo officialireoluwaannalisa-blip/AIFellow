@@ -2,7 +2,7 @@
 
 ## Status: local synthetic demo, not production-ready
 
-The application has one shared workspace and no login, roles, tenant isolation, or authenticated audit identity. `Demo analyst` is a label, not proof of who acted. The live preview is for demonstration with synthetic data only.
+The application has one shared workspace and no login, roles, tenant isolation, or authenticated audit identity. `Demo analyst` is a label, not proof of who acted. The live preview is for demonstration with synthetic data only. Operator-controlled authorized aggregate mode is intended for non-public deployments and still requires production access controls.
 
 ## Implemented controls
 
@@ -17,6 +17,9 @@ The application has one shared workspace and no login, roles, tenant isolation, 
 - Helmet security headers; no secrets or external model keys required. Frame restrictions are relaxed only so the synthetic demo can appear in the Arena live-preview iframe; production must set explicit `frame-ancestors`.
 - Gitignored local database, environment files, build output, and browser artifacts.
 - No patient data fields, external procurement writes, or payment integrations.
+- Country/location and clinical-policy gates fail closed for real-country allocation.
+- Aggregate import preview rejects patient-level flags, direct identifier fields/values, country mismatch, and unreconciled batches.
+- Optimizer output is independently re-checked for integer feasibility, budget, donor/batch/recipient caps, and fixed-cost consistency.
 
 ## Known limitations / production blockers
 
@@ -25,7 +28,7 @@ The application has one shared workspace and no login, roles, tenant isolation, 
 3. **Audit integrity:** authenticated actor identity, tamper-evident storage, retention, and review controls.
 4. **Transport/hosting:** TLS, exact host/origin allowlists, rate limiting, WAF/bot controls as appropriate.
 5. **Database:** replace or harden the experimental Node SQLite adapter; migrations, backups, encryption, restore tests, and connection management.
-6. **Ingestion:** malware scanning, quarantine, source authentication, lineage, and reconciliation before real connectors.
+6. **Ingestion:** live custodian connectors, malware scanning, quarantine, source authentication, lineage, currency/unit normalization, and reconciliation before real data activation.
 7. **Secrets:** managed secret storage and rotation; never commit `.env` or credentials.
 8. **Observability:** privacy-preserving logs, metrics, alerts, error tracking, and incident response.
 9. **Dependency/browser supply chain:** review updates, pin lockfiles, and run vulnerability checks in CI.
@@ -44,6 +47,8 @@ The application has one shared workspace and no login, roles, tenant isolation, 
 | Sensitive data in notes | Warning + synthetic-only policy | DLP, retention, access controls |
 | Prompt injection | No LLM; bounded retrieval | Future LLM isolation/validation |
 | Preview exposure | Synthetic data only | Private hosting/access control for pilots |
+| Unauthorized real data activation | Public preview blocks activation; operator env gates | Authenticated operator roles, DSA verification, audit |
+| Solver tolerance violating safety cap | Independent integer feasibility re-check | Formal verification/load testing at scale |
 
 ## Reporting
 

@@ -20,7 +20,7 @@ Help non-technical health supply and planning teams understand, challenge, and s
 - Run the same scope at two budget ceilings.
 - Compare selected actions, unfunded needs, and before/after estimates.
 - Exercise: identify a facility that remains unfunded and propose a non-model action (data refresh, escalation, manual review).
-- Discuss why greedy cost-effectiveness is not an equity rule.
+- Discuss why weighted-unit MILP optimality is not an equity rule or clinical priority policy.
 
 ### 40–50 min — Human workflow
 - Save and explicitly approve a demo plan; advance one item; inspect the audit trail.
@@ -35,7 +35,7 @@ Help non-technical health supply and planning teams understand, challenge, and s
 
 - [ ] Use synthetic data only; never paste real patient or government records.
 - [ ] Confirm the dataset version/date shown in the UI.
-- [ ] Explain heuristic vs optimum and estimate vs impact.
+- [ ] Explain modeled MILP optimality vs real-world impact, and synthetic vs authorized aggregate data.
 - [ ] Keep Unknown and unfunded needs visible.
 - [ ] Record participant assumptions and override reasons.
 - [ ] End with a named owner for follow-up questions, not an autonomous action.

@@ -34,10 +34,18 @@ export class PlanRepository {
         actor TEXT NOT NULL, note TEXT NOT NULL, created_at TEXT NOT NULL
       );
       CREATE INDEX IF NOT EXISTS audit_plan_idx ON audit_events(plan_id, created_at);
+      CREATE TABLE IF NOT EXISTS settings (key TEXT PRIMARY KEY, value TEXT NOT NULL);
       INSERT INTO schema_meta(version) SELECT 1 WHERE NOT EXISTS(SELECT 1 FROM schema_meta);
     `);
   }
   close() { this.db.close(); }
+  getSetting(key: string): string | null {
+    const row = this.db.prepare('SELECT value FROM settings WHERE key=?').get(key) as { value: string } | undefined;
+    return row?.value ?? null;
+  }
+  setSetting(key: string, value: string): void {
+    this.db.prepare('INSERT INTO settings(key,value) VALUES(?,?) ON CONFLICT(key) DO UPDATE SET value=excluded.value').run(key, value);
+  }
   private transaction<T>(fn: () => T): T {
     this.db.exec('BEGIN IMMEDIATE');
     try { const result = fn(); this.db.exec('COMMIT'); return result; }
@@ -69,7 +77,7 @@ export class PlanRepository {
         .run(id, name, 'draft', JSON.stringify(scenario), JSON.stringify(result), idempotencyKey, now, now);
       const insert = this.db.prepare('INSERT INTO plan_items(plan_id,id,position,status,payload_json,updated_at) VALUES(?,?,?,?,?,?)');
       result.selected.forEach((item, position) => insert.run(id, item.id, position, 'proposed', JSON.stringify(item), now));
-      this.audit(id, null, 'plan_created', '', 'draft', 'Saved from a server-recomputed synthetic scenario.', now);
+      this.audit(id, null, 'plan_created', '', 'draft', 'Saved from a server-recomputed scenario.', now);
       return this.getPlan(id)!;
     });
   }

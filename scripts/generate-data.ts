@@ -69,7 +69,7 @@ const evidence = [
   { id: 'EV-005', title: 'Data quality and provenance', category: 'Data governance', text: 'Track reporting freshness, consumption-history completeness, dataset version, and checksums. Distinguish missing from zero. Do not use real personal or government data in this demo workspace.', source: 'StockSense illustrative demo guidance' },
   { id: 'EV-006', title: 'AI and automation boundary', category: 'Responsible AI', text: 'This release has no connected LLM. Retrieval answers cite demo evidence and computed facts. Deterministic tools own arithmetic and constraints; no model may autonomously approve expenditure or create clinical instructions.', source: 'StockSense illustrative demo guidance' },
 ];
-const dataset: Dataset = { version: 'synthetic-2026.11.14-v1', asOf, country: 'Demo Republic', currency: 'USD', districts, facilities, products, stocks, routes, evidence };
+const dataset: Dataset = { version: 'synthetic-2026.11.14-v1', asOf, country: 'Demo Republic', countryCode: 'DEMO', currency: 'USD', districts, facilities, products, stocks, routes, evidence };
 const parsed = datasetSchema.parse(dataset);
 const json = JSON.stringify(parsed, null, 2) + '\n';
 const sha256 = createHash('sha256').update(json).digest('hex');

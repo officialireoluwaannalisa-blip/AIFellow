@@ -24,7 +24,8 @@ export function answerQuestion(dataset: Dataset, question: string, districtId: s
   };
   const overview = buildOverview(dataset, 30, districtId);
   const scope = districtId ? dataset.districts.find((d) => d.id === districtId)?.name ?? 'Selected district' : dataset.country;
-  const baseFacts = [`${scope}: ${overview.recordCount} facility-product records in synthetic snapshot ${dataset.version}.`, `${overview.criticalCount} Critical, ${overview.watchCount} Watch, and ${overview.unknownCount} Unknown records at a 30-day horizon.`];
+  const modeLabel = dataset.countryCode && dataset.countryCode !== 'DEMO' ? 'authorized aggregate' : 'synthetic';
+  const baseFacts = [`${scope}: ${overview.recordCount} facility-product records in ${modeLabel} snapshot ${dataset.version}.`, `${overview.criticalCount} Critical, ${overview.watchCount} Watch, and ${overview.unknownCount} Unknown records at a 30-day horizon.`];
   if (/llm|language model|generative|\bai\b|model connected/.test(q)) return {
     mode: 'retrieval', answer: 'No LLM is connected in this prototype. Answers are bounded retrieval over demo guidance and computed snapshot facts. The forecasting and allocation engines are deterministic and auditable.',
     facts: baseFacts, citations: citations(dataset, ['EV-006']),
@@ -38,7 +39,7 @@ export function answerQuestion(dataset: Dataset, question: string, districtId: s
     facts: [...baseFacts, `${overview.expiringSoonUnits.toLocaleString('en-US')} product units are in released batches expiring within 60 days; units are not interchangeable across products.`], citations: citations(dataset, ['EV-004', 'EV-002']),
   };
   if (/budget|cost|fund|priorit|optimi|allocat/.test(q)) return {
-    mode: 'retrieval', answer: 'Open Scenario planner to set a budget ceiling. The engine ranks affordable actions by marginal priority units per dollar, recomputes needs after each choice, and leaves unfunded needs visible. This is an adaptive greedy heuristic—not a global optimum or a clinical priority rule.',
+    mode: 'retrieval', answer: 'Open Scenario planner to set a budget ceiling. The engine solves an exact fixed-charge integer-flow MILP with HiGHS: maximize weighted units under safety constraints, then minimize cost without reducing that benefit. It returns an optimality certificate and leaves unfunded needs visible. This is global optimality for the modeled problem—not a clinical priority rule or real-world impact guarantee.',
     facts: baseFacts, citations: citations(dataset, ['EV-003']),
   };
   if (/risk|stockout|shortage|why|urgent|critical|forecast/.test(q)) {
@@ -68,7 +69,7 @@ export function buildBriefing(dataset: Dataset, districtId: string | null = null
   return [
     `# StockSense Africa — grounded demo briefing`, '',
     `**Scope:** ${scope} · **Snapshot:** ${dataset.asOf} · **Dataset:** ${dataset.version}`,
-    `**Notice:** Synthetic data; deterministic retrieval and calculations; no connected LLM; human review required.`, '',
+    `**Notice:** ${dataset.countryCode && dataset.countryCode !== 'DEMO' ? 'Authorized aggregate data; no patient-level records' : 'Synthetic data'}; deterministic retrieval and calculations; no connected LLM; human review required.`, '',
     '## Snapshot facts',
     `- ${overview.facilityCount} facilities; ${overview.recordCount} facility-product records.`,
     `- ${overview.criticalCount} Critical, ${overview.watchCount} Watch, ${overview.stableCount} Stable, ${overview.unknownCount} Unknown.`,

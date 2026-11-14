@@ -23,10 +23,24 @@ The browser smoke test starts an isolated production server on port 3100 (overri
 
 ### Planner
 - Budget never exceeded; exact cost reconciliation; zero-budget behavior.
-- Deterministic output for identical inputs.
+- Deterministic output for identical inputs apart from solve timing.
 - Feasible exact-product transfer with donor buffer and shelf-life checks.
 - Cold-chain route rejection, insufficient donor surplus rejection, Unknown exclusion.
 - No donor batch double-allocation across the full demo.
+- Real-country allocation blocked without authorized data/policy.
+
+### Optimizer
+- Empty optimal certificate.
+- Fixed-charge knapsack case where greedy ratio selection is suboptimal.
+- Shared fixed cost charged once across multiple batch flows.
+- Lexicographic cost minimization without sacrificing optimal benefit.
+- Duplicate candidate and inconsistent fixed-cost rejection.
+
+### Country / clinical / imports
+- Country profiles do not claim live patient data.
+- Real-country gate requires authorized data and approved jurisdiction-matched policy.
+- Aggregate pack preview accepts valid structure and returns quality/hash.
+- Patient-level flags, direct identifier fields, country mismatch, and unreconciled batches are rejected.
 
 ### API/workflow
 - Health/meta and composed risk filters.
@@ -53,17 +67,20 @@ The browser smoke test starts an isolated production server on port 3100 (overri
 
 - **Date:** 2026-11-14
 - `npm run typecheck`: pass
-- `npm test`: **29 tests passed** across 4 files
+- `npm test`: **41 tests passed** across 6 files
 - `npm run build`: pass
 - `npm run test:e2e`: pass (isolated production server + Chromium)
 - Mobile overflow check: pass at 390×844
 - `npm audit --omit=dev --audit-level=high`: 0 production vulnerabilities reported
+- Default synthetic scenario: HiGHS `Optimal`, gap 0; 52 selected actions, 2,499,966 USD cents, 113 candidates / 226 variables / 210 constraints; solve time approximately 3.2 s in the sandbox
 
 These results verify the synthetic prototype's implementation, not real-world forecast accuracy, fairness, security readiness, or health impact.
 
 ## Manual acceptance checklist
 
-- [ ] Persistent synthetic-data notice is visible.
+- [ ] Persistent synthetic/authorized-aggregate data notice is visible.
+- [ ] Optimality certificate and clinical-policy status are visible in the planner.
+- [ ] Country profiles show not-connected state for unconfigured real jurisdictions.
 - [ ] Critical/Watch/Stable/Unknown are distinguishable by text, not color alone.
 - [ ] Risk detail shows batches, inbound, quality flags, and calculation explanation.
 - [ ] Changing scenario inputs marks the previous result stale until rerun.

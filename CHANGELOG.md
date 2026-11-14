@@ -1,5 +1,30 @@
 # Changelog
 
+## 0.2.0 — 2026-11-14
+
+Exact global optimization and country-aware authorized data boundary.
+
+### Added
+- HiGHS fixed-charge integer-flow MILP with lexicographic weighted-unit/cost objective, zero-gap optimality certificate, model hash, and independent feasibility re-check.
+- Conservative donor transferable-batch calculation by FEFO demand replay and buffer reservation.
+- Country/location profiles for Demo Republic, Nigeria, Ethiopia, South Africa, and Kenya; location setting and allocation gate reasons.
+- Authorized aggregate pack schema, privacy/identifier scanning, quality preview, and operator validation CLI (`npm run data:validate-import`).
+- Clinical-policy schema separating safety guardrails from locally approved prioritization weights; real-country allocation fails closed without authorization and approval.
+- Planner optimality certificate UI, Data & evidence country connections/import preview, Funding decision-trace notice, and updated methodology.
+- Optimizer, country, clinical-policy, and aggregate-import tests; expanded API tests.
+
+### Changed
+- Replaced adaptive greedy allocation as the active engine. Greedy remains only as historical v0.1 context.
+- Public demo remains synthetic; operator-controlled authorized aggregate ingestion is available but disabled by default.
+- Exports and briefing labels distinguish synthetic demo from authorized aggregate mode.
+- Documentation updated: PRD v0.2, model card, architecture, data contract, API, country data, decisions, security, responsible AI, testing, roadmap.
+
+### Known limits
+- No live government API connector is configured; portal links are reference entry points, not verified data endpoints.
+- Patient-level records are rejected. Real-country use requires signed authorization, local clinical governance, authenticated deployment, and prospective evaluation.
+- MILP optimality is scoped to the modeled integer-flow problem, not real-world clinical utility or equity.
+- Node SQLite API is experimental; production hardening is required.
+
 ## 0.1.0 — 2026-11-14
 
 Initial synthetic-data portfolio MVP.

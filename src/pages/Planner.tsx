@@ -24,7 +24,14 @@ export function Planner() {
     catch (err) { setError(err instanceof Error ? err.message : 'Unable to run scenario'); }
     finally { setRunning(false); }
   }, []);
-  useEffect(() => { if (!initialized.current) { initialized.current = true; void run(DEFAULT_SCENARIO); } }, [run]);
+  useEffect(() => {
+    if (!initialized.current && meta) {
+      initialized.current = true;
+      const initial = meta.defaultScenario ?? DEFAULT_SCENARIO;
+      setScenario(initial); setBudgetText(String(initial.budgetCents / 100));
+      void run(initial);
+    }
+  }, [meta, run]);
   const updateBudget = (value: string) => { setBudgetText(value); const dollars = Number(value); if (value !== '' && Number.isFinite(dollars) && dollars >= 0 && dollars <= 1000000) setScenario((s) => ({ ...s, budgetCents: Math.round(dollars * 100) })); };
   const submitRun = () => {
     const dollars = Number(budgetText);
@@ -44,21 +51,32 @@ export function Planner() {
   };
   const utilization = result && scenario.budgetCents > 0 ? Math.min(100, result.totalCostCents / scenario.budgetCents * 100) : 0;
   return <>
-    <PageHeader eyebrow="DECISION SUPPORT" title="Scenario planner" description="Compare feasible transfers and replenishment under a hard budget ceiling. Keep the trade-offs visible." action={<Pill tone="blue"><FlaskConical size={14} />Synthetic scenario</Pill>} />
+    <PageHeader eyebrow="DECISION SUPPORT" title="Scenario planner" description="Compare feasible transfers and replenishment under a hard budget ceiling. Keep the trade-offs visible." action={<Pill tone="blue"><FlaskConical size={14} />{meta?.dataMode === 'authorized_aggregate' ? 'Authorized aggregate scenario' : 'Synthetic scenario'}</Pill>} />
     <div className="planner-layout"><Card title="Scenario inputs" subtitle="Change assumptions, then run a new preview" className="scenario-controls"><div className="form-stack">
-      <label className="field-label">District scope<select value={scenario.districtId ?? ''} onChange={(e) => setScenario((s) => ({ ...s, districtId: e.target.value || null }))}><option value="">All districts · Demo Republic</option>{meta?.districts.map((d) => <option key={d.id} value={d.id}>{d.name}</option>)}</select></label>
+      <label className="field-label">District scope<select value={scenario.districtId ?? ''} onChange={(e) => setScenario((s) => ({ ...s, districtId: e.target.value || null }))}><option value="">All districts · {meta?.country ?? 'Demo Republic'}</option>{meta?.districts.map((d) => <option key={d.id} value={d.id}>{d.name}</option>)}</select></label>
       <div className="field-label">Planning horizon<div className="segmented" role="group" aria-label="Planning horizon">{([14, 30, 60] as const).map((days) => <button key={days} aria-pressed={scenario.horizonDays === days} className={scenario.horizonDays === days ? 'selected' : ''} onClick={() => setScenario((s) => ({ ...s, horizonDays: days }))}>{days} days</button>)}</div></div>
       <label className="field-label">Budget ceiling (USD)<div className="money-input"><span>$</span><input type="number" min="0" max="1000000" step="100" value={budgetText} onChange={(e) => updateBudget(e.target.value)} aria-label="Budget ceiling in US dollars" /></div><small>Integer-cent accounting. No real funds are committed.</small></label>
       <label className="field-label">Safety buffer <output>{scenario.bufferDays} days</output><input type="range" min="0" max="14" step="1" value={scenario.bufferDays} onChange={(e) => setScenario((s) => ({ ...s, bufferDays: Number(e.target.value) }))} aria-label="Safety buffer days" /><div className="range-labels"><span>0 days</span><span>14 days</span></div></label>
       <button className="button primary full-width" onClick={submitRun} disabled={running}>{running ? <LoaderCircle className="spin" size={17} /> : <FlaskConical size={17} />}{running ? 'Evaluating options…' : 'Run scenario'}</button>
       {error && <p className="form-error" role="alert">{error}</p>}
-      <div className="control-note"><ShieldCheck size={18} /><p>Transfers preserve donor buffer and check exact product, route, shelf life, and cold chain. Unknown records are excluded.</p></div>
+      <div className="control-note"><ShieldCheck size={18} /><p>Exact HiGHS MILP enforces donor buffer, exact product, route, shelf life, and cold chain. Unknown records are excluded. Clinical prioritization requires local approval.</p></div>
     </div></Card>
     <div className="planner-results">{running && !result ? <Loading label="Evaluating feasible actions…" /> : !result ? <Card><div className="state-panel"><FlaskConical size={30} /><h2>Ready to compare options</h2><p>Set your scope and budget, then run a scenario.</p></div></Card> : <>
       {stale && <div className="notice-strip warning"><Info size={17} /><span>Inputs changed. Run the scenario again before saving this plan.</span></div>}
       <div className="scenario-summary"><div><span>Selected actions</span><strong>{result.selected.length}</strong><small>feasible under constraints</small></div><div><span>Estimated cost</span><strong>{money(result.totalCostCents)}</strong><small>of {money(scenario.budgetCents)} ceiling</small></div><div><span>Remaining budget</span><strong>{money(result.remainingBudgetCents)}</strong><small>{result.unfunded.length} needs still unfunded</small></div><div><span>Stockout days avoided</span><strong>{Math.max(0, result.before.stockoutDays - result.after.stockoutDays)}</strong><small>modeled estimate, not impact</small></div></div>
       <div className="budget-meter"><div><span>Budget utilization</span><strong>{utilization.toFixed(1)}%</strong></div><div className="progress-track"><span style={{ width: `${utilization}%` }} /></div></div>
-      <Card title="Recommended actions" subtitle="Adaptive greedy ranking · marginal priority units per dollar" action={<button className="button primary small" disabled={stale || running || result.selected.length === 0} onClick={() => setSaveOpen(true)}><Save size={16} />Save plan</button>}>
+      <Card title="Optimality certificate" subtitle="Exact fixed-charge integer-flow MILP · HiGHS" action={<Pill tone={result.optimization.status === 'optimal' ? 'green' : 'amber'}><ShieldCheck size={14} />{result.optimization.status === 'optimal' ? 'Optimal · gap 0' : result.optimization.status}</Pill>}>
+        <div className="certificate-grid">
+          <div><span>Objective</span><strong>Weighted units, then cost</strong></div>
+          <div><span>Weighted benefit</span><strong>{number(result.optimization.objectiveValue)}</strong></div>
+          <div><span>Candidates / variables</span><strong>{result.optimization.candidateCount} / {result.optimization.variableCount}</strong></div>
+          <div><span>Constraints</span><strong>{result.optimization.constraintCount}</strong></div>
+          <div><span>Solve time</span><strong>{result.optimization.solveTimeMs} ms</strong></div>
+          <div><span>Model SHA-256</span><code>{result.optimization.modelSha256.slice(0, 12)}…</code></div>
+        </div>
+        <p className="card-footnote">Global optimality is certified for the modeled integer-flow problem and stated objective—not for unmodeled actions, real-world supply uncertainty, or clinical utility. Clinical policy: {result.clinicalPolicy.approvalStatus} · {result.clinicalPolicy.prioritizationSource === 'synthetic_demo' ? 'synthetic weights only' : 'approved local weights'} · autonomous execution disabled.</p>
+      </Card>
+      <Card title="Recommended actions" subtitle="Globally optimal selection over modeled feasible flows · display priority is explanatory, not the solver objective" action={<button className="button primary small" disabled={stale || running || result.selected.length === 0} onClick={() => setSaveOpen(true)}><Save size={16} />Save plan</button>}>
         {result.selected.length ? <div className="table-wrap"><table className="data-table"><thead><tr><th>#</th><th>Action / destination</th><th>Medicine</th><th>Quantity</th><th>Arrival</th><th>Cost</th><th>Priority / $1k</th></tr></thead><tbody>{result.selected.slice(0, showAllActions ? result.selected.length : 12).map((item, index) => <tr key={item.id}><td><span className="rank-number">{index + 1}</span></td><td><div className="action-kind">{item.kind === 'transfer' ? <Truck size={15} /> : <PackagePlus size={15} />}<strong>{item.kind === 'transfer' ? 'Redistribute' : 'Replenish'}</strong></div><span className="cell-sub">{facilityName(item.facilityId)}</span>{item.donorFacilityId && <span className="cell-sub">From {facilityName(item.donorFacilityId)}</span>}</td><td>{productName(item.productId)}<details className="rationale-details"><summary>Why this action <ChevronDown size={12} /></summary><p>{item.rationale}</p></details></td><td>{number(item.quantity)} <span className="muted">{productUnit(item.productId)}</span></td><td>{item.arrivalDays} days</td><td><strong>{money(item.costCents)}</strong></td><td>{item.priorityScore.toFixed(1)}</td></tr>)}</tbody></table></div> : <div className="inline-empty"><CircleAlert size={18} />No feasible action fits this budget and scope. Increase the ceiling or review constraints.</div>}
         {result.selected.length > 12 && <div className="table-more"><button className="text-link" onClick={() => setShowAllActions((v) => !v)}>{showAllActions ? 'Show top 12 actions' : `Show all ${result.selected.length} actions`} <ChevronDown size={14} /></button><span>Saved plans and exports include every selected action.</span></div>}
       </Card>

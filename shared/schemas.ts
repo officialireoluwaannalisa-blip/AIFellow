@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { isCountryCode } from './countries';
 
 export const isoDate = z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Expected YYYY-MM-DD').refine((value) => {
   const date = new Date(`${value}T00:00:00Z`);
@@ -28,7 +29,7 @@ export const routeSchema = z.object({
 }).strict();
 export const evidenceSchema = z.object({ id, title: z.string().min(1).max(200), category: z.string().min(1).max(80), text: z.string().min(1).max(4000), source: z.string().min(1).max(200) }).strict();
 export const datasetSchema = z.object({
-  version: z.string().min(1).max(40), asOf: isoDate, country: z.string().min(1).max(100), currency: z.literal('USD'),
+  version: z.string().min(1).max(40), asOf: isoDate, country: z.string().min(1).max(100), countryCode: z.string().max(10).optional(), currency: z.literal('USD'),
   districts: z.array(z.object({ id, name: z.string().min(1).max(100) }).strict()).min(1).max(50),
   facilities: z.array(facilitySchema).min(1).max(1000), products: z.array(productSchema).min(1).max(200),
   stocks: z.array(stockSchema).max(50_000), routes: z.array(routeSchema).max(20_000), evidence: z.array(evidenceSchema).max(200),
@@ -72,6 +73,7 @@ export const scenarioSchema = z.object({
   horizonDays: z.union([z.literal(14), z.literal(30), z.literal(60)]),
   bufferDays: z.number().int().min(0).max(14),
   districtId: id.nullable(),
+  countryCode: z.string().max(10).refine((value) => isCountryCode(value), 'Unknown country/location').optional(),
 }).strict();
 export const savePlanSchema = z.object({
   name: z.string().trim().min(3).max(100), scenario: scenarioSchema, idempotencyKey: z.uuid(),

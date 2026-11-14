@@ -1,6 +1,6 @@
 # Product Requirements Document — StockSense Africa
 
-**Version:** 0.1 · **Status:** working MVP specification · **Date:** 2026-11-14
+**Version:** 0.2 · **Status:** working MVP specification · **Date:** 2026-11-14
 **Product:** Essential-medicines stockout decision support
 **Context:** An independent portfolio prototype inspired by the Gates Foundation AI Fellows (Africa) job description. It is not an official foundation product, endorsed deployment, or job application guarantee.
 
@@ -38,18 +38,18 @@ No patient-facing or prescriber workflow is included.
 2. Forecast near-term stockouts using consumption history, usable batches, expiry, and confirmed inbound shipments.
 3. Explain every risk classification and expose missing/stale data as **Unknown**, not low risk.
 4. Generate feasible same-product redistribution and replenishment options.
-5. Rank actions under a hard budget ceiling using a transparent, reproducible heuristic.
+5. Optimize actions under a hard budget ceiling using an exact, reproducible MILP with an optimality certificate.
 6. Require human approval before simulated procurement and cash-release steps.
 7. Preserve plan snapshots and an append-only audit trail in SQLite.
 8. Export reviewable CSV artifacts and a grounded briefing.
 9. Document assumptions, validation, limitations, and a responsible path to real deployment.
 
-### Non-goals for v0.1
+### Non-goals for the public demo
 
-- Real patient, facility, government, or donor data.
+- Patient-level records; unapproved real government, facility, or donor data in the public demo.
 - Clinical diagnosis, prescribing, medicine substitution, or dosing advice.
 - Autonomous purchasing, payments, supplier selection, or government-system writes.
-- Claims of calibrated stockout probabilities, clinical effectiveness, or globally optimal allocation.
+- Claims of calibrated stockout probabilities, clinical effectiveness, or real-world clinical optimality. Modeled MILP optimality is in scope; autonomous clinical allocation is not.
 - Live DHIS2/LMIS/ERP integration, authentication/SSO, or production multi-tenancy.
 - A live LLM dependency. Retrieval and briefing are deterministic and explicitly labeled.
 - Cross-country financial reconciliation, routing on real roads, or expiry-disposal decisions.
@@ -66,7 +66,7 @@ A planner opens Overview, sees network coverage, high-risk items, projected stoc
 
 The planner chooses a district scope, 14/30/60-day horizon, safety buffer, and USD budget ceiling. The server validates inputs, computes current risk, proposes exact-product transfers and procurement, and returns selected actions plus unfunded needs.
 
-**Acceptance:** total selected cost never exceeds the ceiling; donor stock is not double-allocated; expired/quarantined stock is excluded; transfers preserve donor buffer and minimum remaining shelf life; cold-chain products require compatible routes; identical inputs produce identical ordering; the UI labels the heuristic and assumptions.
+**Acceptance:** total selected cost never exceeds the ceiling; donor stock is not double-allocated; expired/quarantined stock is excluded; transfers preserve donor buffer and minimum remaining shelf life; cold-chain products require compatible routes; identical inputs produce identical selections apart from solve timing; the solver returns an optimal zero-gap certificate or fails closed; the UI labels modeled optimality, clinical-policy status, and assumptions.
 
 ### J3 — Review and approve
 
@@ -111,8 +111,10 @@ The user exports risk or plan CSVs and follows the demo script/workshop guide. F
 | FR-09 | Show data-quality and methodology pages | Must |
 | FR-10 | Provide responsive keyboard-accessible UI with loading/error/empty states | Must |
 | FR-11 | Optional provider-backed LLM adapter with citation/action gates | Later |
-| FR-12 | Validated CSV/LMIS ingestion with quarantine and lineage | Later |
+| FR-12 | Authorized aggregate pack preview with privacy/quality gates and operator ingestion boundary | Must for v0.2 |
 | FR-13 | Authenticated roles, tenant isolation, and production observability | Before real deployment |
+| FR-14 | Country/location profiles and location-aware allocation gating | Must for v0.2 |
+| FR-15 | Locally approved clinical policy gate; autonomous execution disabled | Must for v0.2 |
 
 ## 7. Decision logic
 
@@ -121,7 +123,7 @@ The user exports risk or plan CSVs and follows the demo script/workshop guide. F
 - Report **Critical**, **Watch**, **Stable**, or **Unknown** using cover thresholds and data-quality gates. These are triage labels, not probabilities.
 - Generate a replenishment gap for the planning horizon plus safety buffer.
 - Consider same-product transfers from same-district donors with surplus and eligible shelf life.
-- Use adaptive greedy cost-effectiveness ranking; recompute marginal needs after each selection. Do not call it a global optimum.
+- Solve a fixed-charge integer-flow MILP: maximize weighted units under safety/budget caps, then minimize cost without reducing benefit. Require HiGHS `Optimal` and zero gap; independently re-check feasibility. Call it globally optimal only for the modeled problem.
 - Simulate selected arrivals and donor debits to estimate changes in stockout days and unmet demand.
 
 Full formulas and failure modes: [Model card](docs/MODEL_CARD.md).
@@ -174,7 +176,9 @@ No real-world impact or hiring outcome is claimed by the synthetic demo.
 |---|---|
 | Synthetic patterns mistaken for evidence | Persistent labels, manifest, model card, no impact claims |
 | Missing data treated as safety | Unknown gate and quality warnings |
-| Greedy allocation disadvantages a facility | Expose unfunded needs, allow scope/budget changes, require review; future equity constraints |
+| Weighted-unit optimization disadvantages a facility | Expose unfunded needs, allow scope/budget changes, require review; add locally approved equity constraints |
+| Real data mistaken for authorized demo data | Country profiles show not-connected state; aggregate preview does not activate; operator gates required |
+| Clinical rule invented by the app | Real-country prioritization fails closed until a jurisdiction-matched approved policy is supplied |
 | Transfer harms donor | Preserve donor target cover and shelf-life/cold-chain constraints |
 | Demo action mistaken for payment | Explicit confirmation, simulated statuses, no external integrations |
 | Shared local workspace mistaken for secure production | Document lack of auth; block real-data deployment until controls exist |
@@ -182,10 +186,11 @@ No real-world impact or hiring outcome is claimed by the synthetic demo.
 
 ## 13. Release plan
 
-1. **v0.1:** this synthetic vertical slice, documentation, tests, live local preview.
-2. **v0.2:** CSV ingestion/quarantine, richer evaluation/backtesting, sensitivity analysis, optional grounded LLM adapter.
-3. **Partner pilot:** data-sharing agreement, local co-design, security/roles, workflow integration, prospective shadow evaluation.
-4. **Scale:** modular connectors, monitoring, equity review, operational ownership and training.
+1. **v0.1:** synthetic vertical slice, documentation, tests, live local preview.
+2. **v0.2:** exact MILP allocation, country/location profiles, authorized aggregate import preview, clinical-policy gates, operator validation CLI.
+3. **Next:** live custodian connectors, row-level quarantine lineage, richer evaluation/backtesting, sensitivity analysis, optional grounded LLM adapter.
+4. **Partner pilot:** data-sharing agreement, local co-design, security/roles, workflow integration, prospective shadow evaluation.
+5. **Scale:** modular connectors, monitoring, equity review, operational ownership and training.
 
 See [Roadmap](docs/ROADMAP.md).
 

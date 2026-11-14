@@ -19,6 +19,9 @@ Environment variables are read from the process; `.env.example` documents defaul
 | `NODE_ENV` | unset | `production` serves `dist/client` |
 | `E2E_PORT` | `3100` | Isolated browser smoke server port |
 | `AGENT_BROWSER_EXECUTABLE_PATH` | unset | Optional system Chrome for smoke tests |
+| `DATA_SHARING_AUTHORIZED` | unset | Operator attestation required for authorized aggregate ingestion |
+| `AUTHORIZED_AGGREGATE_PACK_PATH` | unset | Secure path to an aggregate-only pack; disables synthetic default when set |
+| `CLINICAL_POLICY_PATH` | unset | Secure path to a locally approved jurisdiction-matched clinical policy |
 
 Node 22 prints an experimental warning for `node:sqlite`; this is expected in the demo. The repository adapter isolates that dependency.
 
@@ -26,7 +29,9 @@ Node 22 prints an experimental warning for `node:sqlite`; this is expected in th
 
 - Synthetic inputs: `data/synthetic/seed.json` and `manifest.json`.
 - Regenerate deterministically: `npm run data:generate`. Do not edit the seed without updating the manifest and tests.
-- Workflow state: SQLite plans, items, and audit events. Plans snapshot scenario/results and dataset version/hash.
+- Validate an operator aggregate pack before ingestion: `npm run data:validate-import -- <pack.json> [policy.json]`.
+- Authorized aggregate mode requires all three ingestion environment variables and a non-public deployment. Patient-level records are rejected.
+- Workflow state: SQLite plans, items, audit events, and location setting. Plans snapshot scenario/results and dataset version/hash.
 - The database is local and gitignored. The public preview has one shared demo workspace.
 
 ## Backup and restore (local demo)
@@ -60,6 +65,8 @@ The script starts its own production server and temporary database, uses a proje
 | Dataset checksum mismatch | Regenerate data or restore matching seed/manifest; do not bypass verification |
 | Plan transition conflict | Refresh the plan; another update changed the expected status |
 | No scenario actions | Budget may be zero/too small, scope may contain only Unknown records, or constraints block feasibility |
+| Allocation blocked | Country/location does not match active dataset, or authorized aggregate/clinical-policy gates are unmet |
+| Optimizer did not certify optimality | Narrow scope/budget; no greedy fallback is returned. Check solver time limit and model size |
 | Mobile table scrolls horizontally | Intentional inside the table container; the page itself should not overflow |
 | SQLite locked | Stop other processes using the same demo DB; avoid shared network filesystems |
 

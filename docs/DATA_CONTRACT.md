@@ -9,7 +9,8 @@ All records are **synthetic**. `Demo Republic`, its districts, facilities, quant
 ### Dataset envelope
 - `version`: semantic dataset version.
 - `asOf`: ISO date used for all calculations.
-- `country`: fictional display name.
+- `country`: display name.
+- `countryCode`: optional location code (`DEMO`, `NG`, `ET`, `ZA`, `KE`); defaults to `DEMO` for the synthetic snapshot.
 - `currency`: `USD` for synthetic comparison only.
 - `districts`, `facilities`, `products`, `stocks`, `routes`, `evidence`.
 
@@ -52,8 +53,8 @@ Expired and quarantined batches are unavailable. Projection consumes released ba
 
 ## Privacy and retention
 
-No patient-level fields, credentials, or real facility identifiers are accepted by the demo. SQLite contains only demo plan names, notes, statuses, and the fixed demo actor. Do not enter real sensitive information in plan notes. Local database retention/reset is operator-controlled; see [Operations](OPERATIONS.md).
+No patient-level fields, credentials, or real facility identifiers are accepted by the public demo. Operator-controlled authorized aggregate mode may contain real facility/product aggregates only after data-sharing authorization; it still rejects patient-level fields and direct identifiers. SQLite contains plan names, notes, statuses, settings, and the fixed demo actor. Do not enter real sensitive information in plan notes. Local database retention/reset is operator-controlled; see [Operations](OPERATIONS.md).
 
-## Future ingestion contract
+## Authorized aggregate ingestion contract
 
-A real connector must add source-system ID, extract timestamp, observation period, unit normalization, transformation version, row-level errors, quarantine status, and authorized data-use purpose. It must distinguish missing from zero, reconcile stock definitions with local owners, and prevent cross-tenant leakage before any model runs.
+See [Country data connections](COUNTRY_DATA.md). An aggregate pack adds provenance: country code, source-system ID, authorization reference, data-use purpose, extract timestamp, observation period, transformation version, `patientLevelData: false`, and `aggregateOnly: true`. The dataset must pass the same structural/reconciliation checks. Preview validates and hashes the pack but does not activate it. Operator activation requires authorization attestation and a locally approved clinical policy. A live connector must additionally authenticate the custodian endpoint, quarantine row-level errors, normalize units/currency, and prevent cross-tenant leakage before any model runs.

@@ -48,11 +48,18 @@ Project over `horizon + buffer`. Total modeled need is cumulative unmet demand p
 - Procurement uses integer unit costs plus a fixed synthetic order cost.
 - Every action has positive quantity and fits the remaining integer-cent budget.
 
-## Allocation heuristic
+## Exact allocation engine
 
-Adaptive greedy selection chooses the affordable candidate with the highest `priorityUnitsPer1000USD = (marginalUnits × productPriorityWeight / costCents) × 100000`. Essential products receive a modest explicit demo weight. After each choice, donor balances and recipient needs are recomputed to avoid double allocation. Ties are resolved by stable IDs. The loop is bounded to 300 unique actions. Multi-batch transfers conservatively carry the earliest allocated expiry.
+The planner generates integer flow candidates: procurement quantities and exact-product transfer quantities from conservative donor surplus. Donor transferable supply is computed by replaying the donor's own FEFO demand over `horizon + buffer`, reserving the safety buffer, and excluding confirmed inbound that has not arrived. Each shipment has a binary fixed-charge activation; batch flows share one fixed cost.
 
-This is **not globally optimal** and does not encode a normative claim about whose health matters more. Unfunded needs remain visible. Real deployment requires locally agreed equity constraints, clinical/logistics review, and sensitivity analysis.
+HiGHS solves a two-stage lexicographic MILP:
+
+1. **Maximize weighted units** subject to budget, recipient need caps, donor surplus caps, batch caps, fixed-charge links, and safety eligibility.
+2. **Minimize integer-cent cost** subject to preserving the stage-1 optimal benefit.
+
+Both stages must return `Optimal` with `mip_rel_gap = 0` and `mip_abs_gap = 0`. The server independently re-checks integer quantities, binary activations, budget, donor/batch/recipient caps, and fixed-cost consistency before returning a plan. The certificate records solver version, objective, benefit, cost, candidate/variable/constraint counts, solve time, model SHA-256, and scope `modeled_integer_flow_problem`.
+
+This is **globally optimal for the modeled integer-flow problem and stated objective**. It is not a claim of real-world clinical optimality, calibrated health benefit, or normative equity. Product weights are synthetic demo assumptions unless a locally approved clinical policy supplies them. Real-country allocation is gated until authorized aggregate data and an approved jurisdiction-matched policy are present. Unfunded needs remain visible.
 
 ## Estimated effect
 
@@ -60,7 +67,7 @@ Apply selected procurement arrivals and transfer debits/arrivals to a copy of th
 
 ## Evaluation
 
-Automated tests cover deterministic demand, FEFO/expiry, confirmed-only inbound, Unknown gates, budget limits, donor preservation, exact-product matching, shelf life, cold chain, stable ordering, and workflow invariants. Synthetic tests demonstrate implementation correctness, **not external validity**. No accuracy, fairness, or impact metric from real populations is claimed.
+Automated tests cover deterministic demand, FEFO/expiry, confirmed-only inbound, Unknown gates, budget limits, donor preservation, exact-product matching, shelf life, cold chain, stable ordering, workflow invariants, exact MILP knapsack/fixed-charge behavior, country gating, clinical-policy approval, and aggregate-import privacy/quality checks. Synthetic tests demonstrate implementation correctness, **not external validity**. No accuracy, fairness, or impact metric from real populations is claimed.
 
 Before a pilot: backtest by facility/product/district with rolling origins; compare against naive mean and current practice; measure alert precision/recall, missed shortages, calibration where probabilistic models are introduced, burden, and subgroup performance; run prospective shadow mode with human review.
 
@@ -69,11 +76,11 @@ Before a pilot: backtest by facility/product/district with rolling origins; comp
 - Consumption can change abruptly during outbreaks, strikes, or seasonality.
 - Stock adjustments, losses, and reverse logistics are absent.
 - Batch reconciliation may hide real-world data-entry problems.
-- Greedy ranking can leave small/remote facilities unfunded.
+- The weighted-unit objective can leave small/remote facilities unfunded unless local equity constraints are added.
 - Fixed lead times and immediate authorization overstate feasibility.
 - Synthetic routes and prices do not represent actual markets.
 - Unknown records are excluded from allocation, which can hide need unless the quality queue is acted on.
 
 ## LLM boundary
 
-v0.1 has **no connected LLM**. The evidence assistant uses bounded retrieval and computed facts with citations. A future LLM may summarize verified evidence only; it must not alter arithmetic, invent citations, infer missing stock as zero, or execute actions. See [Responsible AI](RESPONSIBLE_AI.md).
+The current release has **no connected LLM**. The evidence assistant uses bounded retrieval and computed facts with citations. A future LLM may summarize verified evidence only; it must not alter arithmetic, invent citations, infer missing stock as zero, or execute actions. See [Responsible AI](RESPONSIBLE_AI.md).

@@ -1,3 +1,5 @@
+import type { OptimizationCertificate } from './optimizer';
+
 export type RiskLevel = 'critical' | 'watch' | 'stable' | 'unknown';
 export type ItemStatus = 'proposed' | 'approved' | 'procurement_requested' | 'funds_released' | 'received';
 export type PlanStatus = 'draft' | 'approved';
@@ -17,10 +19,10 @@ export interface Stock {
 export interface Route { fromFacilityId: string; toFacilityId: string; days: number; costCents: number; coldChainCapable: boolean; sameDistrict: boolean }
 export interface Evidence { id: string; title: string; category: string; text: string; source: string }
 export interface Dataset {
-  version: string; asOf: string; country: string; currency: 'USD';
+  version: string; asOf: string; country: string; countryCode?: string; currency: 'USD';
   districts: District[]; facilities: Facility[]; products: Product[]; stocks: Stock[]; routes: Route[]; evidence: Evidence[];
 }
-export interface ScenarioInput { budgetCents: number; horizonDays: 14 | 30 | 60; bufferDays: number; districtId: string | null }
+export interface ScenarioInput { budgetCents: number; horizonDays: 14 | 30 | 60; bufferDays: number; districtId: string | null; countryCode?: string }
 export interface ProjectionPoint { day: number; date: string; stock: number; unmet: number }
 export interface Arrival { id: string; date: string; quantity: number; expiryDate: string }
 export interface Projection { points: ProjectionPoint[]; firstStockoutDay: number | null; unmetUnits: number; endingStock: number; expiredUnits: number }
@@ -55,6 +57,12 @@ export interface ScenarioResult {
   scenario: ScenarioInput; datasetVersion: string; datasetHash: string; asOf: string;
   selected: PlanAction[]; unfunded: UnfundedNeed[]; totalCostCents: number; remainingBudgetCents: number;
   before: OutcomeMetrics; after: OutcomeMetrics; assumptions: string[];
+  optimization: OptimizationCertificate;
+  clinicalPolicy: {
+    jurisdiction: string; policyVersion: string; approvalStatus: 'unapproved' | 'approved';
+    autonomousExecution: false; safetyConstraintsEnforced: true;
+    prioritizationSource: 'synthetic_demo' | 'approved_local_policy';
+  };
 }
 export interface StoredPlanItem extends PlanAction { status: ItemStatus }
 export interface AuditEvent {

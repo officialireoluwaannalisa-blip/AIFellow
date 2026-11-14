@@ -30,7 +30,7 @@ Point out:
 - procurement vs redistribution rationale;
 - donor buffer, exact product, shelf life, and cold-chain checks;
 - before/after estimates and unfunded needs;
-- the greedy heuristic and immediate-authorization assumption.
+- the exact MILP certificate, modeled-optimality scope, clinical-policy gate, and immediate-authorization assumption.
 
 Change the budget without rerunning to show the stale-result guard, then rerun.
 
@@ -55,4 +55,4 @@ Open **Methodology**. Close with the model card, responsible-AI gates, and roadm
 
 ## Do not claim
 
-- Real facility data, foundation endorsement, clinical validity, calibrated probabilities, global optimality, autonomous procurement, or guaranteed job selection.
+- Real facility data in the public demo, foundation endorsement, clinical validity, calibrated probabilities, real-world clinical optimality, autonomous procurement, or guaranteed job selection.

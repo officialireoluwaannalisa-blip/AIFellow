@@ -6,18 +6,26 @@ A fellowship-aligned plan that separates a credible prototype from partner valid
 
 - PRD, architecture, data contract, model card, responsible-AI/security docs.
 - Synthetic dataset and deterministic forecast/risk engine.
-- Budget-aware transfer/replenishment heuristic.
+- Budget-aware transfer/replenishment heuristic (v0.1; superseded by exact MILP in v0.2).
 - Saved plans, approval gate, simulated funding trace, audit trail.
 - Evidence retrieval, exports, quality/methodology pages.
 - Strict types, automated tests, browser smoke, live preview.
 
 **Exit evidence:** reproducible demo, passing checks, documented limits, facilitator walkthrough.
 
+## Phase 0.2 — Exact optimization and country boundary (complete)
+
+- HiGHS fixed-charge integer-flow MILP with zero-gap certificate and feasibility re-check.
+- Country/location profiles, authorized aggregate import preview, clinical-policy gates.
+- Operator validation CLI and updated safety/model documentation.
+
+**Exit evidence:** optimizer tests beat greedy counterexamples; real-country allocation fails closed; public demo remains synthetic.
+
 ## Phase 1 — Weeks 1–4: co-design and data reality
 
 - Confirm country/district, users, authoritative stock definitions, and approval roles.
 - Map existing LMIS/DHIS2/ERP/finance sources and reporting cadence.
-- Build validated CSV ingestion with row-level errors, quarantine, and lineage.
+- Extend aggregate preview into live custodian connectors with row-level errors, quarantine, and lineage.
 - Replace synthetic assumptions with locally reviewed lead times, routes, shelf-life rules, and budget categories.
 - Run usability sessions with supply and budget officers; revise the workflow.
 
@@ -28,7 +36,7 @@ A fellowship-aligned plan that separates a credible prototype from partner valid
 - Rolling-origin backtests against naive mean and current practice.
 - Alert precision/recall, missed shortages, burden, and district/product subgroup review.
 - Sensitivity analysis for demand shocks, lead times, prices, and buffer.
-- Compare greedy ranking with constrained optimization and explicit equity constraints.
+- Evaluate MILP objective choices and add explicit locally approved equity constraints.
 - Add override reasons, plan versioning, and reviewer disagreement capture.
 
 **Gate:** documented performance and failure modes; human reviewers accept the alert burden.
@@ -63,7 +71,7 @@ A fellowship-aligned plan that separates a credible prototype from partner valid
 
 ## Cross-cutting backlog
 
-- Formal optimization with service-equity constraints.
+- Service-equity constraints over the exact MILP contract.
 - Probabilistic forecasting only after calibration/validation.
 - Real transport routing and cold-chain monitoring.
 - Supplier reliability and cash-release delay modeling.

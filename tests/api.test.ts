@@ -4,6 +4,7 @@ import request from 'supertest';
 import { createApp } from '../server/app';
 import { loadDataset } from '../server/data';
 import { PlanRepository } from '../server/repository';
+import { smallDataset } from './fixtures';
 
 const { dataset, manifest, hash } = loadDataset();
 let repository: PlanRepository; let app: ReturnType<typeof createApp>;
@@ -44,6 +45,30 @@ describe('read API', () => {
   it('rejects cross-origin mutations', async () => {
     await request(app).post('/api/scenarios/preview').set('Origin', 'https://evil.example').send(scenario).expect(409);
   });
+  it('exposes country profiles, location gating, and aggregate import preview', async () => {
+    const meta = await request(app).get('/api/meta').expect(200);
+    expect(meta.body.dataMode).toBe('synthetic'); expect(meta.body.clinicalPolicy.autonomousExecution).toBe(false);
+    const countries = await request(app).get('/api/countries').expect(200);
+    expect(countries.body.countries.find((c: { code: string }) => c.code === 'NG').connectionState).toBe('not_connected');
+    await request(app).put('/api/location').send({ countryCode: 'NG' }).expect(200);
+    const blocked = await request(app).post('/api/scenarios/preview').send({ ...scenario, countryCode: 'NG' }).expect(409);
+    expect(blocked.body.error.code).toBe('ALLOCATION_BLOCKED');
+    const pack = {
+      provenance: {
+        countryCode: 'NG', sourceName: 'Authorized district aggregate stock extract', sourceSystemId: 'lmis-ng',
+        authorizationReference: 'DSA-2026-001', dataUsePurpose: 'District essential-medicines supply planning under signed data-sharing agreement.',
+        extractedAt: '2026-11-14T08:00:00Z', observationStart: '2026-10-18', observationEnd: '2026-11-14',
+        transformationVersion: 'aggregate-v1', patientLevelData: false, aggregateOnly: true,
+      },
+      dataset: { ...smallDataset(), countryCode: 'NG', country: 'Nigeria' },
+    };
+    const preview = await request(app).post('/api/imports/preview').send(pack).expect(200);
+    expect(preview.body.acceptedRows).toBe(2); expect(preview.body.activationBlocked).toBe(true);
+    const pii = structuredClone(pack);
+    (pii.dataset.stocks[0] as unknown as Record<string, unknown>).patient_id = 'P123';
+    const rejected = await request(app).post('/api/imports/preview').send(pii).expect(200);
+    expect(rejected.body.acceptedRows).toBe(0);
+  });
 });
 
 describe('plan workflow', () => {
@@ -54,6 +79,8 @@ describe('plan workflow', () => {
     expect(again.body.plan.id).toBe(saved.body.plan.id);
     const id = saved.body.plan.id; expect(saved.body.plan.items.length).toBeGreaterThan(0);
     expect(saved.body.plan.result.totalCostCents).toBeLessThanOrEqual(scenario.budgetCents);
+    expect(saved.body.plan.result.optimization.status).toBe('optimal');
+    expect(saved.body.plan.result.clinicalPolicy.autonomousExecution).toBe(false);
     const itemId = saved.body.plan.items[0].id;
     await request(app).post(`/api/plans/${id}/items/${encodeURIComponent(itemId)}/advance`).send({ expectedStatus: 'approved' }).expect(409);
     await request(app).post(`/api/plans/${id}/approve`).send({ note: 'Reviewed synthetic trade-offs.' }).expect(200);
