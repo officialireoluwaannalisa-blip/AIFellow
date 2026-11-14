@@ -1,0 +1,17 @@
+{
+  "version": "synthetic-2026.11.14-v1",
+  "asOf": "2026-11-14",
+  "generator": "scripts/generate-data.ts",
+  "seed": null,
+  "sourceFile": "data/synthetic/seed.json",
+  "sha256": "b91d3ea7e7cee57d152686df238d5c047891fb6b23feff6f55da3525d092b751",
+  "synthetic": true,
+  "counts": {
+    "districts": 3,
+    "facilities": 18,
+    "products": 5,
+    "stockRecords": 90,
+    "routes": 90,
+    "evidenceSnippets": 6
+  }
+}

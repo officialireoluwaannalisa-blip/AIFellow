@@ -1,0 +1,5961 @@
+{
+  "version": "synthetic-2026.11.14-v1",
+  "asOf": "2026-11-14",
+  "country": "Demo Republic",
+  "currency": "USD",
+  "districts": [
+    {
+      "id": "north",
+      "name": "Northern Valley"
+    },
+    {
+      "id": "central",
+      "name": "Central Plateau"
+    },
+    {
+      "id": "south",
+      "name": "Southern Coast"
+    }
+  ],
+  "facilities": [
+    {
+      "id": "fac-11",
+      "name": "Northgate District Hospital",
+      "districtId": "north",
+      "type": "hospital"
+    },
+    {
+      "id": "fac-12",
+      "name": "Riverbend Health Centre",
+      "districtId": "north",
+      "type": "health_centre"
+    },
+    {
+      "id": "fac-13",
+      "name": "Pine Hills Clinic",
+      "districtId": "north",
+      "type": "clinic"
+    },
+    {
+      "id": "fac-14",
+      "name": "Lakeside Health Centre",
+      "districtId": "north",
+      "type": "health_centre"
+    },
+    {
+      "id": "fac-15",
+      "name": "Eastfield Clinic",
+      "districtId": "north",
+      "type": "clinic"
+    },
+    {
+      "id": "fac-16",
+      "name": "Harmony District Hospital",
+      "districtId": "north",
+      "type": "hospital"
+    },
+    {
+      "id": "fac-21",
+      "name": "Central District Hospital",
+      "districtId": "central",
+      "type": "hospital"
+    },
+    {
+      "id": "fac-22",
+      "name": "Sunrise Health Centre",
+      "districtId": "central",
+      "type": "health_centre"
+    },
+    {
+      "id": "fac-23",
+      "name": "Green Valley Clinic",
+      "districtId": "central",
+      "type": "clinic"
+    },
+    {
+      "id": "fac-24",
+      "name": "Hilltop Health Centre",
+      "districtId": "central",
+      "type": "health_centre"
+    },
+    {
+      "id": "fac-25",
+      "name": "Market Road Clinic",
+      "districtId": "central",
+      "type": "clinic"
+    },
+    {
+      "id": "fac-26",
+      "name": "Unity District Hospital",
+      "districtId": "central",
+      "type": "hospital"
+    },
+    {
+      "id": "fac-31",
+      "name": "Coastal District Hospital",
+      "districtId": "south",
+      "type": "hospital"
+    },
+    {
+      "id": "fac-32",
+      "name": "Palm Grove Health Centre",
+      "districtId": "south",
+      "type": "health_centre"
+    },
+    {
+      "id": "fac-33",
+      "name": "Seabreeze Clinic",
+      "districtId": "south",
+      "type": "clinic"
+    },
+    {
+      "id": "fac-34",
+      "name": "Lagoon Health Centre",
+      "districtId": "south",
+      "type": "health_centre"
+    },
+    {
+      "id": "fac-35",
+      "name": "Southpoint Clinic",
+      "districtId": "south",
+      "type": "clinic"
+    },
+    {
+      "id": "fac-36",
+      "name": "Bridgeview District Hospital",
+      "districtId": "south",
+      "type": "hospital"
+    }
+  ],
+  "products": [
+    {
+      "id": "med-amox",
+      "name": "Amoxicillin 500 mg",
+      "form": "Capsule",
+      "unit": "capsules",
+      "essential": true,
+      "coldChain": false,
+      "unitCostCents": 8,
+      "minRemainingShelfLifeDays": 60,
+      "shelfLifeDays": 540,
+      "priorityWeight": 1.1
+    },
+    {
+      "id": "med-ors",
+      "name": "Oral rehydration salts",
+      "form": "Sachet",
+      "unit": "sachets",
+      "essential": true,
+      "coldChain": false,
+      "unitCostCents": 12,
+      "minRemainingShelfLifeDays": 60,
+      "shelfLifeDays": 720,
+      "priorityWeight": 1.1
+    },
+    {
+      "id": "med-oxy",
+      "name": "Oxytocin 10 IU/mL",
+      "form": "Injection",
+      "unit": "vials",
+      "essential": true,
+      "coldChain": true,
+      "unitCostCents": 95,
+      "minRemainingShelfLifeDays": 90,
+      "shelfLifeDays": 365,
+      "priorityWeight": 1.2
+    },
+    {
+      "id": "med-act",
+      "name": "Artemether/lumefantrine",
+      "form": "Tablet pack",
+      "unit": "packs",
+      "essential": true,
+      "coldChain": false,
+      "unitCostCents": 180,
+      "minRemainingShelfLifeDays": 90,
+      "shelfLifeDays": 540,
+      "priorityWeight": 1.15
+    },
+    {
+      "id": "med-ins",
+      "name": "Human insulin 100 IU/mL",
+      "form": "Injection",
+      "unit": "vials",
+      "essential": true,
+      "coldChain": true,
+      "unitCostCents": 420,
+      "minRemainingShelfLifeDays": 60,
+      "shelfLifeDays": 365,
+      "priorityWeight": 1.2
+    }
+  ],
+  "stocks": [
+    {
+      "facilityId": "fac-11",
+      "productId": "med-amox",
+      "reportedAt": "2026-11-14",
+      "usableUnits": 0,
+      "quarantinedUnits": 23,
+      "history": [
+        45,
+        48,
+        49,
+        48,
+        45,
+        42,
+        41,
+        42,
+        46,
+        49,
+        49,
+        48,
+        44,
+        41,
+        41,
+        43,
+        46,
+        49,
+        49,
+        47,
+        44,
+        46,
+        46,
+        48,
+        52,
+        55,
+        55,
+        52
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-11-med-amox-a",
+          "quantity": 0,
+          "expiryDate": "2026-12-19",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-11-med-amox-b",
+          "quantity": 0,
+          "expiryDate": "2027-08-01",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-11-med-amox-q",
+          "quantity": 23,
+          "expiryDate": "2027-06-02",
+          "status": "quarantined"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 5
+    },
+    {
+      "facilityId": "fac-11",
+      "productId": "med-ors",
+      "reportedAt": "2026-11-14",
+      "usableUnits": 93,
+      "quarantinedUnits": 0,
+      "history": [
+        30,
+        32,
+        33,
+        32,
+        30,
+        28,
+        27,
+        28,
+        30,
+        32,
+        33,
+        32,
+        29,
+        28,
+        27,
+        28,
+        31,
+        33,
+        33,
+        31,
+        29,
+        31,
+        31,
+        32,
+        35,
+        36,
+        36,
+        35
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-11-med-ors-a",
+          "quantity": 46,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-11-med-ors-b",
+          "quantity": 47,
+          "expiryDate": "2027-08-31",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 5
+    },
+    {
+      "facilityId": "fac-11",
+      "productId": "med-oxy",
+      "reportedAt": "2026-11-14",
+      "usableUnits": 67,
+      "quarantinedUnits": 0,
+      "history": [
+        8,
+        9,
+        9,
+        9,
+        8,
+        7,
+        7,
+        7,
+        8,
+        9,
+        9,
+        8,
+        8,
+        7,
+        7,
+        8,
+        8,
+        9,
+        9,
+        8,
+        8,
+        8,
+        8,
+        9,
+        9,
+        10,
+        10,
+        9
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-11-med-oxy-a",
+          "quantity": 33,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-11-med-oxy-b",
+          "quantity": 34,
+          "expiryDate": "2027-09-30",
+          "status": "released"
+        }
+      ],
+      "inbound": [
+        {
+          "id": "planned-fac-11-med-oxy",
+          "quantity": 100,
+          "expectedDate": "2026-11-24",
+          "expiryDate": "2027-09-30",
+          "status": "planned"
+        }
+      ],
+      "leadTimeDays": 5
+    },
+    {
+      "facilityId": "fac-11",
+      "productId": "med-act",
+      "reportedAt": "2026-11-14",
+      "usableUnits": 412,
+      "quarantinedUnits": 0,
+      "history": [
+        22,
+        24,
+        24,
+        23,
+        22,
+        20,
+        20,
+        21,
+        22,
+        24,
+        24,
+        23,
+        22,
+        20,
+        20,
+        21,
+        23,
+        24,
+        24,
+        23,
+        21,
+        23,
+        23,
+        24,
+        25,
+        27,
+        27,
+        25
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-11-med-act-a",
+          "quantity": 206,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-11-med-act-b",
+          "quantity": 206,
+          "expiryDate": "2027-10-30",
+          "status": "released"
+        }
+      ],
+      "inbound": [
+        {
+          "id": "inbound-fac-11-med-act",
+          "quantity": 229,
+          "expectedDate": "2026-11-19",
+          "expiryDate": "2027-09-10",
+          "status": "confirmed"
+        }
+      ],
+      "leadTimeDays": 5
+    },
+    {
+      "facilityId": "fac-11",
+      "productId": "med-ins",
+      "reportedAt": "2026-11-14",
+      "usableUnits": 213,
+      "quarantinedUnits": 0,
+      "history": [
+        6,
+        6,
+        7,
+        6,
+        6,
+        6,
+        5,
+        6,
+        6,
+        6,
+        7,
+        6,
+        6,
+        6,
+        5,
+        6,
+        6,
+        7,
+        7,
+        6,
+        6,
+        5,
+        5,
+        6,
+        6,
+        7,
+        7,
+        6
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-11-med-ins-a",
+          "quantity": 106,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-11-med-ins-b",
+          "quantity": 107,
+          "expiryDate": "2027-11-29",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 5
+    },
+    {
+      "facilityId": "fac-12",
+      "productId": "med-amox",
+      "reportedAt": "2026-11-13",
+      "usableUnits": 242,
+      "quarantinedUnits": 0,
+      "history": [
+        51,
+        53,
+        51,
+        48,
+        44,
+        43,
+        45,
+        49,
+        52,
+        53,
+        51,
+        47,
+        44,
+        43,
+        45,
+        49,
+        52,
+        53,
+        50,
+        47,
+        44,
+        43,
+        46,
+        50,
+        52,
+        52,
+        50,
+        46
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-12-med-amox-a",
+          "quantity": 121,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-12-med-amox-b",
+          "quantity": 121,
+          "expiryDate": "2027-08-01",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 8
+    },
+    {
+      "facilityId": "fac-12",
+      "productId": "med-ors",
+      "reportedAt": "2026-11-13",
+      "usableUnits": 732,
+      "quarantinedUnits": 0,
+      "history": [
+        35,
+        36,
+        35,
+        33,
+        31,
+        30,
+        31,
+        33,
+        36,
+        36,
+        35,
+        32,
+        30,
+        30,
+        31,
+        34,
+        36,
+        36,
+        35,
+        32,
+        30,
+        30,
+        32,
+        34,
+        36,
+        36,
+        34,
+        32
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-12-med-ors-a",
+          "quantity": 366,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-12-med-ors-b",
+          "quantity": 366,
+          "expiryDate": "2027-08-31",
+          "status": "released"
+        }
+      ],
+      "inbound": [
+        {
+          "id": "inbound-fac-12-med-ors",
+          "quantity": 333,
+          "expectedDate": "2026-11-20",
+          "expiryDate": "2027-09-10",
+          "status": "confirmed"
+        }
+      ],
+      "leadTimeDays": 8
+    },
+    {
+      "facilityId": "fac-12",
+      "productId": "med-oxy",
+      "reportedAt": "2026-11-13",
+      "usableUnits": 133,
+      "quarantinedUnits": 0,
+      "history": [
+        12,
+        12,
+        12,
+        11,
+        10,
+        10,
+        10,
+        11,
+        12,
+        12,
+        12,
+        11,
+        10,
+        10,
+        10,
+        11,
+        12,
+        12,
+        12,
+        11,
+        10,
+        10,
+        11,
+        11,
+        12,
+        12,
+        11,
+        11
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-12-med-oxy-a",
+          "quantity": 66,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-12-med-oxy-b",
+          "quantity": 67,
+          "expiryDate": "2027-09-30",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 8
+    },
+    {
+      "facilityId": "fac-12",
+      "productId": "med-act",
+      "reportedAt": "2026-11-13",
+      "usableUnits": 1133,
+      "quarantinedUnits": 0,
+      "history": [
+        27,
+        27,
+        27,
+        25,
+        23,
+        23,
+        23,
+        25,
+        27,
+        27,
+        26,
+        25,
+        23,
+        23,
+        24,
+        26,
+        27,
+        27,
+        26,
+        24,
+        23,
+        23,
+        24,
+        26,
+        27,
+        27,
+        26,
+        24
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-12-med-act-a",
+          "quantity": 566,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-12-med-act-b",
+          "quantity": 567,
+          "expiryDate": "2027-10-30",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 8
+    },
+    {
+      "facilityId": "fac-12",
+      "productId": "med-ins",
+      "reportedAt": "2026-11-13",
+      "usableUnits": 255,
+      "quarantinedUnits": 0,
+      "history": [
+        10,
+        10,
+        10,
+        9,
+        8,
+        8,
+        8,
+        9,
+        10,
+        10,
+        10,
+        9,
+        8,
+        8,
+        9,
+        9,
+        10,
+        10,
+        9,
+        9,
+        8,
+        8,
+        9,
+        9,
+        10,
+        10,
+        9,
+        9
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-12-med-ins-a",
+          "quantity": 127,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-12-med-ins-b",
+          "quantity": 128,
+          "expiryDate": "2027-11-29",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 8
+    },
+    {
+      "facilityId": "fac-13",
+      "productId": "med-amox",
+      "reportedAt": "2026-11-12",
+      "usableUnits": 511,
+      "quarantinedUnits": 0,
+      "history": [
+        56,
+        54,
+        51,
+        47,
+        46,
+        48,
+        52,
+        55,
+        56,
+        54,
+        50,
+        47,
+        46,
+        48,
+        52,
+        55,
+        56,
+        53,
+        50,
+        46,
+        46,
+        49,
+        53,
+        56,
+        56,
+        53,
+        49,
+        46
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-13-med-amox-a",
+          "quantity": 255,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-13-med-amox-b",
+          "quantity": 256,
+          "expiryDate": "2027-08-01",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 11
+    },
+    {
+      "facilityId": "fac-13",
+      "productId": "med-ors",
+      "reportedAt": "2026-11-12",
+      "usableUnits": 0,
+      "quarantinedUnits": 0,
+      "history": [
+        40,
+        38,
+        36,
+        33,
+        32,
+        34,
+        36,
+        39,
+        40,
+        38,
+        35,
+        33,
+        32,
+        34,
+        37,
+        39,
+        39,
+        38,
+        35,
+        33,
+        33,
+        39,
+        42,
+        44,
+        44,
+        42,
+        39,
+        37
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-13-med-ors-a",
+          "quantity": 0,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-13-med-ors-b",
+          "quantity": 0,
+          "expiryDate": "2027-08-31",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 11
+    },
+    {
+      "facilityId": "fac-13",
+      "productId": "med-oxy",
+      "reportedAt": "2026-11-12",
+      "usableUnits": 43,
+      "quarantinedUnits": 0,
+      "history": [
+        15,
+        15,
+        14,
+        13,
+        13,
+        13,
+        14,
+        15,
+        15,
+        15,
+        14,
+        13,
+        13,
+        13,
+        14,
+        15,
+        15,
+        15,
+        14,
+        13,
+        13,
+        15,
+        16,
+        17,
+        17,
+        16,
+        15,
+        14
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-13-med-oxy-a",
+          "quantity": 21,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-13-med-oxy-b",
+          "quantity": 22,
+          "expiryDate": "2027-09-30",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 11
+    },
+    {
+      "facilityId": "fac-13",
+      "productId": "med-act",
+      "reportedAt": "2026-11-12",
+      "usableUnits": 231,
+      "quarantinedUnits": 0,
+      "history": [
+        31,
+        30,
+        28,
+        26,
+        25,
+        26,
+        28,
+        30,
+        31,
+        30,
+        28,
+        26,
+        25,
+        26,
+        29,
+        30,
+        31,
+        29,
+        27,
+        26,
+        25,
+        30,
+        32,
+        34,
+        34,
+        32,
+        30,
+        29
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-13-med-act-a",
+          "quantity": 115,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-13-med-act-b",
+          "quantity": 116,
+          "expiryDate": "2027-10-30",
+          "status": "released"
+        }
+      ],
+      "inbound": [
+        {
+          "id": "planned-fac-13-med-act",
+          "quantity": 346,
+          "expectedDate": "2026-11-24",
+          "expiryDate": "2027-09-30",
+          "status": "planned"
+        }
+      ],
+      "leadTimeDays": 11
+    },
+    {
+      "facilityId": "fac-13",
+      "productId": "med-ins",
+      "reportedAt": "2026-11-12",
+      "usableUnits": 224,
+      "quarantinedUnits": 0,
+      "history": [
+        13,
+        13,
+        12,
+        11,
+        11,
+        11,
+        12,
+        13,
+        13,
+        13,
+        12,
+        11,
+        11,
+        11,
+        12,
+        13,
+        13,
+        13,
+        12,
+        11,
+        11,
+        13,
+        14,
+        15,
+        15,
+        14,
+        13,
+        12
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-13-med-ins-a",
+          "quantity": 78,
+          "expiryDate": "2026-12-21",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-13-med-ins-b",
+          "quantity": 146,
+          "expiryDate": "2027-11-29",
+          "status": "released"
+        }
+      ],
+      "inbound": [
+        {
+          "id": "inbound-fac-13-med-ins",
+          "quantity": 124,
+          "expectedDate": "2026-11-21",
+          "expiryDate": "2027-09-10",
+          "status": "confirmed"
+        }
+      ],
+      "leadTimeDays": 11
+    },
+    {
+      "facilityId": "fac-14",
+      "productId": "med-amox",
+      "reportedAt": "2026-11-11",
+      "usableUnits": 1883,
+      "quarantinedUnits": 0,
+      "history": [
+        58,
+        54,
+        50,
+        49,
+        51,
+        55,
+        58,
+        59,
+        57,
+        53,
+        50,
+        49,
+        51,
+        55,
+        59,
+        59,
+        57,
+        52,
+        49,
+        49,
+        52,
+        56,
+        59,
+        59,
+        56,
+        52,
+        49,
+        49
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-14-med-amox-a",
+          "quantity": 941,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-14-med-amox-b",
+          "quantity": 942,
+          "expiryDate": "2027-08-01",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 14
+    },
+    {
+      "facilityId": "fac-14",
+      "productId": "med-ors",
+      "reportedAt": "2026-11-11",
+      "usableUnits": 194,
+      "quarantinedUnits": 0,
+      "history": [
+        42,
+        39,
+        36,
+        35,
+        37,
+        39,
+        42,
+        43,
+        41,
+        38,
+        36,
+        35,
+        37,
+        40,
+        42,
+        43,
+        41,
+        38,
+        36,
+        35,
+        37,
+        40,
+        43,
+        43,
+        40,
+        37,
+        35,
+        35
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-14-med-ors-a",
+          "quantity": 97,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-14-med-ors-b",
+          "quantity": 97,
+          "expiryDate": "2027-08-31",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 14
+    },
+    {
+      "facilityId": "fac-14",
+      "productId": "med-oxy",
+      "reportedAt": "2026-11-11",
+      "usableUnits": 372,
+      "quarantinedUnits": 0,
+      "history": [
+        18,
+        17,
+        16,
+        15,
+        16,
+        17,
+        18,
+        19,
+        18,
+        17,
+        16,
+        15,
+        16,
+        17,
+        18,
+        19,
+        18,
+        17,
+        15,
+        15,
+        16,
+        18,
+        19,
+        19,
+        18,
+        16,
+        15,
+        15
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-14-med-oxy-a",
+          "quantity": 186,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-14-med-oxy-b",
+          "quantity": 186,
+          "expiryDate": "2027-09-30",
+          "status": "released"
+        }
+      ],
+      "inbound": [
+        {
+          "id": "inbound-fac-14-med-oxy",
+          "quantity": 169,
+          "expectedDate": "2026-11-22",
+          "expiryDate": "2027-09-10",
+          "status": "confirmed"
+        }
+      ],
+      "leadTimeDays": 14
+    },
+    {
+      "facilityId": "fac-14",
+      "productId": "med-act",
+      "reportedAt": "2026-11-11",
+      "usableUnits": 370,
+      "quarantinedUnits": 0,
+      "history": [
+        33,
+        31,
+        29,
+        28,
+        29,
+        31,
+        33,
+        34,
+        33,
+        30,
+        28,
+        28,
+        29,
+        32,
+        34,
+        34,
+        33,
+        30,
+        28,
+        28,
+        30,
+        32,
+        34,
+        34,
+        32,
+        30,
+        28,
+        28
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-14-med-act-a",
+          "quantity": 129,
+          "expiryDate": "2026-12-22",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-14-med-act-b",
+          "quantity": 241,
+          "expiryDate": "2027-10-30",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 14
+    },
+    {
+      "facilityId": "fac-14",
+      "productId": "med-ins",
+      "reportedAt": "2026-11-11",
+      "usableUnits": 673,
+      "quarantinedUnits": 0,
+      "history": [
+        16,
+        15,
+        14,
+        14,
+        14,
+        15,
+        16,
+        16,
+        16,
+        15,
+        14,
+        14,
+        14,
+        15,
+        16,
+        16,
+        16,
+        15,
+        14,
+        14,
+        14,
+        16,
+        16,
+        16,
+        16,
+        14,
+        14,
+        14
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-14-med-ins-a",
+          "quantity": 336,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-14-med-ins-b",
+          "quantity": 337,
+          "expiryDate": "2027-11-29",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 14
+    },
+    {
+      "facilityId": "fac-15",
+      "productId": "med-amox",
+      "reportedAt": "2026-11-14",
+      "usableUnits": 1583,
+      "quarantinedUnits": 0,
+      "history": [
+        57,
+        53,
+        51,
+        53,
+        58,
+        62,
+        63,
+        60,
+        56,
+        52,
+        51,
+        54,
+        58,
+        62,
+        63,
+        60,
+        55,
+        52,
+        52,
+        55,
+        59,
+        62,
+        62,
+        59,
+        55,
+        52,
+        52,
+        55
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-15-med-amox-a",
+          "quantity": 791,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-15-med-amox-b",
+          "quantity": 792,
+          "expiryDate": "2027-08-01",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 5
+    },
+    {
+      "facilityId": "fac-15",
+      "productId": "med-ors",
+      "reportedAt": "2026-11-14",
+      "usableUnits": 416,
+      "quarantinedUnits": 0,
+      "history": [
+        42,
+        39,
+        38,
+        39,
+        42,
+        45,
+        46,
+        44,
+        41,
+        39,
+        38,
+        40,
+        43,
+        46,
+        46,
+        44,
+        41,
+        38,
+        38,
+        40,
+        43,
+        46,
+        46,
+        44,
+        40,
+        38,
+        38,
+        41
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-15-med-ors-a",
+          "quantity": 208,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-15-med-ors-b",
+          "quantity": 208,
+          "expiryDate": "2027-08-31",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 5
+    },
+    {
+      "facilityId": "fac-15",
+      "productId": "med-oxy",
+      "reportedAt": "2026-11-14",
+      "usableUnits": 0,
+      "quarantinedUnits": 0,
+      "history": [
+        20,
+        18,
+        18,
+        19,
+        20,
+        22,
+        22
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-15-med-oxy-a",
+          "quantity": 0,
+          "expiryDate": "2026-12-23",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-15-med-oxy-b",
+          "quantity": 0,
+          "expiryDate": "2027-09-30",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 5
+    },
+    {
+      "facilityId": "fac-15",
+      "productId": "med-act",
+      "reportedAt": "2026-11-14",
+      "usableUnits": 104,
+      "quarantinedUnits": 0,
+      "history": [
+        34,
+        31,
+        31,
+        32,
+        34,
+        37,
+        37,
+        36,
+        33,
+        31,
+        31,
+        32,
+        35,
+        37,
+        37,
+        36,
+        33,
+        31,
+        31,
+        33,
+        35,
+        41,
+        41,
+        39,
+        37,
+        35,
+        35,
+        37
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-15-med-act-a",
+          "quantity": 52,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-15-med-act-b",
+          "quantity": 52,
+          "expiryDate": "2027-10-30",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 5
+    },
+    {
+      "facilityId": "fac-15",
+      "productId": "med-ins",
+      "reportedAt": "2026-11-14",
+      "usableUnits": 147,
+      "quarantinedUnits": 0,
+      "history": [
+        18,
+        17,
+        16,
+        17,
+        18,
+        19,
+        20,
+        19,
+        18,
+        17,
+        16,
+        17,
+        18,
+        20,
+        20,
+        19,
+        17,
+        16,
+        16,
+        17,
+        19,
+        22,
+        22,
+        21,
+        19,
+        18,
+        19,
+        20
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-15-med-ins-a",
+          "quantity": 73,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-15-med-ins-b",
+          "quantity": 74,
+          "expiryDate": "2027-11-29",
+          "status": "released"
+        }
+      ],
+      "inbound": [
+        {
+          "id": "planned-fac-15-med-ins",
+          "quantity": 221,
+          "expectedDate": "2026-11-24",
+          "expiryDate": "2027-09-30",
+          "status": "planned"
+        }
+      ],
+      "leadTimeDays": 5
+    },
+    {
+      "facilityId": "fac-16",
+      "productId": "med-amox",
+      "reportedAt": "2026-11-13",
+      "usableUnits": 830,
+      "quarantinedUnits": 0,
+      "history": [
+        42,
+        41,
+        42,
+        46,
+        49,
+        49,
+        48,
+        44,
+        41,
+        41,
+        43,
+        46,
+        49,
+        49,
+        47,
+        44,
+        41,
+        41,
+        43,
+        47,
+        49,
+        55,
+        52,
+        49,
+        46,
+        46,
+        49,
+        52
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-16-med-amox-a",
+          "quantity": 415,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-16-med-amox-b",
+          "quantity": 415,
+          "expiryDate": "2027-08-01",
+          "status": "released"
+        }
+      ],
+      "inbound": [
+        {
+          "id": "inbound-fac-16-med-amox",
+          "quantity": 461,
+          "expectedDate": "2026-11-20",
+          "expiryDate": "2027-09-10",
+          "status": "confirmed"
+        }
+      ],
+      "leadTimeDays": 8
+    },
+    {
+      "facilityId": "fac-16",
+      "productId": "med-ors",
+      "reportedAt": "2026-11-13",
+      "usableUnits": 1041,
+      "quarantinedUnits": 0,
+      "history": [
+        28,
+        27,
+        28,
+        30,
+        32,
+        33,
+        32,
+        29,
+        28,
+        27,
+        28,
+        31,
+        33,
+        33,
+        31,
+        29,
+        27,
+        27,
+        29,
+        31,
+        33,
+        33,
+        31,
+        29,
+        27,
+        27,
+        29,
+        31
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-16-med-ors-a",
+          "quantity": 364,
+          "expiryDate": "2026-12-24",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-16-med-ors-b",
+          "quantity": 677,
+          "expiryDate": "2027-08-31",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 8
+    },
+    {
+      "facilityId": "fac-16",
+      "productId": "med-oxy",
+      "reportedAt": "2026-11-13",
+      "usableUnits": 39,
+      "quarantinedUnits": 0,
+      "history": [
+        7,
+        7,
+        7,
+        8,
+        9,
+        9,
+        8,
+        8,
+        7,
+        7,
+        8,
+        8,
+        9,
+        9,
+        8,
+        8,
+        7,
+        7,
+        8,
+        8,
+        9,
+        9,
+        8,
+        8,
+        7,
+        7,
+        8,
+        8
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-16-med-oxy-a",
+          "quantity": 19,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-16-med-oxy-b",
+          "quantity": 20,
+          "expiryDate": "2027-09-30",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 8
+    },
+    {
+      "facilityId": "fac-16",
+      "productId": "med-act",
+      "reportedAt": "2026-11-13",
+      "usableUnits": 481,
+      "quarantinedUnits": 0,
+      "history": [
+        20,
+        20,
+        21,
+        22,
+        24,
+        24,
+        23,
+        22,
+        20,
+        20,
+        21,
+        23,
+        24,
+        24,
+        23,
+        21,
+        20,
+        20,
+        21,
+        23,
+        24,
+        24,
+        23,
+        21,
+        20,
+        20,
+        21,
+        23
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-16-med-act-a",
+          "quantity": 240,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-16-med-act-b",
+          "quantity": 241,
+          "expiryDate": "2027-10-30",
+          "status": "released"
+        }
+      ],
+      "inbound": [
+        {
+          "id": "inbound-fac-16-med-act",
+          "quantity": 219,
+          "expectedDate": "2026-11-20",
+          "expiryDate": "2027-09-10",
+          "status": "confirmed"
+        }
+      ],
+      "leadTimeDays": 8
+    },
+    {
+      "facilityId": "fac-16",
+      "productId": "med-ins",
+      "reportedAt": "2026-11-13",
+      "usableUnits": 72,
+      "quarantinedUnits": 3,
+      "history": [
+        6,
+        5,
+        6,
+        6,
+        6,
+        7,
+        6,
+        6,
+        6,
+        5,
+        6,
+        6,
+        7,
+        7,
+        6,
+        6,
+        5,
+        5,
+        6,
+        6,
+        7,
+        7,
+        6,
+        6,
+        5,
+        5,
+        6,
+        6
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-16-med-ins-a",
+          "quantity": 36,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-16-med-ins-b",
+          "quantity": 36,
+          "expiryDate": "2027-11-29",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-16-med-ins-q",
+          "quantity": 3,
+          "expiryDate": "2027-06-02",
+          "status": "quarantined"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 8
+    },
+    {
+      "facilityId": "fac-21",
+      "productId": "med-amox",
+      "reportedAt": "2026-11-12",
+      "usableUnits": 2158,
+      "quarantinedUnits": 0,
+      "history": [
+        43,
+        45,
+        49,
+        52,
+        53,
+        51,
+        47,
+        44,
+        43,
+        45,
+        49,
+        52,
+        53,
+        50,
+        47,
+        44,
+        43,
+        46,
+        50,
+        52,
+        52,
+        50,
+        46,
+        44,
+        44,
+        46,
+        50,
+        53
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-21-med-amox-a",
+          "quantity": 755,
+          "expiryDate": "2026-12-25",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-21-med-amox-b",
+          "quantity": 1403,
+          "expiryDate": "2027-08-01",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 11
+    },
+    {
+      "facilityId": "fac-21",
+      "productId": "med-ors",
+      "reportedAt": "2026-11-12",
+      "usableUnits": 923,
+      "quarantinedUnits": 0,
+      "history": [
+        30,
+        31,
+        33,
+        36,
+        36,
+        35,
+        32,
+        30,
+        30,
+        31,
+        34,
+        36,
+        36,
+        35,
+        32,
+        30,
+        30,
+        32,
+        34,
+        36,
+        36,
+        34,
+        32,
+        30,
+        30,
+        32,
+        34,
+        36
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-21-med-ors-a",
+          "quantity": 461,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-21-med-ors-b",
+          "quantity": 462,
+          "expiryDate": "2027-08-31",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 11
+    },
+    {
+      "facilityId": "fac-21",
+      "productId": "med-oxy",
+      "reportedAt": "2026-11-12",
+      "usableUnits": 110,
+      "quarantinedUnits": 0,
+      "history": [
+        10,
+        10,
+        11,
+        12,
+        12,
+        12,
+        11,
+        10,
+        10,
+        10,
+        11,
+        12,
+        12,
+        12,
+        11,
+        10,
+        10,
+        11,
+        11,
+        12,
+        12,
+        11,
+        11,
+        10,
+        10,
+        11,
+        11,
+        12
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-21-med-oxy-a",
+          "quantity": 55,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-21-med-oxy-b",
+          "quantity": 55,
+          "expiryDate": "2027-09-30",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 11
+    },
+    {
+      "facilityId": "fac-21",
+      "productId": "med-act",
+      "reportedAt": "2026-11-12",
+      "usableUnits": 0,
+      "quarantinedUnits": 13,
+      "history": [
+        23,
+        23,
+        25,
+        27,
+        27,
+        26,
+        25,
+        23,
+        23,
+        24,
+        26,
+        27,
+        27,
+        26,
+        24,
+        23,
+        23,
+        24,
+        26,
+        27,
+        27,
+        29,
+        27,
+        26,
+        26,
+        27,
+        29,
+        30
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-21-med-act-a",
+          "quantity": 0,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-21-med-act-b",
+          "quantity": 0,
+          "expiryDate": "2027-10-30",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-21-med-act-q",
+          "quantity": 13,
+          "expiryDate": "2027-06-02",
+          "status": "quarantined"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 11
+    },
+    {
+      "facilityId": "fac-21",
+      "productId": "med-ins",
+      "reportedAt": "2026-11-12",
+      "usableUnits": 28,
+      "quarantinedUnits": 0,
+      "history": [
+        8,
+        8,
+        9,
+        10,
+        10,
+        10,
+        9,
+        8,
+        8,
+        9,
+        9,
+        10,
+        10,
+        9,
+        9,
+        8,
+        8,
+        9,
+        9,
+        10,
+        10,
+        10,
+        10,
+        9,
+        9,
+        10,
+        10,
+        11
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-21-med-ins-a",
+          "quantity": 14,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-21-med-ins-b",
+          "quantity": 14,
+          "expiryDate": "2027-11-29",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 11
+    },
+    {
+      "facilityId": "fac-22",
+      "productId": "med-amox",
+      "reportedAt": "2026-11-11",
+      "usableUnits": 423,
+      "quarantinedUnits": 0,
+      "history": [
+        48,
+        52,
+        55,
+        56,
+        54,
+        50,
+        47,
+        46,
+        48,
+        52,
+        55,
+        56,
+        53,
+        50,
+        46,
+        46,
+        49,
+        53,
+        56,
+        56,
+        53,
+        55,
+        52,
+        53,
+        55,
+        59,
+        62,
+        62
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-22-med-amox-a",
+          "quantity": 211,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-22-med-amox-b",
+          "quantity": 212,
+          "expiryDate": "2027-08-01",
+          "status": "released"
+        }
+      ],
+      "inbound": [
+        {
+          "id": "planned-fac-22-med-amox",
+          "quantity": 634,
+          "expectedDate": "2026-11-24",
+          "expiryDate": "2027-09-30",
+          "status": "planned"
+        }
+      ],
+      "leadTimeDays": 14
+    },
+    {
+      "facilityId": "fac-22",
+      "productId": "med-ors",
+      "reportedAt": "2026-11-11",
+      "usableUnits": 670,
+      "quarantinedUnits": 0,
+      "history": [
+        34,
+        36,
+        39,
+        40,
+        38,
+        35,
+        33,
+        32,
+        34,
+        37,
+        39,
+        39,
+        38,
+        35,
+        33,
+        33,
+        34,
+        37,
+        39,
+        39,
+        37,
+        39,
+        37,
+        37,
+        39,
+        42,
+        44,
+        43
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-22-med-ors-a",
+          "quantity": 335,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-22-med-ors-b",
+          "quantity": 335,
+          "expiryDate": "2027-08-31",
+          "status": "released"
+        }
+      ],
+      "inbound": [
+        {
+          "id": "inbound-fac-22-med-ors",
+          "quantity": 372,
+          "expectedDate": "2026-11-22",
+          "expiryDate": "2027-09-10",
+          "status": "confirmed"
+        }
+      ],
+      "leadTimeDays": 14
+    },
+    {
+      "facilityId": "fac-22",
+      "productId": "med-oxy",
+      "reportedAt": "2026-11-11",
+      "usableUnits": 493,
+      "quarantinedUnits": 7,
+      "history": [
+        13,
+        14,
+        15,
+        15,
+        15,
+        14,
+        13,
+        13,
+        13,
+        14,
+        15,
+        15,
+        15,
+        14,
+        13,
+        13,
+        13,
+        14,
+        15,
+        15,
+        15,
+        13,
+        13,
+        13,
+        14,
+        15,
+        15,
+        15
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-22-med-oxy-a",
+          "quantity": 246,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-22-med-oxy-b",
+          "quantity": 247,
+          "expiryDate": "2027-09-30",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-22-med-oxy-q",
+          "quantity": 7,
+          "expiryDate": "2027-06-02",
+          "status": "quarantined"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 14
+    },
+    {
+      "facilityId": "fac-22",
+      "productId": "med-act",
+      "reportedAt": "2026-11-11",
+      "usableUnits": 141,
+      "quarantinedUnits": 0,
+      "history": [
+        26,
+        28,
+        30,
+        31,
+        30,
+        28,
+        26,
+        25,
+        26,
+        29,
+        30,
+        31,
+        29,
+        27,
+        26,
+        25,
+        27,
+        29,
+        31,
+        31,
+        29,
+        27,
+        25,
+        25,
+        27,
+        29,
+        31,
+        30
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-22-med-act-a",
+          "quantity": 70,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-22-med-act-b",
+          "quantity": 71,
+          "expiryDate": "2027-10-30",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 14
+    },
+    {
+      "facilityId": "fac-22",
+      "productId": "med-ins",
+      "reportedAt": "2026-11-11",
+      "usableUnits": 266,
+      "quarantinedUnits": 0,
+      "history": [
+        11,
+        12,
+        13,
+        13,
+        13,
+        12,
+        11,
+        11,
+        11,
+        12,
+        13,
+        13,
+        13,
+        12,
+        11,
+        11,
+        11,
+        12,
+        13,
+        13,
+        12,
+        12,
+        11,
+        11,
+        12,
+        13,
+        13,
+        13
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-22-med-ins-a",
+          "quantity": 133,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-22-med-ins-b",
+          "quantity": 133,
+          "expiryDate": "2027-11-29",
+          "status": "released"
+        }
+      ],
+      "inbound": [
+        {
+          "id": "inbound-fac-22-med-ins",
+          "quantity": 121,
+          "expectedDate": "2026-11-22",
+          "expiryDate": "2027-09-10",
+          "status": "confirmed"
+        }
+      ],
+      "leadTimeDays": 14
+    },
+    {
+      "facilityId": "fac-23",
+      "productId": "med-amox",
+      "reportedAt": "2026-11-14",
+      "usableUnits": 654,
+      "quarantinedUnits": 0,
+      "history": [
+        55,
+        58,
+        59,
+        57,
+        53,
+        50,
+        49,
+        51,
+        55,
+        59,
+        59,
+        57,
+        52,
+        49,
+        49,
+        52,
+        56,
+        59,
+        59,
+        56,
+        52,
+        49,
+        49,
+        52,
+        56,
+        59,
+        59,
+        55
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-23-med-amox-a",
+          "quantity": 327,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-23-med-amox-b",
+          "quantity": 327,
+          "expiryDate": "2027-08-01",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 5
+    },
+    {
+      "facilityId": "fac-23",
+      "productId": "med-ors",
+      "reportedAt": "2026-11-14",
+      "usableUnits": 1768,
+      "quarantinedUnits": 20,
+      "history": [
+        39,
+        42,
+        43,
+        41,
+        38,
+        36,
+        35,
+        37,
+        40,
+        42,
+        43,
+        41,
+        38,
+        36,
+        35,
+        37,
+        40,
+        43,
+        43,
+        40,
+        37,
+        35,
+        35,
+        38,
+        41,
+        43,
+        42,
+        40
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-23-med-ors-a",
+          "quantity": 884,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-23-med-ors-b",
+          "quantity": 884,
+          "expiryDate": "2027-08-31",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-23-med-ors-q",
+          "quantity": 20,
+          "expiryDate": "2027-06-02",
+          "status": "quarantined"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 5
+    },
+    {
+      "facilityId": "fac-23",
+      "productId": "med-oxy",
+      "reportedAt": "2026-11-14",
+      "usableUnits": 479,
+      "quarantinedUnits": 0,
+      "history": [
+        17,
+        18,
+        19,
+        18,
+        17,
+        16,
+        15,
+        16,
+        17,
+        18,
+        19,
+        18,
+        17,
+        15,
+        15,
+        16,
+        18,
+        19,
+        19,
+        18,
+        16,
+        15,
+        15,
+        16,
+        18,
+        19,
+        18,
+        17
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-23-med-oxy-a",
+          "quantity": 239,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-23-med-oxy-b",
+          "quantity": 240,
+          "expiryDate": "2027-09-30",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 5
+    },
+    {
+      "facilityId": "fac-23",
+      "productId": "med-act",
+      "reportedAt": "2026-11-14",
+      "usableUnits": 313,
+      "quarantinedUnits": 0,
+      "history": [
+        31,
+        33,
+        34,
+        33,
+        30,
+        28,
+        28,
+        29,
+        32,
+        34,
+        34,
+        33,
+        30,
+        28,
+        28,
+        30,
+        32,
+        34,
+        34,
+        32,
+        30,
+        28,
+        28,
+        30,
+        32,
+        34,
+        34,
+        32
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-23-med-act-a",
+          "quantity": 156,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-23-med-act-b",
+          "quantity": 157,
+          "expiryDate": "2027-10-30",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 5
+    },
+    {
+      "facilityId": "fac-23",
+      "productId": "med-ins",
+      "reportedAt": "2026-11-14",
+      "usableUnits": 0,
+      "quarantinedUnits": 0,
+      "history": [
+        15,
+        16,
+        16,
+        16,
+        15,
+        14,
+        14,
+        14,
+        15,
+        16,
+        16,
+        16,
+        15,
+        14,
+        14,
+        14,
+        16,
+        16,
+        16,
+        16,
+        14,
+        15,
+        15,
+        16,
+        17,
+        18,
+        18,
+        17
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-23-med-ins-a",
+          "quantity": 0,
+          "expiryDate": "2026-12-27",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-23-med-ins-b",
+          "quantity": 0,
+          "expiryDate": "2027-11-29",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 5
+    },
+    {
+      "facilityId": "fac-24",
+      "productId": "med-amox",
+      "reportedAt": "2026-11-13",
+      "usableUnits": 177,
+      "quarantinedUnits": 30,
+      "history": [
+        62,
+        63,
+        60,
+        56,
+        52,
+        51,
+        54,
+        58,
+        62,
+        63,
+        60,
+        55,
+        52,
+        52,
+        55,
+        59,
+        62,
+        62,
+        59,
+        55,
+        52,
+        59,
+        62,
+        66,
+        69,
+        69,
+        65,
+        61
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-24-med-amox-a",
+          "quantity": 88,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-24-med-amox-b",
+          "quantity": 89,
+          "expiryDate": "2027-08-01",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-24-med-amox-q",
+          "quantity": 30,
+          "expiryDate": "2027-06-02",
+          "status": "quarantined"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 8
+    },
+    {
+      "facilityId": "fac-24",
+      "productId": "med-ors",
+      "reportedAt": "2026-11-13",
+      "usableUnits": 348,
+      "quarantinedUnits": 0,
+      "history": [
+        45,
+        46,
+        44,
+        41,
+        39,
+        38,
+        40,
+        43,
+        46,
+        46,
+        44,
+        41,
+        38,
+        38,
+        40,
+        43,
+        46,
+        46,
+        44,
+        40,
+        38,
+        43,
+        46,
+        49,
+        51,
+        51,
+        48,
+        45
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-24-med-ors-a",
+          "quantity": 174,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-24-med-ors-b",
+          "quantity": 174,
+          "expiryDate": "2027-08-31",
+          "status": "released"
+        }
+      ],
+      "inbound": [
+        {
+          "id": "planned-fac-24-med-ors",
+          "quantity": 522,
+          "expectedDate": "2026-11-24",
+          "expiryDate": "2027-09-30",
+          "status": "planned"
+        }
+      ],
+      "leadTimeDays": 8
+    },
+    {
+      "facilityId": "fac-24",
+      "productId": "med-oxy",
+      "reportedAt": "2026-11-13",
+      "usableUnits": 373,
+      "quarantinedUnits": 0,
+      "history": [
+        22,
+        22,
+        21,
+        20,
+        18,
+        18,
+        19,
+        20,
+        22,
+        22,
+        21,
+        19,
+        18,
+        18,
+        19,
+        21,
+        22,
+        22,
+        21,
+        19,
+        18,
+        21,
+        22,
+        23,
+        24,
+        24,
+        23,
+        21
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-24-med-oxy-a",
+          "quantity": 186,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-24-med-oxy-b",
+          "quantity": 187,
+          "expiryDate": "2027-09-30",
+          "status": "released"
+        }
+      ],
+      "inbound": [
+        {
+          "id": "inbound-fac-24-med-oxy",
+          "quantity": 207,
+          "expectedDate": "2026-11-20",
+          "expiryDate": "2027-09-10",
+          "status": "confirmed"
+        }
+      ],
+      "leadTimeDays": 8
+    },
+    {
+      "facilityId": "fac-24",
+      "productId": "med-act",
+      "reportedAt": "2026-11-13",
+      "usableUnits": 1199,
+      "quarantinedUnits": 0,
+      "history": [
+        37,
+        37,
+        36,
+        33,
+        31,
+        31,
+        32,
+        35,
+        37,
+        37,
+        36,
+        33,
+        31,
+        31,
+        33,
+        35,
+        37,
+        37,
+        35,
+        33,
+        31,
+        31,
+        33,
+        36,
+        37,
+        37,
+        35,
+        32
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-24-med-act-a",
+          "quantity": 419,
+          "expiryDate": "2026-12-28",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-24-med-act-b",
+          "quantity": 780,
+          "expiryDate": "2027-10-30",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 8
+    },
+    {
+      "facilityId": "fac-24",
+      "productId": "med-ins",
+      "reportedAt": "2026-11-13",
+      "usableUnits": 91,
+      "quarantinedUnits": 0,
+      "history": [
+        19,
+        20,
+        19,
+        18,
+        17,
+        16,
+        17,
+        18,
+        20,
+        20,
+        19,
+        17,
+        16,
+        16,
+        17,
+        19,
+        20,
+        20,
+        19,
+        17,
+        16,
+        16,
+        17,
+        19,
+        20,
+        20,
+        18,
+        17
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-24-med-ins-a",
+          "quantity": 45,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-24-med-ins-b",
+          "quantity": 46,
+          "expiryDate": "2027-11-29",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 8
+    },
+    {
+      "facilityId": "fac-25",
+      "productId": "med-amox",
+      "reportedAt": "2026-11-02",
+      "usableUnits": 992,
+      "quarantinedUnits": 0,
+      "history": [
+        49,
+        48,
+        44,
+        41,
+        41,
+        43,
+        46,
+        49,
+        49,
+        47,
+        44,
+        41,
+        41,
+        43,
+        47,
+        49,
+        49,
+        47,
+        43,
+        41,
+        41,
+        44,
+        47,
+        49,
+        49,
+        46,
+        43,
+        41
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-25-med-amox-a",
+          "quantity": 496,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-25-med-amox-b",
+          "quantity": 496,
+          "expiryDate": "2027-08-01",
+          "status": "released"
+        }
+      ],
+      "inbound": [
+        {
+          "id": "inbound-fac-25-med-amox",
+          "quantity": 451,
+          "expectedDate": "2026-11-21",
+          "expiryDate": "2027-09-10",
+          "status": "confirmed"
+        }
+      ],
+      "leadTimeDays": 11
+    },
+    {
+      "facilityId": "fac-25",
+      "productId": "med-ors",
+      "reportedAt": "2026-11-12",
+      "usableUnits": 360,
+      "quarantinedUnits": 0,
+      "history": [
+        33,
+        32,
+        29,
+        28,
+        27,
+        28,
+        31,
+        33,
+        33,
+        31,
+        29,
+        27,
+        27,
+        29,
+        31,
+        33,
+        33,
+        31,
+        29,
+        27,
+        27,
+        29,
+        31,
+        33,
+        33,
+        31,
+        28,
+        27
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-25-med-ors-a",
+          "quantity": 180,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-25-med-ors-b",
+          "quantity": 180,
+          "expiryDate": "2027-08-31",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 11
+    },
+    {
+      "facilityId": "fac-25",
+      "productId": "med-oxy",
+      "reportedAt": "2026-11-12",
+      "usableUnits": 360,
+      "quarantinedUnits": 0,
+      "history": [
+        9,
+        8,
+        8,
+        7,
+        7,
+        8,
+        8,
+        9,
+        9,
+        8,
+        8,
+        7,
+        7,
+        8,
+        8,
+        9,
+        9,
+        8,
+        8,
+        7,
+        7,
+        8,
+        8,
+        9,
+        9,
+        8,
+        8,
+        7
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-25-med-oxy-a",
+          "quantity": 125,
+          "expiryDate": "2026-12-29",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-25-med-oxy-b",
+          "quantity": 235,
+          "expiryDate": "2027-09-30",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 11
+    },
+    {
+      "facilityId": "fac-25",
+      "productId": "med-act",
+      "reportedAt": "2026-11-12",
+      "usableUnits": 617,
+      "quarantinedUnits": 0,
+      "history": [
+        24,
+        23,
+        22,
+        20,
+        20,
+        21,
+        23,
+        24,
+        24,
+        23,
+        21,
+        20,
+        20,
+        21,
+        23,
+        24,
+        24,
+        23,
+        21,
+        20,
+        20,
+        21,
+        23,
+        24,
+        24,
+        23,
+        21,
+        20
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-25-med-act-a",
+          "quantity": 308,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-25-med-act-b",
+          "quantity": 309,
+          "expiryDate": "2027-10-30",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 11
+    },
+    {
+      "facilityId": "fac-25",
+      "productId": "med-ins",
+      "reportedAt": "2026-11-12",
+      "usableUnits": 60,
+      "quarantinedUnits": 0,
+      "history": [
+        7,
+        6,
+        6,
+        6,
+        5,
+        6,
+        6,
+        7,
+        7,
+        6,
+        6,
+        5,
+        5,
+        6,
+        6,
+        7,
+        7,
+        6,
+        6,
+        5,
+        5,
+        6,
+        6,
+        7,
+        7,
+        6,
+        6,
+        5
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-25-med-ins-a",
+          "quantity": 30,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-25-med-ins-b",
+          "quantity": 30,
+          "expiryDate": "2027-11-29",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 11
+    },
+    {
+      "facilityId": "fac-26",
+      "productId": "med-amox",
+      "reportedAt": "2026-11-11",
+      "usableUnits": 0,
+      "quarantinedUnits": 0,
+      "history": [
+        51,
+        47,
+        44,
+        43,
+        45,
+        49,
+        52,
+        53,
+        50,
+        47,
+        44,
+        43,
+        46,
+        50,
+        52,
+        52,
+        50,
+        46,
+        44,
+        44,
+        46,
+        56,
+        58,
+        58,
+        55,
+        51,
+        49,
+        50
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-26-med-amox-a",
+          "quantity": 0,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-26-med-amox-b",
+          "quantity": 0,
+          "expiryDate": "2027-08-01",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 14
+    },
+    {
+      "facilityId": "fac-26",
+      "productId": "med-ors",
+      "reportedAt": "2026-11-11",
+      "usableUnits": 101,
+      "quarantinedUnits": 0,
+      "history": [
+        35,
+        32,
+        30,
+        30,
+        31,
+        34,
+        36,
+        36,
+        35,
+        32,
+        30,
+        30,
+        32,
+        34,
+        36,
+        36,
+        34,
+        32,
+        30,
+        30,
+        32,
+        38,
+        40,
+        40,
+        38,
+        35,
+        34,
+        34
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-26-med-ors-a",
+          "quantity": 35,
+          "expiryDate": "2026-12-30",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-26-med-ors-b",
+          "quantity": 66,
+          "expiryDate": "2027-08-31",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 14
+    },
+    {
+      "facilityId": "fac-26",
+      "productId": "med-oxy",
+      "reportedAt": "2026-11-11",
+      "usableUnits": 90,
+      "quarantinedUnits": 0,
+      "history": [
+        12,
+        11,
+        10,
+        10,
+        10,
+        11,
+        12,
+        12,
+        12,
+        11,
+        10,
+        10,
+        11,
+        11,
+        12,
+        12,
+        11,
+        11,
+        10,
+        10,
+        11,
+        13,
+        13,
+        13,
+        13,
+        12,
+        11,
+        11
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-26-med-oxy-a",
+          "quantity": 45,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-26-med-oxy-b",
+          "quantity": 45,
+          "expiryDate": "2027-09-30",
+          "status": "released"
+        }
+      ],
+      "inbound": [
+        {
+          "id": "planned-fac-26-med-oxy",
+          "quantity": 135,
+          "expectedDate": "2026-11-24",
+          "expiryDate": "2027-09-30",
+          "status": "planned"
+        }
+      ],
+      "leadTimeDays": 14
+    },
+    {
+      "facilityId": "fac-26",
+      "productId": "med-act",
+      "reportedAt": "2026-11-11",
+      "usableUnits": 462,
+      "quarantinedUnits": 0,
+      "history": [
+        26,
+        25,
+        23,
+        23,
+        24,
+        26,
+        27,
+        27,
+        26,
+        24,
+        23,
+        23,
+        24,
+        26,
+        27,
+        27,
+        26,
+        24,
+        23,
+        23,
+        24,
+        29,
+        30,
+        30,
+        29,
+        27,
+        26,
+        26
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-26-med-act-a",
+          "quantity": 231,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-26-med-act-b",
+          "quantity": 231,
+          "expiryDate": "2027-10-30",
+          "status": "released"
+        }
+      ],
+      "inbound": [
+        {
+          "id": "inbound-fac-26-med-act",
+          "quantity": 256,
+          "expectedDate": "2026-11-22",
+          "expiryDate": "2027-09-10",
+          "status": "confirmed"
+        }
+      ],
+      "leadTimeDays": 14
+    },
+    {
+      "facilityId": "fac-26",
+      "productId": "med-ins",
+      "reportedAt": "2026-11-11",
+      "usableUnits": 314,
+      "quarantinedUnits": 0,
+      "history": [
+        10,
+        9,
+        8,
+        8,
+        9,
+        9,
+        10,
+        10,
+        9,
+        9,
+        8,
+        8,
+        9,
+        9,
+        10,
+        10,
+        9,
+        9,
+        8,
+        8,
+        9,
+        9,
+        10,
+        10,
+        9,
+        9,
+        8,
+        8
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-26-med-ins-a",
+          "quantity": 157,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-26-med-ins-b",
+          "quantity": 157,
+          "expiryDate": "2027-11-29",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 14
+    },
+    {
+      "facilityId": "fac-31",
+      "productId": "med-amox",
+      "reportedAt": "2026-11-14",
+      "usableUnits": 252,
+      "quarantinedUnits": 0,
+      "history": [
+        50,
+        47,
+        46,
+        48,
+        52,
+        55,
+        56,
+        53,
+        50,
+        46,
+        46,
+        49,
+        53,
+        56,
+        56,
+        53,
+        49,
+        46,
+        46,
+        49,
+        53,
+        56,
+        55,
+        52,
+        48,
+        46,
+        47,
+        50
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-31-med-amox-a",
+          "quantity": 88,
+          "expiryDate": "2026-12-31",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-31-med-amox-b",
+          "quantity": 164,
+          "expiryDate": "2027-08-01",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 5
+    },
+    {
+      "facilityId": "fac-31",
+      "productId": "med-ors",
+      "reportedAt": "2026-11-14",
+      "usableUnits": 784,
+      "quarantinedUnits": 0,
+      "history": [
+        35,
+        33,
+        32,
+        34,
+        37,
+        39,
+        39,
+        38,
+        35,
+        33,
+        33,
+        34,
+        37,
+        39,
+        39,
+        37,
+        35,
+        33,
+        33,
+        35,
+        38,
+        39,
+        39,
+        37,
+        34,
+        33,
+        33,
+        35
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-31-med-ors-a",
+          "quantity": 392,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-31-med-ors-b",
+          "quantity": 392,
+          "expiryDate": "2027-08-31",
+          "status": "released"
+        }
+      ],
+      "inbound": [
+        {
+          "id": "inbound-fac-31-med-ors",
+          "quantity": 356,
+          "expectedDate": "2026-11-19",
+          "expiryDate": "2027-09-10",
+          "status": "confirmed"
+        }
+      ],
+      "leadTimeDays": 5
+    },
+    {
+      "facilityId": "fac-31",
+      "productId": "med-oxy",
+      "reportedAt": "2026-11-14",
+      "usableUnits": 167,
+      "quarantinedUnits": 0,
+      "history": [
+        14,
+        13,
+        13,
+        13,
+        14,
+        15,
+        15,
+        15,
+        14,
+        13,
+        13,
+        13,
+        14,
+        15,
+        15,
+        15,
+        13,
+        13,
+        13,
+        14,
+        15,
+        15,
+        15,
+        14,
+        13,
+        13,
+        13,
+        14
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-31-med-oxy-a",
+          "quantity": 83,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-31-med-oxy-b",
+          "quantity": 84,
+          "expiryDate": "2027-09-30",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 5
+    },
+    {
+      "facilityId": "fac-31",
+      "productId": "med-act",
+      "reportedAt": "2026-11-14",
+      "usableUnits": 1249,
+      "quarantinedUnits": 0,
+      "history": [
+        28,
+        26,
+        25,
+        26,
+        29,
+        30,
+        31,
+        29,
+        27,
+        26,
+        25,
+        27,
+        29,
+        31,
+        31,
+        29,
+        27,
+        25,
+        25,
+        27,
+        29,
+        31,
+        30,
+        29,
+        27,
+        25,
+        26,
+        27
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-31-med-act-a",
+          "quantity": 624,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-31-med-act-b",
+          "quantity": 625,
+          "expiryDate": "2027-10-30",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 5
+    },
+    {
+      "facilityId": "fac-31",
+      "productId": "med-ins",
+      "reportedAt": "2026-11-14",
+      "usableUnits": 333,
+      "quarantinedUnits": 0,
+      "history": [
+        12,
+        11,
+        11,
+        11,
+        12,
+        13,
+        13,
+        13,
+        12,
+        11,
+        11,
+        11,
+        12,
+        13,
+        13,
+        12,
+        12,
+        11,
+        11,
+        12,
+        13,
+        13,
+        13,
+        12,
+        11,
+        11,
+        11,
+        12
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-31-med-ins-a",
+          "quantity": 166,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-31-med-ins-b",
+          "quantity": 167,
+          "expiryDate": "2027-11-29",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 5
+    },
+    {
+      "facilityId": "fac-32",
+      "productId": "med-amox",
+      "reportedAt": "2026-11-13",
+      "usableUnits": 536,
+      "quarantinedUnits": 0,
+      "history": [
+        50,
+        49,
+        51,
+        55,
+        59,
+        59,
+        57,
+        52,
+        49,
+        49,
+        52,
+        56,
+        59,
+        59,
+        56,
+        52,
+        49,
+        49,
+        52,
+        56,
+        59,
+        59,
+        55,
+        51,
+        49,
+        49,
+        53,
+        57
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-32-med-amox-a",
+          "quantity": 268,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-32-med-amox-b",
+          "quantity": 268,
+          "expiryDate": "2027-08-01",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 8
+    },
+    {
+      "facilityId": "fac-32",
+      "productId": "med-ors",
+      "reportedAt": "2026-11-13",
+      "usableUnits": 0,
+      "quarantinedUnits": 0,
+      "history": [
+        36,
+        35,
+        37,
+        40,
+        42,
+        43,
+        41,
+        38,
+        36,
+        35,
+        37,
+        40,
+        43,
+        43,
+        40,
+        37,
+        35,
+        35,
+        38,
+        41,
+        43,
+        47,
+        45,
+        42,
+        40,
+        40,
+        43,
+        46
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-32-med-ors-a",
+          "quantity": 0,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-32-med-ors-b",
+          "quantity": 0,
+          "expiryDate": "2027-08-31",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 8
+    },
+    {
+      "facilityId": "fac-32",
+      "productId": "med-oxy",
+      "reportedAt": "2026-11-13",
+      "usableUnits": 52,
+      "quarantinedUnits": 0,
+      "history": [
+        16,
+        15,
+        16,
+        17,
+        18,
+        19,
+        18,
+        17,
+        15,
+        15,
+        16,
+        18,
+        19,
+        19,
+        18,
+        16,
+        15,
+        15,
+        16,
+        18,
+        19,
+        21,
+        20,
+        18,
+        17,
+        18,
+        19,
+        20
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-32-med-oxy-a",
+          "quantity": 26,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-32-med-oxy-b",
+          "quantity": 26,
+          "expiryDate": "2027-09-30",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 8
+    },
+    {
+      "facilityId": "fac-32",
+      "productId": "med-act",
+      "reportedAt": "2026-11-13",
+      "usableUnits": 254,
+      "quarantinedUnits": 0,
+      "history": [
+        28,
+        28,
+        29,
+        32,
+        34,
+        34,
+        33,
+        30,
+        28,
+        28,
+        30,
+        32,
+        34,
+        34,
+        32,
+        30,
+        28,
+        28,
+        30,
+        32,
+        34,
+        37,
+        36,
+        33,
+        32,
+        32,
+        34,
+        36
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-32-med-act-a",
+          "quantity": 127,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-32-med-act-b",
+          "quantity": 127,
+          "expiryDate": "2027-10-30",
+          "status": "released"
+        }
+      ],
+      "inbound": [
+        {
+          "id": "planned-fac-32-med-act",
+          "quantity": 381,
+          "expectedDate": "2026-11-24",
+          "expiryDate": "2027-09-30",
+          "status": "planned"
+        }
+      ],
+      "leadTimeDays": 8
+    },
+    {
+      "facilityId": "fac-32",
+      "productId": "med-ins",
+      "reportedAt": "2026-11-13",
+      "usableUnits": 277,
+      "quarantinedUnits": 0,
+      "history": [
+        14,
+        14,
+        14,
+        15,
+        16,
+        16,
+        16,
+        15,
+        14,
+        14,
+        14,
+        16,
+        16,
+        16,
+        16,
+        14,
+        14,
+        14,
+        15,
+        16,
+        16,
+        18,
+        17,
+        16,
+        15,
+        16,
+        16,
+        18
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-32-med-ins-a",
+          "quantity": 138,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-32-med-ins-b",
+          "quantity": 139,
+          "expiryDate": "2027-11-29",
+          "status": "released"
+        }
+      ],
+      "inbound": [
+        {
+          "id": "inbound-fac-32-med-ins",
+          "quantity": 154,
+          "expectedDate": "2026-11-20",
+          "expiryDate": "2027-09-10",
+          "status": "confirmed"
+        }
+      ],
+      "leadTimeDays": 8
+    },
+    {
+      "facilityId": "fac-33",
+      "productId": "med-amox",
+      "reportedAt": "2026-11-12",
+      "usableUnits": 1996,
+      "quarantinedUnits": 0,
+      "history": [
+        51,
+        54,
+        58,
+        62,
+        63,
+        60,
+        55,
+        52,
+        52,
+        55,
+        59,
+        62,
+        62,
+        59,
+        55,
+        52,
+        52,
+        55,
+        60,
+        62,
+        62,
+        59,
+        54,
+        51,
+        52,
+        56,
+        60,
+        63
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-33-med-amox-a",
+          "quantity": 998,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-33-med-amox-b",
+          "quantity": 998,
+          "expiryDate": "2027-08-01",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 11
+    },
+    {
+      "facilityId": "fac-33",
+      "productId": "med-ors",
+      "reportedAt": "2026-11-12",
+      "usableUnits": 210,
+      "quarantinedUnits": 0,
+      "history": [
+        38,
+        40,
+        43,
+        46,
+        46,
+        44,
+        41,
+        38,
+        38,
+        40,
+        43,
+        46,
+        46,
+        44,
+        40,
+        38,
+        38,
+        41,
+        44,
+        46,
+        46,
+        43,
+        40,
+        38,
+        38,
+        41,
+        44,
+        46
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-33-med-ors-a",
+          "quantity": 105,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-33-med-ors-b",
+          "quantity": 105,
+          "expiryDate": "2027-08-31",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 11
+    },
+    {
+      "facilityId": "fac-33",
+      "productId": "med-oxy",
+      "reportedAt": "2026-11-12",
+      "usableUnits": 440,
+      "quarantinedUnits": 0,
+      "history": [
+        18,
+        19,
+        20,
+        22,
+        22,
+        21,
+        19,
+        18,
+        18,
+        19,
+        21,
+        22,
+        22,
+        21,
+        19,
+        18,
+        18,
+        19,
+        21,
+        22,
+        22,
+        21,
+        19,
+        18,
+        18,
+        20,
+        21,
+        22
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-33-med-oxy-a",
+          "quantity": 220,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-33-med-oxy-b",
+          "quantity": 220,
+          "expiryDate": "2027-09-30",
+          "status": "released"
+        }
+      ],
+      "inbound": [
+        {
+          "id": "inbound-fac-33-med-oxy",
+          "quantity": 200,
+          "expectedDate": "2026-11-21",
+          "expiryDate": "2027-09-10",
+          "status": "confirmed"
+        }
+      ],
+      "leadTimeDays": 11
+    },
+    {
+      "facilityId": "fac-33",
+      "productId": "med-act",
+      "reportedAt": "2026-11-12",
+      "usableUnits": 408,
+      "quarantinedUnits": 0,
+      "history": [
+        31,
+        32,
+        35,
+        37,
+        37,
+        36,
+        33,
+        31,
+        31,
+        33,
+        35,
+        37,
+        37,
+        35,
+        33,
+        31,
+        31,
+        33,
+        36,
+        37,
+        37,
+        35,
+        32,
+        31,
+        31,
+        33,
+        36,
+        37
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-33-med-act-a",
+          "quantity": 204,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-33-med-act-b",
+          "quantity": 204,
+          "expiryDate": "2027-10-30",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 11
+    },
+    {
+      "facilityId": "fac-33",
+      "productId": "med-ins",
+      "reportedAt": "2026-11-12",
+      "usableUnits": 808,
+      "quarantinedUnits": 9,
+      "history": [
+        16,
+        17,
+        18,
+        20,
+        20,
+        19,
+        17,
+        16,
+        16,
+        17,
+        19,
+        20,
+        20,
+        19,
+        17,
+        16,
+        16,
+        17,
+        19,
+        20,
+        20,
+        18,
+        17,
+        16,
+        16,
+        18,
+        19,
+        20
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-33-med-ins-a",
+          "quantity": 282,
+          "expiryDate": "2027-01-02",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-33-med-ins-b",
+          "quantity": 526,
+          "expiryDate": "2027-11-29",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-33-med-ins-q",
+          "quantity": 9,
+          "expiryDate": "2027-06-02",
+          "status": "quarantined"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 11
+    },
+    {
+      "facilityId": "fac-34",
+      "productId": "med-amox",
+      "reportedAt": "2026-11-11",
+      "usableUnits": 1269,
+      "quarantinedUnits": 0,
+      "history": [
+        43,
+        46,
+        49,
+        49,
+        47,
+        44,
+        41,
+        41,
+        43,
+        47,
+        49,
+        49,
+        47,
+        43,
+        41,
+        41,
+        44,
+        47,
+        49,
+        49,
+        46,
+        43,
+        41,
+        41,
+        44,
+        47,
+        49,
+        49
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-34-med-amox-a",
+          "quantity": 634,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-34-med-amox-b",
+          "quantity": 635,
+          "expiryDate": "2027-08-01",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 14
+    },
+    {
+      "facilityId": "fac-34",
+      "productId": "med-ors",
+      "reportedAt": "2026-11-11",
+      "usableUnits": 301,
+      "quarantinedUnits": 0,
+      "history": [
+        28,
+        31,
+        33,
+        33,
+        31,
+        29,
+        27,
+        27,
+        29,
+        31,
+        33,
+        33,
+        31,
+        29,
+        27,
+        27,
+        29,
+        31,
+        33,
+        33,
+        31,
+        28,
+        27,
+        27,
+        29,
+        32,
+        33,
+        32
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-34-med-ors-a",
+          "quantity": 150,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-34-med-ors-b",
+          "quantity": 151,
+          "expiryDate": "2027-08-31",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 14
+    },
+    {
+      "facilityId": "fac-34",
+      "productId": "med-oxy",
+      "reportedAt": "2026-11-11",
+      "usableUnits": 0,
+      "quarantinedUnits": 0,
+      "history": [
+        8,
+        8,
+        9,
+        9,
+        8,
+        8,
+        7,
+        7,
+        8,
+        8,
+        9,
+        9,
+        8,
+        8,
+        7,
+        7,
+        8,
+        8,
+        9,
+        9,
+        8,
+        9,
+        8,
+        8,
+        9,
+        9,
+        10,
+        10
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-34-med-oxy-a",
+          "quantity": 0,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-34-med-oxy-b",
+          "quantity": 0,
+          "expiryDate": "2027-09-30",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 14
+    },
+    {
+      "facilityId": "fac-34",
+      "productId": "med-act",
+      "reportedAt": "2026-11-11",
+      "usableUnits": 69,
+      "quarantinedUnits": 11,
+      "history": [
+        21,
+        23,
+        24,
+        24,
+        23,
+        21,
+        20,
+        20,
+        21,
+        23,
+        24,
+        24,
+        23,
+        21,
+        20,
+        20,
+        21,
+        23,
+        24,
+        24,
+        23,
+        24,
+        23,
+        23,
+        24,
+        26,
+        27,
+        26
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-34-med-act-a",
+          "quantity": 24,
+          "expiryDate": "2027-01-03",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-34-med-act-b",
+          "quantity": 45,
+          "expiryDate": "2027-10-30",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-34-med-act-q",
+          "quantity": 11,
+          "expiryDate": "2027-06-02",
+          "status": "quarantined"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 14
+    },
+    {
+      "facilityId": "fac-34",
+      "productId": "med-ins",
+      "reportedAt": "2026-11-11",
+      "usableUnits": 120,
+      "quarantinedUnits": 0,
+      "history": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-34-med-ins-a",
+          "quantity": 60,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-34-med-ins-b",
+          "quantity": 60,
+          "expiryDate": "2027-11-29",
+          "status": "released"
+        }
+      ],
+      "inbound": [
+        {
+          "id": "planned-fac-34-med-ins",
+          "quantity": 75,
+          "expectedDate": "2026-11-24",
+          "expiryDate": "2027-09-30",
+          "status": "planned"
+        }
+      ],
+      "leadTimeDays": 14
+    },
+    {
+      "facilityId": "fac-35",
+      "productId": "med-amox",
+      "reportedAt": "2026-11-14",
+      "usableUnits": 898,
+      "quarantinedUnits": 0,
+      "history": [
+        49,
+        52,
+        53,
+        50,
+        47,
+        44,
+        43,
+        46,
+        50,
+        52,
+        52,
+        50,
+        46,
+        44,
+        44,
+        46,
+        50,
+        53,
+        52,
+        49,
+        46,
+        49,
+        50,
+        53,
+        56,
+        58,
+        58,
+        55
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-35-med-amox-a",
+          "quantity": 449,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-35-med-amox-b",
+          "quantity": 449,
+          "expiryDate": "2027-08-01",
+          "status": "released"
+        }
+      ],
+      "inbound": [
+        {
+          "id": "inbound-fac-35-med-amox",
+          "quantity": 499,
+          "expectedDate": "2026-11-19",
+          "expiryDate": "2027-09-10",
+          "status": "confirmed"
+        }
+      ],
+      "leadTimeDays": 5
+    },
+    {
+      "facilityId": "fac-35",
+      "productId": "med-ors",
+      "reportedAt": "2026-11-14",
+      "usableUnits": 1166,
+      "quarantinedUnits": 0,
+      "history": [
+        34,
+        36,
+        36,
+        35,
+        32,
+        30,
+        30,
+        32,
+        34,
+        36,
+        36,
+        34,
+        32,
+        30,
+        30,
+        32,
+        34,
+        36,
+        36,
+        34,
+        31,
+        30,
+        30,
+        32,
+        35,
+        36,
+        36,
+        34
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-35-med-ors-a",
+          "quantity": 583,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-35-med-ors-b",
+          "quantity": 583,
+          "expiryDate": "2027-08-31",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 5
+    },
+    {
+      "facilityId": "fac-35",
+      "productId": "med-oxy",
+      "reportedAt": "2026-11-14",
+      "usableUnits": 56,
+      "quarantinedUnits": 6,
+      "history": [
+        11,
+        12,
+        12,
+        12,
+        11,
+        10,
+        10,
+        11,
+        11,
+        12,
+        12,
+        11,
+        11,
+        10,
+        10,
+        11,
+        11,
+        12,
+        12,
+        11,
+        10,
+        10,
+        10,
+        11,
+        12,
+        12,
+        12,
+        11
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-35-med-oxy-a",
+          "quantity": 19,
+          "expiryDate": "2027-01-04",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-35-med-oxy-b",
+          "quantity": 37,
+          "expiryDate": "2027-09-30",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-35-med-oxy-q",
+          "quantity": 6,
+          "expiryDate": "2027-06-02",
+          "status": "quarantined"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 5
+    },
+    {
+      "facilityId": "fac-35",
+      "productId": "med-act",
+      "reportedAt": "2026-11-14",
+      "usableUnits": 554,
+      "quarantinedUnits": 0,
+      "history": [
+        26,
+        27,
+        27,
+        26,
+        24,
+        23,
+        23,
+        24,
+        26,
+        27,
+        27,
+        26,
+        24,
+        23,
+        23,
+        24,
+        26,
+        27,
+        27,
+        26,
+        24,
+        23,
+        23,
+        24,
+        26,
+        27,
+        27,
+        25
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-35-med-act-a",
+          "quantity": 277,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-35-med-act-b",
+          "quantity": 277,
+          "expiryDate": "2027-10-30",
+          "status": "released"
+        }
+      ],
+      "inbound": [
+        {
+          "id": "inbound-fac-35-med-act",
+          "quantity": 252,
+          "expectedDate": "2026-11-19",
+          "expiryDate": "2027-09-10",
+          "status": "confirmed"
+        }
+      ],
+      "leadTimeDays": 5
+    },
+    {
+      "facilityId": "fac-35",
+      "productId": "med-ins",
+      "reportedAt": "2026-11-14",
+      "usableUnits": 109,
+      "quarantinedUnits": 0,
+      "history": [
+        9,
+        10,
+        10,
+        9,
+        9,
+        8,
+        8,
+        9,
+        9,
+        10,
+        10,
+        9,
+        9,
+        8,
+        8,
+        9,
+        9,
+        10,
+        10,
+        9,
+        9,
+        8,
+        8,
+        9,
+        9,
+        10,
+        10,
+        9
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-35-med-ins-a",
+          "quantity": 54,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-35-med-ins-b",
+          "quantity": 55,
+          "expiryDate": "2027-11-29",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 5
+    },
+    {
+      "facilityId": "fac-36",
+      "productId": "med-amox",
+      "reportedAt": "2026-11-13",
+      "usableUnits": 2306,
+      "quarantinedUnits": 0,
+      "history": [
+        55,
+        56,
+        53,
+        50,
+        46,
+        46,
+        49,
+        53,
+        56,
+        56,
+        53,
+        49,
+        46,
+        46,
+        49,
+        53,
+        56,
+        55,
+        52,
+        48,
+        46,
+        47,
+        50,
+        54,
+        56,
+        55,
+        52,
+        48
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-36-med-amox-a",
+          "quantity": 1153,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-36-med-amox-b",
+          "quantity": 1153,
+          "expiryDate": "2027-08-01",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 8
+    },
+    {
+      "facilityId": "fac-36",
+      "productId": "med-ors",
+      "reportedAt": "2026-11-13",
+      "usableUnits": 1015,
+      "quarantinedUnits": 18,
+      "history": [
+        39,
+        39,
+        38,
+        35,
+        33,
+        33,
+        34,
+        37,
+        39,
+        39,
+        37,
+        35,
+        33,
+        33,
+        35,
+        38,
+        39,
+        39,
+        37,
+        34,
+        33,
+        33,
+        35,
+        38,
+        40,
+        39,
+        37,
+        34
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-36-med-ors-a",
+          "quantity": 355,
+          "expiryDate": "2027-01-05",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-36-med-ors-b",
+          "quantity": 660,
+          "expiryDate": "2027-08-31",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-36-med-ors-q",
+          "quantity": 18,
+          "expiryDate": "2027-06-02",
+          "status": "quarantined"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 8
+    },
+    {
+      "facilityId": "fac-36",
+      "productId": "med-oxy",
+      "reportedAt": "2026-11-13",
+      "usableUnits": 141,
+      "quarantinedUnits": 0,
+      "history": [
+        15,
+        15,
+        15,
+        14,
+        13,
+        13,
+        13,
+        14,
+        15,
+        15,
+        15,
+        13,
+        13,
+        13,
+        14,
+        15,
+        15,
+        15,
+        14,
+        13,
+        13,
+        13,
+        14,
+        15,
+        15,
+        15,
+        14,
+        13
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-36-med-oxy-a",
+          "quantity": 70,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-36-med-oxy-b",
+          "quantity": 71,
+          "expiryDate": "2027-09-30",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 8
+    },
+    {
+      "facilityId": "fac-36",
+      "productId": "med-act",
+      "reportedAt": "2026-11-13",
+      "usableUnits": 0,
+      "quarantinedUnits": 0,
+      "history": [
+        30,
+        31,
+        29,
+        27,
+        26,
+        25,
+        27,
+        29,
+        31,
+        31,
+        29,
+        27,
+        25,
+        25,
+        27,
+        29,
+        31,
+        30,
+        29,
+        27,
+        25,
+        29,
+        31,
+        33,
+        34,
+        34,
+        32,
+        30
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-36-med-act-a",
+          "quantity": 0,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-36-med-act-b",
+          "quantity": 0,
+          "expiryDate": "2027-10-30",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 8
+    },
+    {
+      "facilityId": "fac-36",
+      "productId": "med-ins",
+      "reportedAt": "2026-11-13",
+      "usableUnits": 37,
+      "quarantinedUnits": 0,
+      "history": [
+        13,
+        13,
+        13,
+        12,
+        11,
+        11,
+        11,
+        12,
+        13,
+        13,
+        12,
+        12,
+        11,
+        11,
+        12,
+        13,
+        13,
+        13,
+        12,
+        11,
+        11,
+        12,
+        13,
+        14,
+        15,
+        14,
+        14,
+        13
+      ],
+      "batches": [
+        {
+          "id": "batch-fac-36-med-ins-a",
+          "quantity": 18,
+          "expiryDate": "2027-04-13",
+          "status": "released"
+        },
+        {
+          "id": "batch-fac-36-med-ins-b",
+          "quantity": 19,
+          "expiryDate": "2027-11-29",
+          "status": "released"
+        }
+      ],
+      "inbound": [],
+      "leadTimeDays": 8
+    }
+  ],
+  "routes": [
+    {
+      "fromFacilityId": "fac-11",
+      "toFacilityId": "fac-12",
+      "days": 1,
+      "costCents": 8000,
+      "coldChainCapable": false,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-11",
+      "toFacilityId": "fac-13",
+      "days": 2,
+      "costCents": 10500,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-11",
+      "toFacilityId": "fac-14",
+      "days": 1,
+      "costCents": 13000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-11",
+      "toFacilityId": "fac-15",
+      "days": 2,
+      "costCents": 15500,
+      "coldChainCapable": false,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-11",
+      "toFacilityId": "fac-16",
+      "days": 1,
+      "costCents": 18000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-12",
+      "toFacilityId": "fac-11",
+      "days": 2,
+      "costCents": 10500,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-12",
+      "toFacilityId": "fac-13",
+      "days": 1,
+      "costCents": 13000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-12",
+      "toFacilityId": "fac-14",
+      "days": 2,
+      "costCents": 15500,
+      "coldChainCapable": false,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-12",
+      "toFacilityId": "fac-15",
+      "days": 1,
+      "costCents": 18000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-12",
+      "toFacilityId": "fac-16",
+      "days": 2,
+      "costCents": 8000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-13",
+      "toFacilityId": "fac-11",
+      "days": 1,
+      "costCents": 13000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-13",
+      "toFacilityId": "fac-12",
+      "days": 2,
+      "costCents": 15500,
+      "coldChainCapable": false,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-13",
+      "toFacilityId": "fac-14",
+      "days": 1,
+      "costCents": 18000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-13",
+      "toFacilityId": "fac-15",
+      "days": 2,
+      "costCents": 8000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-13",
+      "toFacilityId": "fac-16",
+      "days": 1,
+      "costCents": 10500,
+      "coldChainCapable": false,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-14",
+      "toFacilityId": "fac-11",
+      "days": 2,
+      "costCents": 15500,
+      "coldChainCapable": false,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-14",
+      "toFacilityId": "fac-12",
+      "days": 1,
+      "costCents": 18000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-14",
+      "toFacilityId": "fac-13",
+      "days": 2,
+      "costCents": 8000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-14",
+      "toFacilityId": "fac-15",
+      "days": 1,
+      "costCents": 10500,
+      "coldChainCapable": false,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-14",
+      "toFacilityId": "fac-16",
+      "days": 2,
+      "costCents": 13000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-15",
+      "toFacilityId": "fac-11",
+      "days": 1,
+      "costCents": 18000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-15",
+      "toFacilityId": "fac-12",
+      "days": 2,
+      "costCents": 8000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-15",
+      "toFacilityId": "fac-13",
+      "days": 1,
+      "costCents": 10500,
+      "coldChainCapable": false,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-15",
+      "toFacilityId": "fac-14",
+      "days": 2,
+      "costCents": 13000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-15",
+      "toFacilityId": "fac-16",
+      "days": 1,
+      "costCents": 15500,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-16",
+      "toFacilityId": "fac-11",
+      "days": 2,
+      "costCents": 8000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-16",
+      "toFacilityId": "fac-12",
+      "days": 1,
+      "costCents": 10500,
+      "coldChainCapable": false,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-16",
+      "toFacilityId": "fac-13",
+      "days": 2,
+      "costCents": 13000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-16",
+      "toFacilityId": "fac-14",
+      "days": 1,
+      "costCents": 15500,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-16",
+      "toFacilityId": "fac-15",
+      "days": 2,
+      "costCents": 18000,
+      "coldChainCapable": false,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-21",
+      "toFacilityId": "fac-22",
+      "days": 1,
+      "costCents": 10500,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-21",
+      "toFacilityId": "fac-23",
+      "days": 2,
+      "costCents": 13000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-21",
+      "toFacilityId": "fac-24",
+      "days": 1,
+      "costCents": 15500,
+      "coldChainCapable": false,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-21",
+      "toFacilityId": "fac-25",
+      "days": 2,
+      "costCents": 18000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-21",
+      "toFacilityId": "fac-26",
+      "days": 1,
+      "costCents": 8000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-22",
+      "toFacilityId": "fac-21",
+      "days": 2,
+      "costCents": 13000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-22",
+      "toFacilityId": "fac-23",
+      "days": 1,
+      "costCents": 15500,
+      "coldChainCapable": false,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-22",
+      "toFacilityId": "fac-24",
+      "days": 2,
+      "costCents": 18000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-22",
+      "toFacilityId": "fac-25",
+      "days": 1,
+      "costCents": 8000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-22",
+      "toFacilityId": "fac-26",
+      "days": 2,
+      "costCents": 10500,
+      "coldChainCapable": false,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-23",
+      "toFacilityId": "fac-21",
+      "days": 1,
+      "costCents": 15500,
+      "coldChainCapable": false,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-23",
+      "toFacilityId": "fac-22",
+      "days": 2,
+      "costCents": 18000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-23",
+      "toFacilityId": "fac-24",
+      "days": 1,
+      "costCents": 8000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-23",
+      "toFacilityId": "fac-25",
+      "days": 2,
+      "costCents": 10500,
+      "coldChainCapable": false,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-23",
+      "toFacilityId": "fac-26",
+      "days": 1,
+      "costCents": 13000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-24",
+      "toFacilityId": "fac-21",
+      "days": 2,
+      "costCents": 18000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-24",
+      "toFacilityId": "fac-22",
+      "days": 1,
+      "costCents": 8000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-24",
+      "toFacilityId": "fac-23",
+      "days": 2,
+      "costCents": 10500,
+      "coldChainCapable": false,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-24",
+      "toFacilityId": "fac-25",
+      "days": 1,
+      "costCents": 13000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-24",
+      "toFacilityId": "fac-26",
+      "days": 2,
+      "costCents": 15500,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-25",
+      "toFacilityId": "fac-21",
+      "days": 1,
+      "costCents": 8000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-25",
+      "toFacilityId": "fac-22",
+      "days": 2,
+      "costCents": 10500,
+      "coldChainCapable": false,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-25",
+      "toFacilityId": "fac-23",
+      "days": 1,
+      "costCents": 13000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-25",
+      "toFacilityId": "fac-24",
+      "days": 2,
+      "costCents": 15500,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-25",
+      "toFacilityId": "fac-26",
+      "days": 1,
+      "costCents": 18000,
+      "coldChainCapable": false,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-26",
+      "toFacilityId": "fac-21",
+      "days": 2,
+      "costCents": 10500,
+      "coldChainCapable": false,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-26",
+      "toFacilityId": "fac-22",
+      "days": 1,
+      "costCents": 13000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-26",
+      "toFacilityId": "fac-23",
+      "days": 2,
+      "costCents": 15500,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-26",
+      "toFacilityId": "fac-24",
+      "days": 1,
+      "costCents": 18000,
+      "coldChainCapable": false,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-26",
+      "toFacilityId": "fac-25",
+      "days": 2,
+      "costCents": 8000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-31",
+      "toFacilityId": "fac-32",
+      "days": 1,
+      "costCents": 13000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-31",
+      "toFacilityId": "fac-33",
+      "days": 2,
+      "costCents": 15500,
+      "coldChainCapable": false,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-31",
+      "toFacilityId": "fac-34",
+      "days": 1,
+      "costCents": 18000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-31",
+      "toFacilityId": "fac-35",
+      "days": 2,
+      "costCents": 8000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-31",
+      "toFacilityId": "fac-36",
+      "days": 1,
+      "costCents": 10500,
+      "coldChainCapable": false,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-32",
+      "toFacilityId": "fac-31",
+      "days": 2,
+      "costCents": 15500,
+      "coldChainCapable": false,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-32",
+      "toFacilityId": "fac-33",
+      "days": 1,
+      "costCents": 18000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-32",
+      "toFacilityId": "fac-34",
+      "days": 2,
+      "costCents": 8000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-32",
+      "toFacilityId": "fac-35",
+      "days": 1,
+      "costCents": 10500,
+      "coldChainCapable": false,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-32",
+      "toFacilityId": "fac-36",
+      "days": 2,
+      "costCents": 13000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-33",
+      "toFacilityId": "fac-31",
+      "days": 1,
+      "costCents": 18000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-33",
+      "toFacilityId": "fac-32",
+      "days": 2,
+      "costCents": 8000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-33",
+      "toFacilityId": "fac-34",
+      "days": 1,
+      "costCents": 10500,
+      "coldChainCapable": false,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-33",
+      "toFacilityId": "fac-35",
+      "days": 2,
+      "costCents": 13000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-33",
+      "toFacilityId": "fac-36",
+      "days": 1,
+      "costCents": 15500,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-34",
+      "toFacilityId": "fac-31",
+      "days": 2,
+      "costCents": 8000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-34",
+      "toFacilityId": "fac-32",
+      "days": 1,
+      "costCents": 10500,
+      "coldChainCapable": false,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-34",
+      "toFacilityId": "fac-33",
+      "days": 2,
+      "costCents": 13000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-34",
+      "toFacilityId": "fac-35",
+      "days": 1,
+      "costCents": 15500,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-34",
+      "toFacilityId": "fac-36",
+      "days": 2,
+      "costCents": 18000,
+      "coldChainCapable": false,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-35",
+      "toFacilityId": "fac-31",
+      "days": 1,
+      "costCents": 10500,
+      "coldChainCapable": false,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-35",
+      "toFacilityId": "fac-32",
+      "days": 2,
+      "costCents": 13000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-35",
+      "toFacilityId": "fac-33",
+      "days": 1,
+      "costCents": 15500,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-35",
+      "toFacilityId": "fac-34",
+      "days": 2,
+      "costCents": 18000,
+      "coldChainCapable": false,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-35",
+      "toFacilityId": "fac-36",
+      "days": 1,
+      "costCents": 8000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-36",
+      "toFacilityId": "fac-31",
+      "days": 2,
+      "costCents": 13000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-36",
+      "toFacilityId": "fac-32",
+      "days": 1,
+      "costCents": 15500,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-36",
+      "toFacilityId": "fac-33",
+      "days": 2,
+      "costCents": 18000,
+      "coldChainCapable": false,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-36",
+      "toFacilityId": "fac-34",
+      "days": 1,
+      "costCents": 8000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-36",
+      "toFacilityId": "fac-35",
+      "days": 2,
+      "costCents": 10500,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    }
+  ],
+  "evidence": [
+    {
+      "id": "EV-001",
+      "title": "Triage and human review",
+      "category": "Risk workflow",
+      "text": "Review Critical records first, then Watch records. Treat Unknown as a data-action queue, not as safety. A planner must verify local stock and shipment information before approving an action.",
+      "source": "StockSense illustrative demo guidance"
+    },
+    {
+      "id": "EV-002",
+      "title": "Usable stock and FEFO",
+      "category": "Stock accounting",
+      "text": "Only released, non-expired batches count as usable. Project consumption first-expiry-first-out and count only confirmed inbound arrivals. Quarantine and planned shipments require separate review.",
+      "source": "StockSense illustrative demo guidance"
+    },
+    {
+      "id": "EV-003",
+      "title": "Budget-aware action planning",
+      "category": "Planning",
+      "text": "Compare feasible actions under an explicit ceiling, keep unfunded needs visible, and record human approval. The demo uses adaptive greedy cost-effectiveness ranking and does not claim global optimality or clinical priority.",
+      "source": "StockSense illustrative demo guidance"
+    },
+    {
+      "id": "EV-004",
+      "title": "Redistribution safeguards",
+      "category": "Transfers",
+      "text": "Transfer only the exact product on an explicit feasible route. Preserve donor buffer, check remaining shelf life after arrival, and require cold-chain capability for cold-chain products. Local authorization is mandatory.",
+      "source": "StockSense illustrative demo guidance"
+    },
+    {
+      "id": "EV-005",
+      "title": "Data quality and provenance",
+      "category": "Data governance",
+      "text": "Track reporting freshness, consumption-history completeness, dataset version, and checksums. Distinguish missing from zero. Do not use real personal or government data in this demo workspace.",
+      "source": "StockSense illustrative demo guidance"
+    },
+    {
+      "id": "EV-006",
+      "title": "AI and automation boundary",
+      "category": "Responsible AI",
+      "text": "This release has no connected LLM. Retrieval answers cite demo evidence and computed facts. Deterministic tools own arithmetic and constraints; no model may autonomously approve expenditure or create clinical instructions.",
+      "source": "StockSense illustrative demo guidance"
+    }
+  ]
+}
