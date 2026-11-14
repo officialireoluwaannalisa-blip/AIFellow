@@ -2,7 +2,7 @@
 
 ## Status: local synthetic demo, not production-ready
 
-The application has one shared workspace and no login, roles, tenant isolation, or authenticated audit identity. `Demo analyst` is a label, not proof of who acted. The live preview is for demonstration with synthetic data only. Operator-controlled authorized aggregate mode is intended for non-public deployments and still requires production access controls.
+The application has one shared workspace and no login, authenticated roles, tenant isolation, or authenticated audit identity. Dashboard role views are a labeled demo simulation with server-side declared-scope validation, not an access-control boundary. `Demo analyst` is a label, not proof of who acted. The live preview is for demonstration with synthetic data only. Operator-controlled authorized aggregate mode is intended for non-public deployments and still requires production access controls.
 
 ## Implemented controls
 
@@ -18,6 +18,8 @@ The application has one shared workspace and no login, roles, tenant isolation, 
 - Gitignored local database, environment files, build output, and browser artifacts.
 - No patient data fields, external procurement writes, or payment integrations.
 - Country/location and clinical-policy gates fail closed for real-country allocation.
+- Dashboard endpoints validate declared demo role/scope, reject mismatched active-country requests, and record local demo audit events; this does not replace authenticated RBAC.
+- Production service worker caches only same-origin shell/dashboard GET responses for offline tolerance; do not enable real sensitive data without a reviewed caching/retention policy.
 - Aggregate import preview rejects patient-level flags, direct identifier fields/values, country mismatch, and unreconciled batches.
 - Optimizer output is independently re-checked for integer feasibility, budget, donor/batch/recipient caps, and fixed-cost consistency.
 

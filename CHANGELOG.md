@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.3.0 — 2026-11-14
+
+Role-based dashboard overview on the same data and exact MILP engine.
+
+### Added
+- Default `/dashboard` workspace with five demo role views: leadership, supply-chain/financing, district, facility, and partner.
+- URL-backed country → region → district → facility, commodity, period, and search filters; server-side demo scope locks for district/facility roles.
+- Summary strip, schematic geographic risk map/table, top-ranked interventions with “Why this?”, bottleneck summary, 30/60/90 forecast, budget panel, saved-demo-plan pipeline, expiry/redistribution alerts, facility stock/delivery actions, partner country comparison/goals/notes, and dashboard audit trail.
+- Dashboard APIs for scoped payloads, briefings, facility/support records, partner notes, and audit events; SQLite tables for local demo records.
+- Offline-tolerant shell/dashboard caching, cached snapshot banner, and local facility request outbox with reconnect sync.
+- Optional synthetic region and schematic map-coordinate fields; dashboard design plan and dashboard documentation.
+- Dashboard shared/API tests and expanded browser smoke coverage (47 tests across 7 files).
+
+### Changed
+- Dashboard replaces the old overview as the default route; the previous snapshot overview remains at `/overview`.
+- Synthetic seed version `synthetic-2026.11.14-v2`; evidence snippet EV-003 now describes the exact MILP engine.
+- Reduced-motion handling is scoped to spatial/persistent motion instead of a global near-zero duration override.
+
+### Known limits
+- Role switching is a demo simulation, not authenticated RBAC. Real deployment requires identity, authorization, and audit hardening.
+- Financing pipeline and adoption metrics come from local saved demo plans/records, not live treasury, procurement, or telemetry systems.
+- The map is schematic demo geometry, not verified administrative boundaries or road routing.
+- No real stockout prevention, spending improvement, or forecast calibration is claimed.
+
 ## 0.2.0 — 2026-11-14
 
 Exact global optimization and country-aware authorized data boundary.

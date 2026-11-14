@@ -34,6 +34,7 @@ flowchart LR
 | `shared/optimizer.ts` | HiGHS fixed-charge integer-flow MILP, optimality certificate, feasibility re-check |
 | `shared/countries.ts`, `shared/imports.ts` | Country profiles, authorized aggregate pack validation/privacy preview |
 | `shared/clinical-policy.ts` | Safety guardrails, local approval gate, prioritization weights |
+| `shared/dashboard.ts`, `shared/dashboard-meta.ts` | Role-scoped dashboard composition, filters, capabilities, map/forecast/pipeline summaries; browser-safe role metadata |
 | `shared/evidence.ts` | Bounded retrieval and grounded briefing |
 | `shared/export.ts` | Formula-safe CSV |
 | `server/repository.ts` | SQLite schema, transactions, plan snapshots, audit |
@@ -45,7 +46,7 @@ flowchart LR
 ## Request flows
 
 ### Read path
-UI requests `/api/overview`, `/api/risks`, or `/api/meta` → server validates query → loads validated in-memory snapshot → shared engine computes results → JSON response. The fixed snapshot date, not the wall clock, drives calculations.
+UI requests `/api/dashboard`, `/api/overview`, `/api/risks`, or `/api/meta` → server validates query and declared demo role scope → loads validated in-memory snapshot → shared engine computes results (dashboard scenario results are cached by scope/budget/horizon) → JSON response. The fixed snapshot date, not the wall clock, drives calculations. Dashboard role switching is a demo simulation, not authenticated RBAC.
 
 ### Scenario path
 UI posts budget/horizon/buffer/scope/country → Zod validation → country/data/clinical gates → candidate generation → exact HiGHS MILP → independent feasibility check → selected/unfunded actions, optimality certificate, assumptions, dataset hash, and before/after estimates. Saving posts the scenario and an idempotency key; the server recomputes rather than trusting client costs.
@@ -55,7 +56,7 @@ Save creates a plan and item snapshots in one transaction. Approval and item adv
 
 ## Persistence
 
-SQLite stores workflow state only. The immutable demo dataset remains in files; plans retain their scenario/result snapshots and dataset version. Tables: `plans`, `plan_items`, `audit_events`, and `schema_meta`. Database files live under gitignored `.data/`. See [Operations](OPERATIONS.md).
+SQLite stores workflow state only. The immutable demo dataset remains in files; plans retain their scenario/result snapshots and dataset version. Tables: `plans`, `plan_items`, `audit_events`, `settings`, `dashboard_support_requests`, `dashboard_notes`, `dashboard_audit`, and `schema_meta`. Database files live under gitignored `.data/`. See [Operations](OPERATIONS.md).
 
 ## Hosting boundary
 
@@ -63,7 +64,7 @@ Development uses Vite middleware inside Express. Production serves `dist/client`
 
 ## Deliberate limitations
 
-One shared demo workspace, no auth/roles/tenant isolation, no live government API connectors, no background jobs, no real routing, no LLM provider, and no production migration/backup service. Operator-controlled authorized aggregate file ingestion exists but is disabled in the public demo. The SQLite adapter and file-based dataset are replaceable boundaries, not claims of production readiness.
+One shared demo workspace, no auth/tenant isolation (dashboard roles are simulated), no live government API connectors, no background jobs, no real routing, no LLM provider, and no production migration/backup service. Operator-controlled authorized aggregate file ingestion exists but is disabled in the public demo. The SQLite adapter and file-based dataset are replaceable boundaries, not claims of production readiness.
 
 ## Extension points
 

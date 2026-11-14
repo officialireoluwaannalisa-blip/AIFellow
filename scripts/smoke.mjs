@@ -47,8 +47,18 @@ async function main() {
   session = execFileSync('npx', ['agent-browser', 'session', 'id', '--scope', 'worktree', '--prefix', 'stocksense-e2e'], { cwd: root, encoding: 'utf8' }).trim();
   try { cli(['close']); } catch { /* no previous session */ }
   cli(['--executable-path', executable, '--args', '--no-sandbox,--disable-setuid-sandbox,--disable-dev-shm-usage,--single-process', 'open', base]); browserReady = true;
-  cli(['wait', '--text', 'Keep essential medicines within reach.']);
-  assert(cli(['get', 'text', 'h1']).includes('Keep essential medicines within reach.'), 'Overview heading missing');
+  cli(['wait', '--text', 'Dashboard overview']);
+  assert(cli(['get', 'text', 'h1']).includes('Dashboard overview'), 'Dashboard heading missing');
+  cli(['wait', '--text', 'Top 5 priority interventions']);
+  cli(['find', 'role', 'button', 'click', '--name', 'My facility']);
+  cli(['wait', '--text', 'My facility']);
+  cli(['wait', '--text', 'Request support']);
+  cli(['find', 'role', 'button', 'click', '--name', 'District']);
+  cli(['wait', '--text', 'Predictive stockout-risk table']);
+  cli(['find', 'role', 'button', 'click', '--name', 'Partners']);
+  cli(['wait', '--text', 'Cross-country risk & financing overview']);
+  cli(['find', 'role', 'button', 'click', '--name', 'Leadership']);
+  cli(['wait', '--text', 'Top 5 priority interventions']);
 
   cli(['find', 'role', 'link', 'click', '--name', 'Stockout risk']);
   cli(['wait', '--text', 'Risk register']);
@@ -97,14 +107,14 @@ async function main() {
 
   cli(['set', 'viewport', '390', '844']);
   cli(['open', base]);
-  cli(['wait', '--text', 'Keep essential medicines within reach.']);
+  cli(['wait', '--text', 'Dashboard overview']);
   const noOverflow = cli(['eval', 'document.documentElement.scrollWidth <= window.innerWidth + 1']);
   assert(noOverflow.includes('true'), 'Mobile page has horizontal overflow');
   cli(['find', 'role', 'button', 'click', '--name', 'Open navigation']);
   cli(['wait', '--text', 'Built for responsible use']);
   const consoleOutput = cli(['console']);
   assert(!consoleOutput.includes('[error]'), `Browser console errors: ${consoleOutput}`);
-  console.log('PASS browser smoke: overview, risk filters/detail, scenario, save/approve, funding trace, evidence assistant, methodology, mobile navigation, console.');
+  console.log('PASS browser smoke: dashboard role views, risk filters/detail, scenario, save/approve, funding trace, evidence assistant, methodology, mobile navigation, console.');
 }
 main().catch((error) => { console.error('FAIL browser smoke:', error.message); process.exitCode = 1; }).finally(async () => {
   if (browserReady) try { cli(['close']); } catch { /* cleanup */ }

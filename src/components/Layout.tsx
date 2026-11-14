@@ -5,7 +5,8 @@ import { shortDate, useApi } from '../api';
 import type { Meta } from '../types';
 
 const navigation = [
-  { to: '/', label: 'Overview', icon: LayoutDashboard },
+  { to: '/', label: 'Dashboard', icon: LayoutDashboard },
+  { to: '/overview', label: 'Snapshot overview', icon: Activity },
   { to: '/risks', label: 'Stockout risk', icon: TriangleAlert },
   { to: '/planner', label: 'Scenario planner', icon: FlaskConical },
   { to: '/funding', label: 'Funding trace', icon: GitBranch },

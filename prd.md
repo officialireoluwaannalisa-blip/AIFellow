@@ -1,6 +1,6 @@
 # Product Requirements Document — StockSense Africa
 
-**Version:** 0.2 · **Status:** working MVP specification · **Date:** 2026-11-14
+**Version:** 0.3 · **Status:** working MVP specification · **Date:** 2026-11-14
 **Product:** Essential-medicines stockout decision support
 **Context:** An independent portfolio prototype inspired by the Gates Foundation AI Fellows (Africa) job description. It is not an official foundation product, endorsed deployment, or job application guarantee.
 
@@ -29,6 +29,10 @@ The product should demonstrate applied AI/ML judgment, data engineering, optimiz
 | Fellowship reviewer / facilitator | Run and teach the prototype safely | Synthetic dataset, reproducible setup, tests, demo script, playbook |
 
 No patient-facing or prescriber workflow is included.
+
+### Dashboard role views (v0.3)
+
+The default workspace is a role-based dashboard overview using the same dataset and MILP engine: national/MoH leadership, supply-chain/financing officers, district teams, facility users, and Foundation/partner views. It provides country→region→district→facility filters, commodity/period/search, green/amber/red status language, schematic geographic risk view, ranked “Recommended action” items with short “Why this?” explanations, briefing export, local decision audit trail, and offline-tolerant caching. Role switching is explicitly a demo simulation; authenticated RBAC, live financing connectors, verified maps, and real adoption/outcome telemetry remain production prerequisites.
 
 ## 4. Goals and non-goals
 

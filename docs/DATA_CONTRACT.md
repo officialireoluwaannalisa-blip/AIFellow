@@ -12,10 +12,13 @@ All records are **synthetic**. `Demo Republic`, its districts, facilities, quant
 - `country`: display name.
 - `countryCode`: optional location code (`DEMO`, `NG`, `ET`, `ZA`, `KE`); defaults to `DEMO` for the synthetic snapshot.
 - `currency`: `USD` for synthetic comparison only.
-- `districts`, `facilities`, `products`, `stocks`, `routes`, `evidence`.
+- `regions` (optional), `districts`, `facilities`, `products`, `stocks`, `routes`, `evidence`.
+
+### Region and district
+`regions[]` contains `id`, `name`. `districts[]` contains `id`, `name`, and optional `regionId` referencing a region. If no region level is supplied, the dashboard treats each district as its own region for filtering. Region IDs must be unique and references must resolve.
 
 ### Facility
-`id`, `name`, `districtId`, `type` (`hospital|health_centre|clinic`). IDs are stable within the demo. No coordinates or personal identifiers are included.
+`id`, `name`, `districtId`, `type` (`hospital|health_centre|clinic`), and optional `mapPosition` (`x`, `y` in 0–100 schematic map space). IDs are stable within the demo. Map coordinates are illustrative only, not verified geography, and no personal identifiers are included.
 
 ### Product
 `id`, `name`, `form`, `unit`, `essential`, `coldChain`, `unitCostCents`, `minRemainingShelfLifeDays`, `shelfLifeDays`. Product identity includes the exact identifier; the planner never substitutes a different strength/form.
@@ -53,7 +56,7 @@ Expired and quarantined batches are unavailable. Projection consumes released ba
 
 ## Privacy and retention
 
-No patient-level fields, credentials, or real facility identifiers are accepted by the public demo. Operator-controlled authorized aggregate mode may contain real facility/product aggregates only after data-sharing authorization; it still rejects patient-level fields and direct identifiers. SQLite contains plan names, notes, statuses, settings, and the fixed demo actor. Do not enter real sensitive information in plan notes. Local database retention/reset is operator-controlled; see [Operations](OPERATIONS.md).
+No patient-level fields, credentials, or real facility identifiers are accepted by the public demo. Operator-controlled authorized aggregate mode may contain real facility/product aggregates only after data-sharing authorization; it still rejects patient-level fields and direct identifiers. SQLite contains plan names, notes, statuses, settings, dashboard support requests, partner annotations, dashboard audit events, and fixed demo actor labels. Do not enter real sensitive information in plan notes. Local database retention/reset is operator-controlled; see [Operations](OPERATIONS.md).
 
 ## Authorized aggregate ingestion contract
 

@@ -8,6 +8,7 @@ StockSense helps a district planner move from stockout risk to a budget-aware ac
 
 ## What works
 
+- Role-based dashboard overview (leadership, supply-chain/financing, district, facility, partner) with filters, schematic risk map, explainable actions, audit trail, and offline-tolerant caching. Role switching is a demo simulation, not authenticated access control.
 - Network overview and filterable stockout-risk register.
 - FEFO-aware stock projection, expiry exposure, confirmed inbound shipments, and Unknown-data handling.
 - Explainable risk calculations and item-level evidence.
@@ -42,11 +43,12 @@ Browser QA uses project-local `agent-browser` and an npm-distributed Chromium de
 
 ## Try the demo
 
-1. Open **Stockout risk**, filter a district, and inspect an item's calculation.
-2. Open **Scenario planner**, set a budget, and run a scenario.
-3. Review selected and unfunded actions, then save and explicitly approve a demo plan.
-4. Open **Funding trace** and advance an item through the simulated workflow.
-5. Export a CSV, inspect **Data & evidence**, and read **Methodology**.
+1. Open **Dashboard**, switch roles, and use “Why this?” on a recommended action. Facility view supports minimal receipt/issue/support entries.
+2. Open **Stockout risk**, filter a district, and inspect an item's calculation.
+3. Open **Scenario planner**, set a budget, and run a scenario.
+4. Review selected and unfunded actions, then save and explicitly approve a demo plan.
+5. Open **Funding trace** and advance an item through the simulated workflow.
+6. Export a CSV, inspect **Data & evidence**, and read **Methodology**.
 
 A facilitator-friendly walkthrough is in [Demo script](docs/DEMO_SCRIPT.md).
 
@@ -55,6 +57,8 @@ A facilitator-friendly walkthrough is in [Demo script](docs/DEMO_SCRIPT.md).
 | Document | Purpose |
 |---|---|
 | [PRD](prd.md) | Users, scope, journeys, requirements, acceptance criteria |
+| [Dashboard](docs/DASHBOARD.md) | Role views, filters, explainability, audit, offline behavior |
+| [Dashboard design](docs/DASHBOARD_DESIGN.md) | Visual tokens, layout plan, self-critique |
 | [Architecture](docs/ARCHITECTURE.md) | Stack, modules, data flow, deployment boundary |
 | [API](docs/API.md) | Endpoints, validation, errors, examples |
 | [Data contract](docs/DATA_CONTRACT.md) | Schemas, units, provenance, quality gates |

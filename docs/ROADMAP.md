@@ -21,6 +21,14 @@ A fellowship-aligned plan that separates a credible prototype from partner valid
 
 **Exit evidence:** optimizer tests beat greedy counterexamples; real-country allocation fails closed; public demo remains synthetic.
 
+## Phase 0.3 — Role-based dashboard overview (complete)
+
+- Five demo role views on one data/MILP engine; URL-backed scope filters and search.
+- Schematic risk map, explainable ranked actions, bottlenecks, forecast, budget/pipeline panels, facility minimal actions, partner notes/comparison, audit trail.
+- Offline-tolerant caching and local facility outbox; dashboard tests and browser smoke.
+
+**Exit evidence:** role scope locks and “Why this?” explanations tested; demo-role and not-connected limits explicit; no real outcome claim.
+
 ## Phase 1 — Weeks 1–4: co-design and data reality
 
 - Confirm country/district, users, authoritative stock definitions, and approval roles.

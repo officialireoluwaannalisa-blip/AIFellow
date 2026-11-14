@@ -1,21 +1,34 @@
 {
-  "version": "synthetic-2026.11.14-v1",
+  "version": "synthetic-2026.11.14-v2",
   "asOf": "2026-11-14",
   "country": "Demo Republic",
   "countryCode": "DEMO",
   "currency": "USD",
+  "regions": [
+    {
+      "id": "highlands",
+      "name": "Highland Region"
+    },
+    {
+      "id": "coast",
+      "name": "Coastal Region"
+    }
+  ],
   "districts": [
     {
       "id": "north",
-      "name": "Northern Valley"
+      "name": "Northern Valley",
+      "regionId": "highlands"
     },
     {
       "id": "central",
-      "name": "Central Plateau"
+      "name": "Central Plateau",
+      "regionId": "highlands"
     },
     {
       "id": "south",
-      "name": "Southern Coast"
+      "name": "Southern Coast",
+      "regionId": "coast"
     }
   ],
   "facilities": [
@@ -23,109 +36,181 @@
       "id": "fac-11",
       "name": "Northgate District Hospital",
       "districtId": "north",
-      "type": "hospital"
+      "type": "hospital",
+      "mapPosition": {
+        "x": 23,
+        "y": 20
+      }
     },
     {
       "id": "fac-12",
       "name": "Riverbend Health Centre",
       "districtId": "north",
-      "type": "health_centre"
+      "type": "health_centre",
+      "mapPosition": {
+        "x": 30,
+        "y": 20
+      }
     },
     {
       "id": "fac-13",
       "name": "Pine Hills Clinic",
       "districtId": "north",
-      "type": "clinic"
+      "type": "clinic",
+      "mapPosition": {
+        "x": 37,
+        "y": 20
+      }
     },
     {
       "id": "fac-14",
       "name": "Lakeside Health Centre",
       "districtId": "north",
-      "type": "health_centre"
+      "type": "health_centre",
+      "mapPosition": {
+        "x": 23,
+        "y": 29
+      }
     },
     {
       "id": "fac-15",
       "name": "Eastfield Clinic",
       "districtId": "north",
-      "type": "clinic"
+      "type": "clinic",
+      "mapPosition": {
+        "x": 30,
+        "y": 29
+      }
     },
     {
       "id": "fac-16",
       "name": "Harmony District Hospital",
       "districtId": "north",
-      "type": "hospital"
+      "type": "hospital",
+      "mapPosition": {
+        "x": 37,
+        "y": 29
+      }
     },
     {
       "id": "fac-21",
       "name": "Central District Hospital",
       "districtId": "central",
-      "type": "hospital"
+      "type": "hospital",
+      "mapPosition": {
+        "x": 45,
+        "y": 42
+      }
     },
     {
       "id": "fac-22",
       "name": "Sunrise Health Centre",
       "districtId": "central",
-      "type": "health_centre"
+      "type": "health_centre",
+      "mapPosition": {
+        "x": 52,
+        "y": 42
+      }
     },
     {
       "id": "fac-23",
       "name": "Green Valley Clinic",
       "districtId": "central",
-      "type": "clinic"
+      "type": "clinic",
+      "mapPosition": {
+        "x": 59,
+        "y": 42
+      }
     },
     {
       "id": "fac-24",
       "name": "Hilltop Health Centre",
       "districtId": "central",
-      "type": "health_centre"
+      "type": "health_centre",
+      "mapPosition": {
+        "x": 45,
+        "y": 51
+      }
     },
     {
       "id": "fac-25",
       "name": "Market Road Clinic",
       "districtId": "central",
-      "type": "clinic"
+      "type": "clinic",
+      "mapPosition": {
+        "x": 52,
+        "y": 51
+      }
     },
     {
       "id": "fac-26",
       "name": "Unity District Hospital",
       "districtId": "central",
-      "type": "hospital"
+      "type": "hospital",
+      "mapPosition": {
+        "x": 59,
+        "y": 51
+      }
     },
     {
       "id": "fac-31",
       "name": "Coastal District Hospital",
       "districtId": "south",
-      "type": "hospital"
+      "type": "hospital",
+      "mapPosition": {
+        "x": 61,
+        "y": 72
+      }
     },
     {
       "id": "fac-32",
       "name": "Palm Grove Health Centre",
       "districtId": "south",
-      "type": "health_centre"
+      "type": "health_centre",
+      "mapPosition": {
+        "x": 68,
+        "y": 72
+      }
     },
     {
       "id": "fac-33",
       "name": "Seabreeze Clinic",
       "districtId": "south",
-      "type": "clinic"
+      "type": "clinic",
+      "mapPosition": {
+        "x": 75,
+        "y": 72
+      }
     },
     {
       "id": "fac-34",
       "name": "Lagoon Health Centre",
       "districtId": "south",
-      "type": "health_centre"
+      "type": "health_centre",
+      "mapPosition": {
+        "x": 61,
+        "y": 81
+      }
     },
     {
       "id": "fac-35",
       "name": "Southpoint Clinic",
       "districtId": "south",
-      "type": "clinic"
+      "type": "clinic",
+      "mapPosition": {
+        "x": 68,
+        "y": 81
+      }
     },
     {
       "id": "fac-36",
       "name": "Bridgeview District Hospital",
       "districtId": "south",
-      "type": "hospital"
+      "type": "hospital",
+      "mapPosition": {
+        "x": 75,
+        "y": 81
+      }
     }
   ],
   "products": [
@@ -5934,7 +6019,7 @@
       "id": "EV-003",
       "title": "Budget-aware action planning",
       "category": "Planning",
-      "text": "Compare feasible actions under an explicit ceiling, keep unfunded needs visible, and record human approval. The demo uses adaptive greedy cost-effectiveness ranking and does not claim global optimality or clinical priority.",
+      "text": "Compare feasible actions under an explicit ceiling, keep unfunded needs visible, and record human approval. The demo uses an exact fixed-charge integer-flow MILP and certifies optimality only for the modeled problem, not clinical priority or real-world outcomes.",
       "source": "StockSense illustrative demo guidance"
     },
     {

@@ -54,7 +54,8 @@ The browser smoke test starts an isolated production server on port 3100 (overri
 - Distinct Unknown/Stable labels, chart text alternative, dialog Escape/focus restoration, actionable empty state.
 
 ### Browser smoke
-- Overview loads.
+- Dashboard loads and leadership, facility, district, and partner role views render.
+- Snapshot overview remains available at `/overview`.
 - Risk search/filter and detail dialog work.
 - Scenario runs; plan saves and navigates to Funding trace.
 - Explicit demo approval and all three item advances work; audit event appears.
@@ -67,7 +68,7 @@ The browser smoke test starts an isolated production server on port 3100 (overri
 
 - **Date:** 2026-11-14
 - `npm run typecheck`: pass
-- `npm test`: **41 tests passed** across 6 files
+- `npm test`: **47 tests passed** across 7 files
 - `npm run build`: pass
 - `npm run test:e2e`: pass (isolated production server + Chromium)
 - Mobile overflow check: pass at 390×844
@@ -78,6 +79,9 @@ These results verify the synthetic prototype's implementation, not real-world fo
 
 ## Manual acceptance checklist
 
+- [ ] Dashboard role switching is labeled demo simulation; facility/district scope locks hold.
+- [ ] Every dashboard recommendation has a short “Why this?” explanation.
+- [ ] Offline banner/cached snapshot and facility outbox sync are understood as demo tolerance, not production offline sync.
 - [ ] Persistent synthetic/authorized-aggregate data notice is visible.
 - [ ] Optimality certificate and clinical-policy status are visible in the planner.
 - [ ] Country profiles show not-connected state for unconfigured real jurisdictions.

@@ -71,6 +71,31 @@ describe('read API', () => {
   });
 });
 
+describe('dashboard API', () => {
+  it('serves role-scoped dashboards and rejects mismatched country', async () => {
+    const leadership = await request(app).get('/api/dashboard').query({ role: 'leadership' }).expect(200);
+    expect(leadership.body.summary.role).toBe('leadership'); expect(leadership.body.interventions.length).toBeLessThanOrEqual(5);
+    expect(leadership.body.capabilities.canExportBriefing).toBe(true);
+    const facility = await request(app).get('/api/dashboard').query({ role: 'facility' }).expect(200);
+    expect(facility.body.filters.facilityId).toBeTruthy(); expect(facility.body.facilityStock.length).toBeGreaterThan(0);
+    await request(app).get('/api/dashboard').query({ role: 'leadership', countryCode: 'NG' }).expect(403);
+  });
+  it('records facility requests, partner notes, and audit events', async () => {
+    const meta = await request(app).get('/api/meta').expect(200);
+    const facilityId = meta.body.facilities[0].id;
+    const support = await request(app).post('/api/dashboard/support').send({ role: 'facility', facilityId, productId: null, referenceId: null, kind: 'support', note: 'Need review of oxytocin cover.' }).expect(201);
+    expect(support.body.request.status).toBe('recorded');
+    await request(app).post('/api/dashboard/support').send({ role: 'facility', facilityId, kind: 'receipt_confirmation', note: 'Confirmed without reference.' }).expect(403);
+    await request(app).post('/api/dashboard/notes').send({ role: 'partner', countryCode: 'DEMO', note: 'Pilot annotation: verify district reporting lag.' }).expect(201);
+    await request(app).post('/api/dashboard/audit').send({ role: 'leadership', action: 'briefing_exported', scope: 'Demo Republic', note: 'Exported demo briefing.' }).expect(201);
+    const dashboard = await request(app).get('/api/dashboard').query({ role: 'partner' }).expect(200);
+    expect(dashboard.body.notes.length).toBe(1); expect(dashboard.body.audit.length).toBeGreaterThan(0);
+    const briefing = await request(app).get('/api/dashboard/briefing').query({ role: 'leadership' }).expect(200);
+    expect(briefing.text).toContain('SYNTHETIC DEMO'); expect(briefing.text).toContain('Why:');
+    await request(app).get('/api/dashboard/briefing').query({ role: 'facility' }).expect(403);
+  });
+});
+
 describe('plan workflow', () => {
   it('persists snapshots, deduplicates submissions, and audits every transition', async () => {
     const key = randomUUID(); const payload = { name: 'Test district plan', scenario, idempotencyKey: key };

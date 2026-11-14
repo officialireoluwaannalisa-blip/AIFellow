@@ -8,19 +8,25 @@ import type { Dataset, DatasetManifest, Stock } from '../shared/types';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const asOf = '2026-11-14';
+const regions = [
+  { id: 'highlands', name: 'Highland Region' },
+  { id: 'coast', name: 'Coastal Region' },
+];
 const districts = [
-  { id: 'north', name: 'Northern Valley' },
-  { id: 'central', name: 'Central Plateau' },
-  { id: 'south', name: 'Southern Coast' },
+  { id: 'north', name: 'Northern Valley', regionId: 'highlands' },
+  { id: 'central', name: 'Central Plateau', regionId: 'highlands' },
+  { id: 'south', name: 'Southern Coast', regionId: 'coast' },
 ];
 const facilityNames = [
   ['Northgate District Hospital', 'Riverbend Health Centre', 'Pine Hills Clinic', 'Lakeside Health Centre', 'Eastfield Clinic', 'Harmony District Hospital'],
   ['Central District Hospital', 'Sunrise Health Centre', 'Green Valley Clinic', 'Hilltop Health Centre', 'Market Road Clinic', 'Unity District Hospital'],
   ['Coastal District Hospital', 'Palm Grove Health Centre', 'Seabreeze Clinic', 'Lagoon Health Centre', 'Southpoint Clinic', 'Bridgeview District Hospital'],
 ];
+const mapAnchors = [{ x: 30, y: 24 }, { x: 52, y: 46 }, { x: 68, y: 76 }];
 const facilities = districts.flatMap((district, di) => facilityNames[di].map((name, fi) => ({
   id: `fac-${di + 1}${fi + 1}`, name, districtId: district.id,
   type: (fi === 0 || fi === 5 ? 'hospital' : fi === 1 || fi === 3 ? 'health_centre' : 'clinic') as 'hospital' | 'health_centre' | 'clinic',
+  mapPosition: { x: mapAnchors[di].x + (fi % 3) * 7 - 7, y: mapAnchors[di].y + Math.floor(fi / 3) * 9 - 4 },
 })));
 const products = [
   { id: 'med-amox', name: 'Amoxicillin 500 mg', form: 'Capsule', unit: 'capsules', essential: true, coldChain: false, unitCostCents: 8, minRemainingShelfLifeDays: 60, shelfLifeDays: 540, priorityWeight: 1.1 },
@@ -64,19 +70,19 @@ const routes = districts.flatMap((district, di) => {
 const evidence = [
   { id: 'EV-001', title: 'Triage and human review', category: 'Risk workflow', text: 'Review Critical records first, then Watch records. Treat Unknown as a data-action queue, not as safety. A planner must verify local stock and shipment information before approving an action.', source: 'StockSense illustrative demo guidance' },
   { id: 'EV-002', title: 'Usable stock and FEFO', category: 'Stock accounting', text: 'Only released, non-expired batches count as usable. Project consumption first-expiry-first-out and count only confirmed inbound arrivals. Quarantine and planned shipments require separate review.', source: 'StockSense illustrative demo guidance' },
-  { id: 'EV-003', title: 'Budget-aware action planning', category: 'Planning', text: 'Compare feasible actions under an explicit ceiling, keep unfunded needs visible, and record human approval. The demo uses adaptive greedy cost-effectiveness ranking and does not claim global optimality or clinical priority.', source: 'StockSense illustrative demo guidance' },
+  { id: 'EV-003', title: 'Budget-aware action planning', category: 'Planning', text: 'Compare feasible actions under an explicit ceiling, keep unfunded needs visible, and record human approval. The demo uses an exact fixed-charge integer-flow MILP and certifies optimality only for the modeled problem, not clinical priority or real-world outcomes.', source: 'StockSense illustrative demo guidance' },
   { id: 'EV-004', title: 'Redistribution safeguards', category: 'Transfers', text: 'Transfer only the exact product on an explicit feasible route. Preserve donor buffer, check remaining shelf life after arrival, and require cold-chain capability for cold-chain products. Local authorization is mandatory.', source: 'StockSense illustrative demo guidance' },
   { id: 'EV-005', title: 'Data quality and provenance', category: 'Data governance', text: 'Track reporting freshness, consumption-history completeness, dataset version, and checksums. Distinguish missing from zero. Do not use real personal or government data in this demo workspace.', source: 'StockSense illustrative demo guidance' },
   { id: 'EV-006', title: 'AI and automation boundary', category: 'Responsible AI', text: 'This release has no connected LLM. Retrieval answers cite demo evidence and computed facts. Deterministic tools own arithmetic and constraints; no model may autonomously approve expenditure or create clinical instructions.', source: 'StockSense illustrative demo guidance' },
 ];
-const dataset: Dataset = { version: 'synthetic-2026.11.14-v1', asOf, country: 'Demo Republic', countryCode: 'DEMO', currency: 'USD', districts, facilities, products, stocks, routes, evidence };
+const dataset: Dataset = { version: 'synthetic-2026.11.14-v2', asOf, country: 'Demo Republic', countryCode: 'DEMO', currency: 'USD', regions, districts, facilities, products, stocks, routes, evidence };
 const parsed = datasetSchema.parse(dataset);
 const json = JSON.stringify(parsed, null, 2) + '\n';
 const sha256 = createHash('sha256').update(json).digest('hex');
 const manifest: DatasetManifest = {
   version: dataset.version, asOf, generator: 'scripts/generate-data.ts', seed: 511e8440,
   sourceFile: 'data/synthetic/seed.json', sha256, synthetic: true,
-  counts: { districts: districts.length, facilities: facilities.length, products: products.length, stockRecords: stocks.length, routes: routes.length, evidenceSnippets: evidence.length },
+  counts: { regions: regions.length, districts: districts.length, facilities: facilities.length, products: products.length, stockRecords: stocks.length, routes: routes.length, evidenceSnippets: evidence.length },
 };
 mkdirSync(resolve(root, 'data/synthetic'), { recursive: true });
 writeFileSync(resolve(root, 'data/synthetic/seed.json'), json);

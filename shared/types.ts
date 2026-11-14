@@ -4,8 +4,9 @@ export type RiskLevel = 'critical' | 'watch' | 'stable' | 'unknown';
 export type ItemStatus = 'proposed' | 'approved' | 'procurement_requested' | 'funds_released' | 'received';
 export type PlanStatus = 'draft' | 'approved';
 
-export interface District { id: string; name: string }
-export interface Facility { id: string; name: string; districtId: string; type: 'hospital' | 'health_centre' | 'clinic' }
+export interface Region { id: string; name: string }
+export interface District { id: string; name: string; regionId?: string }
+export interface Facility { id: string; name: string; districtId: string; type: 'hospital' | 'health_centre' | 'clinic'; mapPosition?: { x: number; y: number } }
 export interface Product {
   id: string; name: string; form: string; unit: string; essential: boolean; coldChain: boolean;
   unitCostCents: number; minRemainingShelfLifeDays: number; shelfLifeDays: number; priorityWeight: number;
@@ -20,7 +21,7 @@ export interface Route { fromFacilityId: string; toFacilityId: string; days: num
 export interface Evidence { id: string; title: string; category: string; text: string; source: string }
 export interface Dataset {
   version: string; asOf: string; country: string; countryCode?: string; currency: 'USD';
-  districts: District[]; facilities: Facility[]; products: Product[]; stocks: Stock[]; routes: Route[]; evidence: Evidence[];
+  regions?: Region[]; districts: District[]; facilities: Facility[]; products: Product[]; stocks: Stock[]; routes: Route[]; evidence: Evidence[];
 }
 export interface ScenarioInput { budgetCents: number; horizonDays: 14 | 30 | 60; bufferDays: number; districtId: string | null; countryCode?: string }
 export interface ProjectionPoint { day: number; date: string; stock: number; unmet: number }
@@ -79,3 +80,10 @@ export interface DatasetManifest {
   version: string; asOf: string; generator: string; seed: number; sourceFile: string; sha256: string;
   counts: Record<string, number>; synthetic: boolean;
 }
+export interface DashboardSupportRequest {
+  id: string; facilityId: string; productId: string | null; referenceId: string | null;
+  kind: 'support' | 'discrepancy' | 'receipt_confirmation' | 'usage_adjustment';
+  note: string; status: 'recorded'; createdAt: string; actor: string; role: string;
+}
+export interface DashboardNote { id: string; countryCode: string; role: string; note: string; createdAt: string; actor: string }
+export interface DashboardAuditEvent { id: string; role: string; action: string; scope: string; note: string; actor: string; createdAt: string }

@@ -5,7 +5,7 @@ Base path: `/api`. All responses are JSON unless an export is requested. The pub
 ## Conventions
 
 - Input validation: Zod; invalid bodies/queries return `400`.
-- Unknown resources/scopes: `404`. Invalid/stale state transitions, cross-origin mutations, or allocation gates: `409`.
+- Unknown resources/scopes: `404`. Invalid/stale state transitions, cross-origin mutations, or allocation gates: `409`. Declared demo-role scope violations: `403` (`ROLE_SCOPE`).
 - Error shape: `{ "error": { "code": "...", "message": "...", "details": [{ "path": "...", "message": "..." }] } }`.
 - JSON body limit: 32 KB, except `/imports/preview` which allows 2 MB. Money: integer USD cents. Dates: `YYYY-MM-DD` for snapshot data; audit timestamps are ISO UTC.
 - Mutations with an `Origin` header must match the request host, an Arena `.e2b.app` preview host, or a configured exact allowed host.
@@ -20,6 +20,11 @@ Base path: `/api`. All responses are JSON unless an export is requested. The pub
 | GET | `/location` | Active location and allocation gate |
 | PUT | `/location` | Set location `{ "countryCode": "NG" }`; does not import data |
 | POST | `/imports/preview` | Validate an authorized aggregate pack; preview only, no activation |
+| GET | `/dashboard?role=leadership&regionId=&districtId=&facilityId=&productId=&horizonDays=30&q=&budgetCents=2500000` | Role-scoped dashboard payload (demo role simulation) |
+| GET | `/dashboard/briefing?...` | Markdown dashboard briefing; leadership/supply_chain/partner only; records audit event |
+| POST | `/dashboard/support` | Record district/facility support, receipt confirmation, discrepancy, or usage note |
+| POST | `/dashboard/notes` | Partner annotation for the active country |
+| POST | `/dashboard/audit` | Record recommendation review, briefing export, or decision event |
 | GET | `/overview?districtId=&horizonDays=30` | Network counts, district summary, top risks |
 | GET | `/risks?districtId=&productId=&risk=all&q=&horizonDays=30` | Filtered, urgency-sorted assessments |
 | GET | `/risks/:facilityId/:productId` | Full assessment and projection evidence |
@@ -36,6 +41,16 @@ Base path: `/api`. All responses are JSON unless an export is requested. The pub
 | GET | `/export/plans/:id.csv` | Download formula-safe plan CSV with optimizer/policy columns |
 | GET | `/data/manifest` | Provenance manifest |
 | GET | `/data/seed.json` | Download active dataset (synthetic in public demo) |
+
+## Dashboard
+
+`GET /api/dashboard` accepts `role` ∈ {leadership, supply_chain, district, facility, partner}, optional `countryCode`, `regionId`, `districtId`, `facilityId`, `productId`, `q`, `horizonDays` ∈ {30,60,90}, and `budgetCents`. District/facility roles are scope-locked server-side. The response includes summary counts, schematic map districts, ranked interventions with `why`, bottlenecks, forecast horizons, saved-demo-plan pipeline, alerts, risk rows, facility stock/deliveries, support requests, notes, audit events, capabilities, and optimizer/policy summaries when allocation is allowed. A 90-day request forecasts 90 days but uses the supported 60-day allocation horizon for ranked interventions.
+
+```json
+{ "role": "facility", "facilityId": "fac-11", "productId": "med-oxy", "referenceId": "inbound-fac-11-med-oxy", "kind": "receipt_confirmation", "note": "Confirmed 80 vials against delivery note." }
+```
+
+`POST /api/dashboard/support` requires `role` ∈ {district, facility}, a known `facilityId`, `kind` ∈ {support, discrepancy, receipt_confirmation, usage_adjustment}, and a 3–500 character note. Facility receipt confirmation requires `referenceId`. `POST /api/dashboard/notes` requires `role: "partner"`, the active `countryCode`, and a 3–1000 character note. `POST /api/dashboard/audit` accepts `role`, `action` ∈ {briefing_exported, recommendation_reviewed, decision_recorded}, optional `scope` and `note`. These are demo records, not authenticated production audit logs.
 
 ## Scenario input
 

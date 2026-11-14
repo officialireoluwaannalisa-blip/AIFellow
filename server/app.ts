@@ -8,7 +8,8 @@ import { answerQuestion, buildBriefing, searchEvidence } from '../shared/evidenc
 import { planCsv, risksCsv } from '../shared/export';
 import { previewAggregateImport } from '../shared/imports';
 import { runScenario } from '../shared/planner';
-import { advanceSchema, approveSchema, assistantSchema, riskQuerySchema, savePlanSchema, scenarioSchema } from '../shared/schemas';
+import { buildDashboard, dashboardRegions, dashboardScenario, resolveDashboardFilters, type DashboardFilters } from '../shared/dashboard';
+import { advanceSchema, approveSchema, assistantSchema, dashboardAuditSchema, dashboardNoteSchema, dashboardQuerySchema, dashboardSupportSchema, riskQuerySchema, savePlanSchema, scenarioSchema } from '../shared/schemas';
 import type { Dataset, DatasetManifest } from '../shared/types';
 import { ConflictError, NotFoundError, PlanRepository } from './repository';
 
@@ -18,6 +19,8 @@ const scopeQuery = z.object({
   horizonDays: z.preprocess((v) => v === undefined ? 30 : Number(v), z.union([z.literal(14), z.literal(30), z.literal(60)])),
 }).strict();
 const locationSchema = z.object({ countryCode: z.string().refine(isCountryCode, 'Unknown country/location') }).strict();
+
+class RoleScopeError extends Error { constructor(message: string) { super(message); this.name = 'RoleScopeError'; } }
 
 export function createApp(options: {
   dataset: Dataset; manifest: DatasetManifest; hash: string; repository: PlanRepository;
@@ -59,6 +62,25 @@ export function createApp(options: {
     autonomousExecution: false as const, safetyConstraintsEnforced: true as const,
     prioritizationSource: policy.prioritization.source,
   });
+  const scenarioCache = new Map<string, ReturnType<typeof dashboardScenario>>();
+  const cachedDashboardScenario = (filters: DashboardFilters) => {
+    const resolved = resolveDashboardFilters(dataset, filters);
+    const key = JSON.stringify([hash, policy.version, dataAuthorized, resolved.countryCode, resolved.districtId, resolved.facilityId, resolved.budgetCents, resolved.horizonDays]);
+    let entry = scenarioCache.get(key);
+    if (!entry) {
+      entry = dashboardScenario(dataset, hash, resolved, policy, dataAuthorized);
+      scenarioCache.set(key, entry);
+      if (scenarioCache.size > 24) scenarioCache.delete(scenarioCache.keys().next().value as string);
+      void entry.catch(() => scenarioCache.delete(key));
+    }
+    return entry;
+  };
+  const assertDashboardScope = (filters: DashboardFilters) => {
+    if (filters.regionId && !dashboardRegions(dataset).some((r) => r.id === filters.regionId)) throw new NotFoundError('Region not found');
+    assertDistrict(filters.districtId); assertProduct(filters.productId);
+    if (filters.facilityId && !dataset.facilities.some((f) => f.id === filters.facilityId)) throw new NotFoundError('Facility not found');
+    if (filters.countryCode && filters.countryCode !== datasetCountry) throw new RoleScopeError('Selected country does not match the active dataset. Connect an authorized aggregate pack first.');
+  };
 
   app.get('/api/health', (_req, res) => res.json({ ok: true, demo: manifest.synthetic, dataMode, countryCode: datasetCountry, datasetVersion: dataset.version, asOf: dataset.asOf }));
   app.get('/api/meta', (_req, res) => res.json({
@@ -85,6 +107,64 @@ export function createApp(options: {
     res.json({ countryCode: input.countryCode, profile, allocationGate: allocationGate(input.countryCode, policy, dataAuthorized && input.countryCode === datasetCountry) });
   });
   app.post('/api/imports/preview', (req, res) => res.json(previewAggregateImport(req.body)));
+  app.get('/api/dashboard', async (req, res) => {
+    const query = dashboardQuerySchema.parse(req.query);
+    const filters = resolveDashboardFilters(dataset, query as DashboardFilters);
+    assertDashboardScope(filters);
+    const { scenario, gateReason } = await cachedDashboardScenario(filters);
+    const data = buildDashboard({
+      dataset, hash, filters, plans: repository.listPlans(), supportRequests: repository.listSupportRequests(),
+      notes: repository.listNotes(), audit: repository.listDashboardAudit(), policy, dataAuthorized, scenario, gateReason,
+    });
+    res.setHeader('X-Dashboard-Role', filters.role);
+    res.json(data);
+  });
+  app.post('/api/dashboard/support', (req, res) => {
+    const input = dashboardSupportSchema.parse(req.body);
+    const facility = dataset.facilities.find((f) => f.id === input.facilityId);
+    if (!facility) throw new NotFoundError('Facility not found');
+    if (input.productId) assertProduct(input.productId);
+    if (input.role === 'facility' && input.kind === 'receipt_confirmation' && !input.referenceId) throw new RoleScopeError('Receipt confirmation requires a delivery reference.');
+    const request = repository.addSupportRequest({ ...input, actor: `Demo ${input.role} user` });
+    res.status(201).json({ request });
+  });
+  app.post('/api/dashboard/notes', (req, res) => {
+    const input = dashboardNoteSchema.parse(req.body);
+    if (input.countryCode !== datasetCountry) throw new RoleScopeError('Notes are limited to the active country dataset.');
+    res.status(201).json({ note: repository.addNote({ ...input, actor: 'Demo partner user' }) });
+  });
+  app.post('/api/dashboard/audit', (req, res) => {
+    const input = dashboardAuditSchema.parse(req.body);
+    res.status(201).json({ event: repository.addDashboardAudit({ ...input, actor: `Demo ${input.role} user` }) });
+  });
+  app.get('/api/dashboard/briefing', async (req, res) => {
+    const query = dashboardQuerySchema.parse(req.query);
+    const filters = resolveDashboardFilters(dataset, query as DashboardFilters);
+    assertDashboardScope(filters);
+    if (filters.role !== 'leadership' && filters.role !== 'supply_chain' && filters.role !== 'partner') throw new RoleScopeError('This role cannot export a briefing.');
+    const { scenario, gateReason } = await cachedDashboardScenario(filters);
+    const data = buildDashboard({ dataset, hash, filters, plans: repository.listPlans(), supportRequests: repository.listSupportRequests(), notes: repository.listNotes(), audit: repository.listDashboardAudit(), policy, dataAuthorized, scenario, gateReason });
+    repository.addDashboardAudit({ role: filters.role, action: 'briefing_exported', scope: data.summary.scopeLabel, note: 'Dashboard briefing exported.', actor: `Demo ${filters.role} user` });
+    const lines = [
+      `# StockSense dashboard briefing — ${data.summary.scopeLabel}`,
+      '', `Data mode: ${manifest.synthetic ? 'SYNTHETIC DEMO' : 'authorized aggregate'} · As of ${data.summary.asOf} · Role view: ${filters.role}`,
+      '', '## Summary',
+      `- Medicine availability (known records with usable stock): ${data.summary.availabilityPct}%`,
+      `- Critical records: ${data.summary.criticalCount}; Watch: ${data.summary.watchCount}; Unknown: ${data.summary.unknownCount}`,
+      `- Budget ceiling: ${(data.summary.budgetCeilingCents / 100).toFixed(2)} USD; planned interventions: ${(data.summary.plannedCostCents / 100).toFixed(2)} USD`,
+      '', '## Recommended interventions',
+      ...data.interventions.map((a, i) => `${i + 1}. ${a.productName} → ${a.facilityName}: ${a.quantity} ${a.unit}, ${(a.costCents / 100).toFixed(2)} USD. Why: ${a.why}`),
+      '', '## Bottlenecks', ...data.bottlenecks.map((b) => `- ${b.title}: ${b.detail}`),
+      '', '## Boundaries',
+      '- Role views are a demo simulation, not authenticated access control.',
+      '- Recommendations require human review; no autonomous procurement, payment, or clinical execution.',
+      '- Forecasts are deterministic projections on the active snapshot, not measured real-world outcomes.',
+      gateReason ? `- Allocation gate: ${gateReason}` : '- Allocation gate: passed for the active dataset.',
+    ];
+    res.setHeader('Content-Type', 'text/markdown; charset=utf-8');
+    res.setHeader('Content-Disposition', `attachment; filename="stocksense-dashboard-${manifest.synthetic ? 'demo' : 'authorized'}-${filters.role}.md"`);
+    res.send(lines.join('\n') + '\n');
+  });
   app.get('/api/overview', (req, res) => {
     const query = scopeQuery.parse(req.query); assertDistrict(query.districtId);
     res.json(buildOverview(dataset, query.horizonDays, query.districtId));
@@ -162,6 +242,7 @@ export function createApp(options: {
   app.use((error: unknown, _req: Request, res: Response, _next: NextFunction) => {
     if (error instanceof ZodError) return res.status(400).json({ error: { code: 'VALIDATION_ERROR', message: 'Invalid request', details: error.issues.map((i) => ({ path: i.path.join('.'), message: i.message })) } });
     if (error instanceof AllocationGateError) return res.status(409).json({ error: { code: 'ALLOCATION_BLOCKED', message: error.message } });
+    if (error instanceof RoleScopeError) return res.status(403).json({ error: { code: 'ROLE_SCOPE', message: error.message } });
     if (error instanceof NotFoundError) return res.status(404).json({ error: { code: 'NOT_FOUND', message: error.message } });
     if (error instanceof ConflictError) return res.status(409).json({ error: { code: 'CONFLICT', message: error.message } });
     if (error instanceof SyntaxError && 'body' in error) return res.status(400).json({ error: { code: 'INVALID_JSON', message: 'Malformed JSON body' } });

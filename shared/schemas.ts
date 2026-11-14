@@ -22,7 +22,12 @@ export const productSchema = z.object({
   minRemainingShelfLifeDays: z.number().int().min(0).max(365), shelfLifeDays: z.number().int().min(30).max(1825),
   priorityWeight: z.number().min(1).max(2),
 }).strict();
-export const facilitySchema = z.object({ id, name: z.string().min(1).max(160), districtId: id, type: z.enum(['hospital', 'health_centre', 'clinic']) }).strict();
+export const regionSchema = z.object({ id, name: z.string().min(1).max(100) }).strict();
+export const districtSchema = z.object({ id, name: z.string().min(1).max(100), regionId: id.optional() }).strict();
+export const facilitySchema = z.object({
+  id, name: z.string().min(1).max(160), districtId: id, type: z.enum(['hospital', 'health_centre', 'clinic']),
+  mapPosition: z.object({ x: z.number().min(0).max(100), y: z.number().min(0).max(100) }).strict().optional(),
+}).strict();
 export const routeSchema = z.object({
   fromFacilityId: id, toFacilityId: id, days: z.number().int().min(1).max(14), costCents: count,
   coldChainCapable: z.boolean(), sameDistrict: z.boolean(),
@@ -30,7 +35,8 @@ export const routeSchema = z.object({
 export const evidenceSchema = z.object({ id, title: z.string().min(1).max(200), category: z.string().min(1).max(80), text: z.string().min(1).max(4000), source: z.string().min(1).max(200) }).strict();
 export const datasetSchema = z.object({
   version: z.string().min(1).max(40), asOf: isoDate, country: z.string().min(1).max(100), countryCode: z.string().max(10).optional(), currency: z.literal('USD'),
-  districts: z.array(z.object({ id, name: z.string().min(1).max(100) }).strict()).min(1).max(50),
+  regions: z.array(regionSchema).max(50).optional(),
+  districts: z.array(districtSchema).min(1).max(50),
   facilities: z.array(facilitySchema).min(1).max(1000), products: z.array(productSchema).min(1).max(200),
   stocks: z.array(stockSchema).max(50_000), routes: z.array(routeSchema).max(20_000), evidence: z.array(evidenceSchema).max(200),
 }).strict().superRefine((data, ctx) => {
@@ -39,6 +45,9 @@ export const datasetSchema = z.object({
     if (new Set(items.map((x) => x.id)).size !== items.length) issue(`Duplicate ${label} IDs`, [label]);
   };
   unique(data.districts, 'districts'); unique(data.facilities, 'facilities'); unique(data.products, 'products'); unique(data.evidence, 'evidence');
+  if (data.regions) unique(data.regions, 'regions');
+  const regionIds = new Set((data.regions ?? []).map((x) => x.id));
+  data.districts.forEach((d, i) => { if (d.regionId && !regionIds.has(d.regionId)) issue('Unknown region', ['districts', i, 'regionId']); });
   const districts = new Set(data.districts.map((x) => x.id));
   const facilities = new Map(data.facilities.map((x) => [x.id, x]));
   const products = new Set(data.products.map((x) => x.id));
@@ -86,4 +95,27 @@ export const riskQuerySchema = z.object({
   districtId: z.string().max(80).optional(), productId: z.string().max(80).optional(),
   risk: z.enum(['all', 'critical', 'watch', 'stable', 'unknown']).default('all'),
   q: z.string().max(120).default(''), horizonDays: z.preprocess((value) => value === undefined ? 30 : Number(value), z.union([z.literal(14), z.literal(30), z.literal(60)])),
+}).strict();
+
+export const dashboardRoleSchema = z.enum(['leadership', 'supply_chain', 'district', 'facility', 'partner']);
+export const dashboardQuerySchema = z.object({
+  role: dashboardRoleSchema.default('leadership'),
+  countryCode: z.string().max(10).refine(isCountryCode, 'Unknown country/location').optional(),
+  regionId: id.nullable().optional(), districtId: id.nullable().optional(), facilityId: id.nullable().optional(), productId: id.nullable().optional(),
+  horizonDays: z.preprocess((value) => value === undefined ? 30 : Number(value), z.union([z.literal(30), z.literal(60), z.literal(90)])),
+  q: z.string().max(120).default(''),
+  budgetCents: z.preprocess((value) => value === undefined ? 2_500_000 : Number(value), z.number().int().min(0).max(100_000_000)),
+}).strict();
+export const dashboardSupportSchema = z.object({
+  role: z.enum(['district', 'facility']), facilityId: id, productId: id.nullable().default(null), referenceId: id.nullable().default(null),
+  kind: z.enum(['support', 'discrepancy', 'receipt_confirmation', 'usage_adjustment']),
+  note: z.string().trim().min(3).max(500),
+}).strict();
+export const dashboardNoteSchema = z.object({
+  role: z.literal('partner'), countryCode: z.string().max(10).refine(isCountryCode, 'Unknown country/location'),
+  note: z.string().trim().min(3).max(1000),
+}).strict();
+export const dashboardAuditSchema = z.object({
+  role: dashboardRoleSchema, action: z.enum(['briefing_exported', 'recommendation_reviewed', 'decision_recorded']),
+  scope: z.string().max(200).default(''), note: z.string().trim().max(500).default(''),
 }).strict();

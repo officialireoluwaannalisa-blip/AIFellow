@@ -2,7 +2,7 @@ import { randomUUID } from 'node:crypto';
 import { mkdirSync } from 'node:fs';
 import { dirname } from 'node:path';
 import { DatabaseSync } from 'node:sqlite';
-import type { AuditEvent, ItemStatus, ScenarioInput, ScenarioResult, StoredPlan, StoredPlanItem } from '../shared/types';
+import type { AuditEvent, DashboardAuditEvent, DashboardNote, DashboardSupportRequest, ItemStatus, ScenarioInput, ScenarioResult, StoredPlan, StoredPlanItem } from '../shared/types';
 
 export class NotFoundError extends Error { constructor(message = 'Resource not found') { super(message); this.name = 'NotFoundError'; } }
 export class ConflictError extends Error { constructor(message: string) { super(message); this.name = 'ConflictError'; } }
@@ -35,6 +35,18 @@ export class PlanRepository {
       );
       CREATE INDEX IF NOT EXISTS audit_plan_idx ON audit_events(plan_id, created_at);
       CREATE TABLE IF NOT EXISTS settings (key TEXT PRIMARY KEY, value TEXT NOT NULL);
+      CREATE TABLE IF NOT EXISTS dashboard_support_requests (
+        id TEXT PRIMARY KEY, facility_id TEXT NOT NULL, product_id TEXT, reference_id TEXT,
+        kind TEXT NOT NULL CHECK(kind IN ('support','discrepancy','receipt_confirmation','usage_adjustment')),
+        note TEXT NOT NULL, status TEXT NOT NULL DEFAULT 'recorded', created_at TEXT NOT NULL, actor TEXT NOT NULL, role TEXT NOT NULL
+      );
+      CREATE INDEX IF NOT EXISTS dashboard_support_facility_idx ON dashboard_support_requests(facility_id, created_at);
+      CREATE TABLE IF NOT EXISTS dashboard_notes (
+        id TEXT PRIMARY KEY, country_code TEXT NOT NULL, role TEXT NOT NULL, note TEXT NOT NULL, created_at TEXT NOT NULL, actor TEXT NOT NULL
+      );
+      CREATE TABLE IF NOT EXISTS dashboard_audit (
+        id TEXT PRIMARY KEY, role TEXT NOT NULL, action TEXT NOT NULL, scope TEXT NOT NULL, note TEXT NOT NULL, actor TEXT NOT NULL, created_at TEXT NOT NULL
+      );
       INSERT INTO schema_meta(version) SELECT 1 WHERE NOT EXISTS(SELECT 1 FROM schema_meta);
     `);
   }
@@ -45,6 +57,40 @@ export class PlanRepository {
   }
   setSetting(key: string, value: string): void {
     this.db.prepare('INSERT INTO settings(key,value) VALUES(?,?) ON CONFLICT(key) DO UPDATE SET value=excluded.value').run(key, value);
+  }
+  addSupportRequest(input: Omit<DashboardSupportRequest, 'id' | 'createdAt' | 'status'>): DashboardSupportRequest {
+    const id = randomUUID(); const createdAt = new Date().toISOString();
+    this.db.prepare('INSERT INTO dashboard_support_requests(id,facility_id,product_id,reference_id,kind,note,status,created_at,actor,role) VALUES(?,?,?,?,?,?,?,?,?,?)')
+      .run(id, input.facilityId, input.productId, input.referenceId, input.kind, input.note, 'recorded', createdAt, input.actor, input.role);
+    this.addDashboardAudit({ role: input.role, action: 'decision_recorded', scope: input.facilityId, note: `${input.kind}: ${input.note}`, actor: input.actor });
+    return { ...input, id, createdAt, status: 'recorded' };
+  }
+  listSupportRequests(limit = 200): DashboardSupportRequest[] {
+    const rows = this.db.prepare('SELECT * FROM dashboard_support_requests ORDER BY created_at DESC, rowid DESC LIMIT ?').all(limit) as unknown as Record<string, string | null>[];
+    return rows.map((r) => ({ id: r.id!, facilityId: r.facility_id!, productId: r.product_id, referenceId: r.reference_id, kind: r.kind as DashboardSupportRequest['kind'], note: r.note!, status: 'recorded', createdAt: r.created_at!, actor: r.actor!, role: r.role! }));
+  }
+  addNote(input: Omit<DashboardNote, 'id' | 'createdAt'>): DashboardNote {
+    const id = randomUUID(); const createdAt = new Date().toISOString();
+    this.db.prepare('INSERT INTO dashboard_notes(id,country_code,role,note,created_at,actor) VALUES(?,?,?,?,?,?)')
+      .run(id, input.countryCode, input.role, input.note, createdAt, input.actor);
+    this.addDashboardAudit({ role: input.role, action: 'decision_recorded', scope: input.countryCode, note: `Partner note: ${input.note}`, actor: input.actor });
+    return { ...input, id, createdAt };
+  }
+  listNotes(countryCode?: string, limit = 100): DashboardNote[] {
+    const rows = (countryCode
+      ? this.db.prepare('SELECT * FROM dashboard_notes WHERE country_code=? ORDER BY created_at DESC, rowid DESC LIMIT ?').all(countryCode, limit)
+      : this.db.prepare('SELECT * FROM dashboard_notes ORDER BY created_at DESC, rowid DESC LIMIT ?').all(limit)) as unknown as Record<string, string>[];
+    return rows.map((r) => ({ id: r.id, countryCode: r.country_code, role: r.role, note: r.note, createdAt: r.created_at, actor: r.actor }));
+  }
+  addDashboardAudit(input: Omit<DashboardAuditEvent, 'id' | 'createdAt'>): DashboardAuditEvent {
+    const id = randomUUID(); const createdAt = new Date().toISOString();
+    this.db.prepare('INSERT INTO dashboard_audit(id,role,action,scope,note,actor,created_at) VALUES(?,?,?,?,?,?,?)')
+      .run(id, input.role, input.action, input.scope, input.note, input.actor, createdAt);
+    return { ...input, id, createdAt };
+  }
+  listDashboardAudit(limit = 100): DashboardAuditEvent[] {
+    const rows = this.db.prepare('SELECT * FROM dashboard_audit ORDER BY created_at DESC, rowid DESC LIMIT ?').all(limit) as unknown as Record<string, string>[];
+    return rows.map((r) => ({ id: r.id, role: r.role, action: r.action, scope: r.scope, note: r.note, actor: r.actor, createdAt: r.created_at }));
   }
   private transaction<T>(fn: () => T): T {
     this.db.exec('BEGIN IMMEDIATE');
