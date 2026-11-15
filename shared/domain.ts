@@ -1,4 +1,4 @@
-import type { Arrival, Assessment, Dataset, Overview, Projection, QualityReport, RiskLevel, ScenarioInput, Stock } from './types';
+import type { Arrival, Assessment, Dataset, Overview, Projection, QualityReport, RiskLevel, ScenarioInput, Stock } from './types.js';
 
 export const DAY_MS = 86_400_000;
 export const DEFAULT_SCENARIO: ScenarioInput = { budgetCents: 2_500_000, horizonDays: 30, bufferDays: 7, districtId: null };

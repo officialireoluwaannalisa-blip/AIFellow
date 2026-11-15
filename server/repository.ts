@@ -2,7 +2,7 @@ import { randomUUID } from 'node:crypto';
 import { mkdirSync } from 'node:fs';
 import { dirname } from 'node:path';
 import { DatabaseSync } from 'node:sqlite';
-import type { AuditEvent, DashboardAuditEvent, DashboardNote, DashboardSupportRequest, ItemStatus, ScenarioInput, ScenarioResult, StoredPlan, StoredPlanItem } from '../shared/types';
+import type { AuditEvent, DashboardAuditEvent, DashboardNote, DashboardSupportRequest, ItemStatus, ScenarioInput, ScenarioResult, StoredPlan, StoredPlanItem } from '../shared/types.js';
 
 export class NotFoundError extends Error { constructor(message = 'Resource not found') { super(message); this.name = 'NotFoundError'; } }
 export class ConflictError extends Error { constructor(message: string) { super(message); this.name = 'ConflictError'; } }

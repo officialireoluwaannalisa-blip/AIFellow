@@ -48,6 +48,33 @@ Recommended settings if configuring manually:
 
 The adapter includes the synthetic dataset and HiGHS WASM runtime in the function bundle. The default scenario solves in a few seconds in the sandbox, but cold starts can add latency.
 
+### Native ESM constraint (caused a full API outage)
+
+`@vercel/node` **transpiles TypeScript without bundling**, and `package.json` declares `"type": "module"`. The emitted files are therefore loaded by native Node ESM, which performs no extension resolution. Every relative import in the serverless graph (`api/`, `server/`, `shared/`) must carry an explicit `.js` extension:
+
+```ts
+import { createApp } from '../server/app.js';   // correct — resolves to server/app.ts at build time
+import { createApp } from '../server/app';      // breaks the deployed function
+```
+
+An extensionless specifier compiles cleanly and passes `tsx`, `esbuild`, and Vitest locally, then throws `ERR_MODULE_NOT_FOUND` on Vercel. Because the throw happened during module initialization, **every** API route returned the platform's opaque `500 FUNCTION_INVOCATION_FAILED` while the static client still loaded, leaving the UI stuck on "Loading workspace…". `tests/esm-specifiers.test.ts` now fails the build if any specifier regresses.
+
+Two further safeguards live in `api/index.ts` and `server/data.ts`:
+
+- Initialization is lazy and guarded. A startup failure is logged with its stack and answered as `503` JSON (`error.code = SERVICE_INIT_FAILED`, `error.reason` such as `ERR_MODULE_NOT_FOUND`) instead of an opaque platform error. Set `STOCKSENSE_DEBUG_ERRORS=true` to include the raw message in the response; leave it unset on public deployments.
+- The dataset root is resolved from `STOCKSENSE_DATA_ROOT`, the working directory, directories above the module, and `/var/task`, because a serverless working directory is not guaranteed to be the bundle root.
+
+### Verifying a deployment
+
+Check the API, not just the page — a healthy static shell says nothing about the function:
+
+```bash
+curl -sS https://<your-domain>/api/health   # expect {"ok":true,...,"storage":{"mode":"ephemeral"}}
+curl -sS https://<your-domain>/api/meta     # expect districts/facilities/products
+```
+
+If a route returns `FUNCTION_INVOCATION_FAILED`, open the deployment's **Runtime Logs** in the Vercel dashboard and read the first stack trace; that is the initialization error. To reproduce the platform build offline, run the `@vercel/node` builder against a **copy** of the repository (never the working tree — its `download()` step rewrites files in place), materialize the emitted Lambda, and import it with Node.
+
 **Hosted storage is ephemeral.** Vercel Functions do not provide a durable writable disk. The adapter keeps demo workflow state in a temporary SQLite file so the save/approve/funding flow works within an instance, but plans, notes, support requests, and audit history may disappear between cold starts, scaling events, or deployments. `/api/health` and `/api/meta` return `storage.mode = "ephemeral"`, and the UI shows a warning. Do not enter sensitive notes. For durable hosted state, replace the repository adapter with an external database before real use.
 
 If Vercel Deployment Protection is enabled, the deployment URL may require Vercel login. That is an access-control setting, not an application failure. Keep protection enabled for non-public demos; use a custom domain or an approved access rule only when intentional.

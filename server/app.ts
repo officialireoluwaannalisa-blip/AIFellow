@@ -1,17 +1,17 @@
 import express, { type NextFunction, type Request, type Response } from 'express';
 import helmet from 'helmet';
 import { ZodError, z } from 'zod';
-import { AllocationGateError, allocationGate, DEMO_CLINICAL_POLICY, type ClinicalPolicy } from '../shared/clinical-policy';
-import { COUNTRY_PROFILES, getCountryProfile, isCountryCode } from '../shared/countries';
-import { assessDataset, assessStock, buildOverview, DEFAULT_SCENARIO, qualityReport } from '../shared/domain';
-import { answerQuestion, buildBriefing, searchEvidence } from '../shared/evidence';
-import { planCsv, risksCsv } from '../shared/export';
-import { previewAggregateImport } from '../shared/imports';
-import { runScenario } from '../shared/planner';
-import { buildDashboard, dashboardRegions, dashboardScenario, resolveDashboardFilters, type DashboardFilters } from '../shared/dashboard';
-import { advanceSchema, approveSchema, assistantSchema, dashboardAuditSchema, dashboardNoteSchema, dashboardQuerySchema, dashboardSupportSchema, riskQuerySchema, savePlanSchema, scenarioSchema } from '../shared/schemas';
-import type { Dataset, DatasetManifest } from '../shared/types';
-import { ConflictError, NotFoundError, PlanRepository } from './repository';
+import { AllocationGateError, allocationGate, DEMO_CLINICAL_POLICY, type ClinicalPolicy } from '../shared/clinical-policy.js';
+import { COUNTRY_PROFILES, getCountryProfile, isCountryCode } from '../shared/countries.js';
+import { assessDataset, assessStock, buildOverview, DEFAULT_SCENARIO, qualityReport } from '../shared/domain.js';
+import { answerQuestion, buildBriefing, searchEvidence } from '../shared/evidence.js';
+import { planCsv, risksCsv } from '../shared/export.js';
+import { previewAggregateImport } from '../shared/imports.js';
+import { runScenario } from '../shared/planner.js';
+import { buildDashboard, dashboardRegions, dashboardScenario, resolveDashboardFilters, type DashboardFilters } from '../shared/dashboard.js';
+import { advanceSchema, approveSchema, assistantSchema, dashboardAuditSchema, dashboardNoteSchema, dashboardQuerySchema, dashboardSupportSchema, riskQuerySchema, savePlanSchema, scenarioSchema } from '../shared/schemas.js';
+import type { Dataset, DatasetManifest } from '../shared/types.js';
+import { ConflictError, NotFoundError, PlanRepository } from './repository.js';
 
 const idParam = z.string().min(1).max(120);
 const scopeQuery = z.object({

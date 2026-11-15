@@ -1,8 +1,8 @@
 import { createHash } from 'node:crypto';
 import { z } from 'zod';
-import { isCountryCode, getCountryProfile } from './countries';
-import { qualityReport } from './domain';
-import { datasetSchema, isoDate } from './schemas';
+import { isCountryCode, getCountryProfile } from './countries.js';
+import { qualityReport } from './domain.js';
+import { datasetSchema, isoDate } from './schemas.js';
 
 export const aggregateProvenanceSchema = z.object({
   countryCode: z.string().refine(isCountryCode, 'Unknown country/location'),

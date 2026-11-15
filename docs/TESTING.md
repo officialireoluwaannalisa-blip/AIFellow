@@ -54,6 +54,11 @@ The browser smoke test starts an isolated production server on port 3100 (overri
 - Facility/district demo scope locks; Unknown is not on-track; commodity/search filters; region fallback; forecast horizons; budget ceiling; every intervention has a short explanation.
 - Every demo facility has a real-name reference source, matching country label, synthetic-data note, and finite manifest seed; EV-007 states names do not imply Foundation funding.
 
+### Serverless deployment
+- Every relative specifier in `api/`, `server/`, and `shared/` carries an explicit file extension and resolves to a real source file. Native Node ESM on Vercel rejects extensionless imports, which previously took down every API route while local gates stayed green.
+- Vercel rewrite path restoration preserves nested paths and query parameters.
+- The synthetic dataset resolves even when the working directory is not the bundle root, and `STOCKSENSE_DATA_ROOT` overrides it.
+
 ### Components
 - Distinct Unknown/Stable labels, chart text alternative, dialog Escape/focus restoration, actionable empty state.
 
@@ -72,9 +77,10 @@ The browser smoke test starts an isolated production server on port 3100 (overri
 
 - **Date:** 2026-11-14
 - `npm run typecheck`: pass
-- `npm test`: **48 tests passed** across 7 files
+- `npm test`: **57 tests passed** across 10 files
 - `npm run build`: pass
 - `npm run test:e2e`: pass (isolated production server + Chromium)
+- Vercel function rehearsal: the real `@vercel/node` builder produced a `nodejs22.x` Lambda (440 files, including `data/synthetic/*.json` and `node_modules/highs/build/highs.wasm`). Running that bundle over HTTP returned 200 for `/api/health`, `/api/meta`, `/api/overview`, the rewritten `/api/index?__path=…` forms, the dashboard, and `POST /api/scenarios/preview` (`optimal`, objective 53,683,100, cost 2,499,926 cents). A deliberately broken module produced the guarded `503 SERVICE_INIT_FAILED` JSON, and the bundle still served health with its working directory outside the bundle root.
 - Mobile overflow check: pass at 390×844
 - `npm audit --omit=dev --audit-level=high`: 0 production vulnerabilities reported
 - Default synthetic scenario: HiGHS `optimal`, gap 0; 51 selected actions, 2,499,926 USD cents, 98 candidates / 196 variables / 195 constraints; solve time approximately 3.9 s in the sandbox

@@ -1,12 +1,12 @@
-import { assessDataset, DEFAULT_SCENARIO, diffDays, outcomeMetrics } from './domain';
-import { COUNTRY_PROFILES } from './countries';
-import { runScenario } from './planner';
-import { dashboardCapabilities, type DashboardCapabilities, type DashboardRole } from './dashboard-meta';
-import type { ClinicalPolicy } from './clinical-policy';
-import type { Assessment, DashboardAuditEvent, DashboardNote, DashboardSupportRequest, Dataset, PlanAction, RiskLevel, ScenarioResult, StoredPlan } from './types';
+import { assessDataset, DEFAULT_SCENARIO, diffDays, outcomeMetrics } from './domain.js';
+import { COUNTRY_PROFILES } from './countries.js';
+import { runScenario } from './planner.js';
+import { dashboardCapabilities, type DashboardCapabilities, type DashboardRole } from './dashboard-meta.js';
+import type { ClinicalPolicy } from './clinical-policy.js';
+import type { Assessment, DashboardAuditEvent, DashboardNote, DashboardSupportRequest, Dataset, PlanAction, RiskLevel, ScenarioResult, StoredPlan } from './types.js';
 
-export { DASHBOARD_ROLES, dashboardCapabilities } from './dashboard-meta';
-export type { DashboardRole } from './dashboard-meta';
+export { DASHBOARD_ROLES, dashboardCapabilities } from './dashboard-meta.js';
+export type { DashboardRole } from './dashboard-meta.js';
 export type DashboardHorizon = 30 | 60 | 90;
 export interface DashboardFilters {
   role: DashboardRole;

@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { isCountryCode } from './countries';
+import { isCountryCode } from './countries.js';
 
 export const isoDate = z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Expected YYYY-MM-DD').refine((value) => {
   const date = new Date(`${value}T00:00:00Z`);

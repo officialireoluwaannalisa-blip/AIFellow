@@ -1,9 +1,9 @@
 import { createServer } from 'node:http';
 import { resolve } from 'node:path';
 import express from 'express';
-import { createApp } from './app';
-import { loadDataset } from './data';
-import { PlanRepository } from './repository';
+import { createApp } from './app.js';
+import { loadDataset } from './data.js';
+import { PlanRepository } from './repository.js';
 
 const root = process.cwd();
 const { dataset, manifest, hash, policy, dataAuthorized } = loadDataset(root);

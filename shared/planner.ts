@@ -1,7 +1,7 @@
-import { allocationGate, AllocationGateError, DEMO_CLINICAL_POLICY, policyWeight, type ClinicalPolicy } from './clinical-policy';
-import { addDays, assessDataset, DEFAULT_SCENARIO, forecastDemand, outcomeMetrics, stockKey } from './domain';
-import { solveAllocation, type AllocationCandidate } from './optimizer';
-import type { Batch, Dataset, PlanAction, ScenarioInput, ScenarioResult, Stock, UnfundedNeed } from './types';
+import { allocationGate, AllocationGateError, DEMO_CLINICAL_POLICY, policyWeight, type ClinicalPolicy } from './clinical-policy.js';
+import { addDays, assessDataset, DEFAULT_SCENARIO, forecastDemand, outcomeMetrics, stockKey } from './domain.js';
+import { solveAllocation, type AllocationCandidate } from './optimizer.js';
+import type { Batch, Dataset, PlanAction, ScenarioInput, ScenarioResult, Stock, UnfundedNeed } from './types.js';
 
 export const ORDER_COST_CENTS = 15_000;
 export const HANDLING_COST_CENTS = 5_000;

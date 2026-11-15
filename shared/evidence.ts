@@ -1,5 +1,5 @@
-import { assessDataset, buildOverview } from './domain';
-import type { Dataset, EvidenceAnswer, EvidenceCitation } from './types';
+import { assessDataset, buildOverview } from './domain.js';
+import type { Dataset, EvidenceAnswer, EvidenceCitation } from './types.js';
 
 const citation = (dataset: Dataset, id: string): EvidenceCitation | null => {
   const item = dataset.evidence.find((e) => e.id === id);

@@ -37,6 +37,7 @@ The application has one shared workspace and no login, authenticated roles, tena
 10. **Content security policy / framing:** CSP is disabled and frame restrictions are relaxed for the Vite/Arena demo; add a tested production CSP with explicit `frame-ancestors` before deployment.
 11. **Shared preview state:** anyone with preview access can view/create demo plans. Do not enter sensitive notes.
 12. **Ephemeral hosted storage:** the Vercel adapter stores demo workflow state in temporary function storage. It is not durable, backed up, or suitable for audit retention; state may reset between instances or deployments.
+13. **Initialization error disclosure:** the Vercel adapter answers startup failures with a generic `503 SERVICE_INIT_FAILED` body plus an error class such as `ERR_MODULE_NOT_FOUND`; stacks go to the runtime logs only. `STOCKSENSE_DEBUG_ERRORS=true` adds the raw message and must stay unset on public deployments.
 
 ## Threat model highlights
 
