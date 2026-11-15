@@ -1,4 +1,4 @@
-import type { Assessment, StoredPlan } from './types';
+import type { Assessment, StoredPlan } from './types.js';
 
 export function csvCell(value: unknown): string {
   let text = String(value ?? '');

@@ -2,9 +2,15 @@
 
 ## Unreleased
 
+### Fixed
+- **Vercel API outage.** Every deployed API route returned `500 FUNCTION_INVOCATION_FAILED` while the static client loaded, leaving the UI on "Loading workspace…". `@vercel/node` transpiles without bundling and the package is `"type": "module"`, so extensionless relative imports threw `ERR_MODULE_NOT_FOUND` during module initialization. All 45 relative specifiers in `api/`, `server/`, and `shared/` now use explicit `.js` extensions. `tsx`/`esbuild`/Vitest resolved them locally, which is why the previous gates passed.
+
 ### Added
 - Vercel deployment adapter (`api/index.ts`) and `vercel.json` for the Vite client plus Express/HiGHS API.
 - Explicit hosted-storage boundary: `/api/health`, `/api/meta`, and the UI label temporary Vercel SQLite state as ephemeral.
+- `tests/esm-specifiers.test.ts` guards the serverless import graph against extensionless or unresolvable relative specifiers.
+- Lazy, guarded function initialization: startup failures are logged and returned as `503` JSON (`SERVICE_INIT_FAILED` plus a `reason`) instead of an opaque platform error. `STOCKSENSE_DEBUG_ERRORS=true` adds the raw message.
+- `resolveDataRoot()` locates the packaged dataset via `STOCKSENSE_DATA_ROOT`, cwd, module ancestors, or `/var/task`, with tests covering a non-root working directory.
 
 ### Known limits
 - Vercel workflow state is not durable across cold starts, instances, or deployments. An external database adapter is required for persistent hosted plans/audit history.

@@ -1,4 +1,4 @@
-import type { OptimizationCertificate } from './optimizer';
+import type { OptimizationCertificate } from './optimizer.js';
 
 export type RiskLevel = 'critical' | 'watch' | 'stable' | 'unknown';
 export type ItemStatus = 'proposed' | 'approved' | 'procurement_requested' | 'funds_released' | 'received';

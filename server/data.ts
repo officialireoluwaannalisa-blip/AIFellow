@@ -1,18 +1,47 @@
 import { createHash } from 'node:crypto';
-import { readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
-import { DEMO_CLINICAL_POLICY, clinicalPolicySchema, type ClinicalPolicy } from '../shared/clinical-policy';
-import { getCountryProfile } from '../shared/countries';
-import { authorizedAggregatePackSchema } from '../shared/imports';
-import { datasetSchema } from '../shared/schemas';
-import type { Dataset, DatasetManifest } from '../shared/types';
+import { existsSync, readFileSync } from 'node:fs';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { DEMO_CLINICAL_POLICY, clinicalPolicySchema, type ClinicalPolicy } from '../shared/clinical-policy.js';
+import { getCountryProfile } from '../shared/countries.js';
+import { authorizedAggregatePackSchema } from '../shared/imports.js';
+import { datasetSchema } from '../shared/schemas.js';
+import type { Dataset, DatasetManifest } from '../shared/types.js';
 
 export interface LoadedData {
   dataset: Dataset; manifest: DatasetManifest; hash: string;
   policy: ClinicalPolicy; dataAuthorized: boolean; dataMode: 'synthetic' | 'authorized_aggregate';
 }
 
-export function loadDataset(root = process.cwd()): LoadedData {
+const SYNTHETIC_SEED = 'data/synthetic/seed.json';
+
+/**
+ * Locate the packaged synthetic dataset without trusting `process.cwd()`.
+ *
+ * Serverless runtimes do not guarantee that the working directory is the bundle
+ * root, so a cwd-only lookup can fail with ENOENT even though `includeFiles`
+ * shipped the data. Fall back to directories above this module (which sits in
+ * `server/` both in the repo and in the traced Lambda) and the Lambda task root.
+ */
+export function resolveDataRoot(): string {
+  const candidates: string[] = [];
+  if (process.env.STOCKSENSE_DATA_ROOT) candidates.push(process.env.STOCKSENSE_DATA_ROOT);
+  candidates.push(process.cwd());
+  let dir = dirname(fileURLToPath(import.meta.url));
+  for (let depth = 0; depth < 6; depth++) {
+    candidates.push(dir);
+    const parent = dirname(dir);
+    if (parent === dir) break;
+    dir = parent;
+  }
+  candidates.push('/var/task');
+  for (const candidate of candidates) {
+    if (candidate && existsSync(resolve(candidate, SYNTHETIC_SEED))) return candidate;
+  }
+  return process.cwd();
+}
+
+export function loadDataset(root = resolveDataRoot()): LoadedData {
   const packPath = process.env.AUTHORIZED_AGGREGATE_PACK_PATH;
   if (packPath) {
     if (process.env.DATA_SHARING_AUTHORIZED !== 'true') throw new Error('Authorized aggregate pack requires DATA_SHARING_AUTHORIZED=true operator attestation.');
