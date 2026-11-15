@@ -11,6 +11,7 @@ export interface Meta {
   asOf: string; version: string; currency: 'USD'; districts: District[]; facilities: Facility[]; products: Product[];
   manifest: DatasetManifest; quality: QualityReport; defaultScenario: ScenarioInput;
   location: string; clinicalPolicy: ClinicalPolicySummary;
+  storage?: { mode: 'persistent' | 'ephemeral'; note: string };
 }
 export interface CountryConnection extends CountryProfile {
   connectionState: 'authorized_aggregate_active' | 'synthetic_demo_active' | 'not_connected';

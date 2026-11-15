@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased
+
+### Added
+- Vercel deployment adapter (`api/index.ts`) and `vercel.json` for the Vite client plus Express/HiGHS API.
+- Explicit hosted-storage boundary: `/api/health`, `/api/meta`, and the UI label temporary Vercel SQLite state as ephemeral.
+
+### Known limits
+- Vercel workflow state is not durable across cold starts, instances, or deployments. An external database adapter is required for persistent hosted plans/audit history.
+
 ## 0.4.0 — 2026-11-14
 
 Real public facility name references and the Calm Clinic design system.

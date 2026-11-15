@@ -36,6 +36,7 @@ The application has one shared workspace and no login, authenticated roles, tena
 9. **Dependency/browser supply chain:** review updates, pin lockfiles, and run vulnerability checks in CI.
 10. **Content security policy / framing:** CSP is disabled and frame restrictions are relaxed for the Vite/Arena demo; add a tested production CSP with explicit `frame-ancestors` before deployment.
 11. **Shared preview state:** anyone with preview access can view/create demo plans. Do not enter sensitive notes.
+12. **Ephemeral hosted storage:** the Vercel adapter stores demo workflow state in temporary function storage. It is not durable, backed up, or suitable for audit retention; state may reset between instances or deployments.
 
 ## Threat model highlights
 

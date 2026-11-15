@@ -24,11 +24,18 @@ class RoleScopeError extends Error { constructor(message: string) { super(messag
 
 export function createApp(options: {
   dataset: Dataset; manifest: DatasetManifest; hash: string; repository: PlanRepository;
-  policy?: ClinicalPolicy; dataAuthorized?: boolean;
+  policy?: ClinicalPolicy; dataAuthorized?: boolean; storageMode?: 'persistent' | 'ephemeral';
 }) {
   const { dataset, manifest, hash, repository } = options;
   const policy = options.policy ?? DEMO_CLINICAL_POLICY;
   const dataAuthorized = options.dataAuthorized ?? false;
+  const storageMode = options.storageMode ?? 'persistent';
+  const storage = {
+    mode: storageMode,
+    note: storageMode === 'ephemeral'
+      ? 'Hosted demo storage is temporary. Saved plans, notes, and audit history may reset between requests or instances.'
+      : 'Demo workflow state is stored in the configured local SQLite database.',
+  };
   const dataMode = manifest.synthetic ? 'synthetic' : 'authorized_aggregate';
   const datasetCountry = dataset.countryCode ?? 'DEMO';
   const app = express();
@@ -46,7 +53,8 @@ export function createApp(options: {
     try {
       const host = new URL(origin).host;
       const configured = (process.env.ALLOWED_HOSTS ?? '').split(',').map((x) => x.trim()).filter(Boolean);
-      if (host === req.get('host') || host.endsWith('.e2b.app') || configured.includes(host)) return next();
+      const forwardedHost = process.env.VERCEL === '1' ? req.get('x-forwarded-host')?.split(',')[0]?.trim() : undefined;
+      if (host === req.get('host') || host === forwardedHost || host === process.env.VERCEL_URL || host.endsWith('.e2b.app') || configured.includes(host)) return next();
     } catch { /* reject malformed origins */ }
     return next(new ConflictError('Cross-origin mutation is not allowed'));
   });
@@ -82,12 +90,12 @@ export function createApp(options: {
     if (filters.countryCode && filters.countryCode !== datasetCountry) throw new RoleScopeError('Selected country does not match the active dataset. Connect an authorized aggregate pack first.');
   };
 
-  app.get('/api/health', (_req, res) => res.json({ ok: true, demo: manifest.synthetic, dataMode, countryCode: datasetCountry, datasetVersion: dataset.version, asOf: dataset.asOf }));
+  app.get('/api/health', (_req, res) => res.json({ ok: true, demo: manifest.synthetic, dataMode, countryCode: datasetCountry, datasetVersion: dataset.version, asOf: dataset.asOf, storage }));
   app.get('/api/meta', (_req, res) => res.json({
     country: dataset.country, countryCode: datasetCountry, dataMode, asOf: dataset.asOf, version: dataset.version, currency: dataset.currency,
     districts: dataset.districts, facilities: dataset.facilities, products: dataset.products,
     manifest, quality: qualityReport(dataset), defaultScenario: { ...DEFAULT_SCENARIO, countryCode: activeLocation() },
-    location: activeLocation(), clinicalPolicy: policySummary(),
+    location: activeLocation(), clinicalPolicy: policySummary(), storage,
   }));
   app.get('/api/countries', (_req, res) => res.json({
     countries: COUNTRY_PROFILES.map((profile) => ({

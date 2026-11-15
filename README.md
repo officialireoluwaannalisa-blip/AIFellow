@@ -41,6 +41,17 @@ Optional configuration: copy `.env.example` to `.env` and load it with your proc
 
 Browser QA uses project-local `agent-browser` and an npm-distributed Chromium dev dependency, so it does not require a global browser install. See [Testing](docs/TESTING.md) and [Operations](docs/OPERATIONS.md).
 
+## Deploy to Vercel
+
+The repository includes a Vercel adapter:
+
+- `vercel.json` builds the Vite client into `dist/client` and runs the API as a Node Function.
+- `api/index.ts` reuses the same Express app, dataset validation, and HiGHS optimizer.
+- Hosted workflow state uses temporary SQLite storage. Saved plans, notes, and audit history may reset between cold starts or instances; the UI and `/api/health` label this explicitly.
+- Node 22 is selected through `package.json` engines for the built-in `node:sqlite` API.
+
+Deploy the current branch as a Vercel preview, or connect the repository in the Vercel dashboard. No API keys are required for the synthetic demo. See [Operations](docs/OPERATIONS.md) for storage and protection notes.
+
 ## Try the demo
 
 1. Open **Dashboard**, switch roles, and use “Why this?” on a recommended action. Facility view supports minimal receipt/issue/support entries.

@@ -62,6 +62,8 @@ SQLite stores workflow state only. The immutable demo dataset remains in files; 
 
 Development uses Vite middleware inside Express. Production serves `dist/client` and the bundled Express server on the same port. Bind to `0.0.0.0`; allow localhost and the Arena `.e2b.app` preview suffix (or configured exact deployment hosts). Browser code never references localhost or a backend port.
 
+Vercel uses a separate adapter: `api/index.ts` exports the same Express app as a Node Function, while `vercel.json` serves the Vite client from `dist/client` and rewrites non-API paths to `index.html`. Because Vercel Functions lack durable writable disk, the hosted adapter uses temporary SQLite storage and labels workflow state as ephemeral. Local/container deployments keep the durable `.data/` SQLite default.
+
 ## Deliberate limitations
 
 One shared demo workspace, no auth/tenant isolation (dashboard roles are simulated), no live government API connectors, no background jobs, no real routing, no LLM provider, and no production migration/backup service. Operator-controlled authorized aggregate file ingestion exists but is disabled in the public demo. The SQLite adapter and file-based dataset are replaceable boundaries, not claims of production readiness.

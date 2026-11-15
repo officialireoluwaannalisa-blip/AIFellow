@@ -25,6 +25,33 @@ Environment variables are read from the process; `.env.example` documents defaul
 
 Node 22 prints an experimental warning for `node:sqlite`; this is expected in the demo. The repository adapter isolates that dependency.
 
+## Vercel deployment
+
+The repository ships `vercel.json` and `api/index.ts` for a same-origin Vercel deployment:
+
+```text
+Static client: dist/client
+API function:  api/index.ts -> Express app from server/app.ts
+Node version:  22.x, selected by package.json engines
+Storage:       temporary SQLite file in the function instance's /tmp
+```
+
+Recommended settings if configuring manually:
+
+| Setting | Value |
+|---|---|
+| Framework preset | Other |
+| Install command | `npm ci` |
+| Build command | `npm run build` |
+| Output directory | `dist/client` |
+| Function max duration | 60 seconds |
+
+The adapter includes the synthetic dataset and HiGHS WASM runtime in the function bundle. The default scenario solves in a few seconds in the sandbox, but cold starts can add latency.
+
+**Hosted storage is ephemeral.** Vercel Functions do not provide a durable writable disk. The adapter keeps demo workflow state in a temporary SQLite file so the save/approve/funding flow works within an instance, but plans, notes, support requests, and audit history may disappear between cold starts, scaling events, or deployments. `/api/health` and `/api/meta` return `storage.mode = "ephemeral"`, and the UI shows a warning. Do not enter sensitive notes. For durable hosted state, replace the repository adapter with an external database before real use.
+
+If Vercel Deployment Protection is enabled, the deployment URL may require Vercel login. That is an access-control setting, not an application failure. Keep protection enabled for non-public demos; use a custom domain or an approved access rule only when intentional.
+
 ## Data and persistence
 
 - Synthetic inputs: `data/synthetic/seed.json` and `manifest.json`.

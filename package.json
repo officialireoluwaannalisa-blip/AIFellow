@@ -5,7 +5,7 @@
   "type": "module",
   "description": "Synthetic-data medicines stockout decision-support demonstrator",
   "engines": {
-    "node": ">=22.13.0"
+    "node": "^22.13.0"
   },
   "scripts": {
     "dev": "tsx watch server/index.ts",

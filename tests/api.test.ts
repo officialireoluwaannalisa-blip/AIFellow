@@ -19,6 +19,15 @@ describe('read API', () => {
     const meta = await request(app).get('/api/meta').expect(200);
     expect(meta.body.manifest.sha256).toBe(hash); expect(meta.body.facilities).toHaveLength(18);
   });
+  it('labels ephemeral hosted storage without changing the local default', async () => {
+    const local = await request(app).get('/api/health').expect(200);
+    expect(local.body.storage.mode).toBe('persistent');
+    const hosted = createApp({ dataset, manifest, hash, repository, storageMode: 'ephemeral' });
+    const health = await request(hosted).get('/api/health').expect(200);
+    const meta = await request(hosted).get('/api/meta').expect(200);
+    expect(health.body.storage.mode).toBe('ephemeral');
+    expect(meta.body.storage.note).toContain('may reset');
+  });
   it('composes product, district, risk, and text filters', async () => {
     const response = await request(app).get('/api/risks').query({ productId: 'med-amox', districtId: 'ng', risk: 'critical', q: 'hospital', horizonDays: 14 }).expect(200);
     expect(response.body.rows.length).toBeGreaterThan(0);
