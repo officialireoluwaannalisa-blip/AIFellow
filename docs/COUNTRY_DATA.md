@@ -10,6 +10,7 @@ The public demo remains synthetic. Country profiles configure **where authorized
 |---|---|---|---|---|
 | `DEMO` | Demo Republic | Synthetic demonstration | Synthetic data only | Active synthetic demo |
 | `NG` | Nigeria | Federal Ministry of Health portal | Nigeria Data Protection Act 2023 (NDPA) | Not connected |
+| `BF` | Burkina Faso | Ministry of Health (verify custodian) | Loi n°010-2004/AN; verify current amendments and health-data rules | Not connected |
 | `ET` | Ethiopia | Ministry of Health portal | Personal Data Protection Proclamation No. 1321/2024 | Not connected |
 | `ZA` | South Africa | National Department of Health portal | Protection of Personal Information Act (POPIA) | Not connected |
 | `KE` | Kenya | Ministry of Health portal | Data Protection Act 2019; health-data governance requirements | Not connected |
@@ -17,6 +18,7 @@ The public demo remains synthetic. Country profiles configure **where authorized
 Portal entry points:
 
 - Nigeria: https://health.gov.ng/ and https://ndpc.gov.ng/
+- Burkina Faso: https://www.cil.bf/ (data-protection regulator; health-data custodian still to be verified)
 - Ethiopia: https://moh.gov.et/
 - South Africa: https://www.health.gov.za/
 - Kenya: https://www.health.go.ke/
@@ -95,6 +97,7 @@ Do not paste real patient records, sensitive government extracts, or credentials
 
 These references informed the initial profile reminders and are not a substitute for local legal review:
 
+- Burkina Faso CIL official reference: [1](https://www.cil.bf/index.php/la-cil/nous-ecrire)
 - Nigeria health-sector NDPA overview: [3](https://healthlaw.com.ng/wp-content/uploads/2024/03/Nigeria-Data-Protection-Legislation-and-the-Health-Sector-1.pdf)
 - Ethiopia Personal Data Protection Proclamation overview: [3](https://www.lolinemag.com/articles/ethiopia-data-protection-law-explained)
 - South Africa Department of Health contact directory: [1](https://www.gov.za/about-government/contact-directory/departments/health-department)

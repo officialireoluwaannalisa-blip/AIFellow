@@ -1,4 +1,4 @@
-const CACHE = 'stocksense-v0.3.0';
+const CACHE = 'stocksense-v0.4.0';
 const SHELL = ['/', '/index.html'];
 self.addEventListener('install', (event) => {
   event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(SHELL)).then(() => self.skipWaiting()));

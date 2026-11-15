@@ -8,25 +8,56 @@ import type { Dataset, DatasetManifest, Stock } from '../shared/types';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const asOf = '2026-11-14';
+// Real, public facilities in the Gates Foundation's documented Africa focus
+// countries (Nigeria, Burkina Faso, Ethiopia, Kenya, South Africa). Names are
+// reference placeholders only: every stock/budget/risk figure below is synthetic
+// and does NOT describe these institutions. See docs/FACILITY_NAMES.md.
 const regions = [
-  { id: 'highlands', name: 'Highland Region' },
-  { id: 'coast', name: 'Coastal Region' },
+  { id: 'west', name: 'West Africa' },
+  { id: 'east-south', name: 'East & Southern Africa' },
 ];
 const districts = [
-  { id: 'north', name: 'Northern Valley', regionId: 'highlands' },
-  { id: 'central', name: 'Central Plateau', regionId: 'highlands' },
-  { id: 'south', name: 'Southern Coast', regionId: 'coast' },
+  { id: 'ng', name: 'Nigeria', regionId: 'west' },
+  { id: 'bf', name: 'Burkina Faso', regionId: 'west' },
+  { id: 'et', name: 'Ethiopia', regionId: 'east-south' },
+  { id: 'ke', name: 'Kenya', regionId: 'east-south' },
+  { id: 'za', name: 'South Africa', regionId: 'east-south' },
 ];
-const facilityNames = [
-  ['Northgate District Hospital', 'Riverbend Health Centre', 'Pine Hills Clinic', 'Lakeside Health Centre', 'Eastfield Clinic', 'Harmony District Hospital'],
-  ['Central District Hospital', 'Sunrise Health Centre', 'Green Valley Clinic', 'Hilltop Health Centre', 'Market Road Clinic', 'Unity District Hospital'],
-  ['Coastal District Hospital', 'Palm Grove Health Centre', 'Seabreeze Clinic', 'Lagoon Health Centre', 'Southpoint Clinic', 'Bridgeview District Hospital'],
+const facilityRefs: { name: string; type: 'hospital' | 'health_centre' | 'clinic'; source: string }[][] = [
+  [
+    { name: 'Lagos University Teaching Hospital', type: 'hospital', source: 'https://luth.gov.ng/' },
+    { name: 'National Hospital Abuja', type: 'hospital', source: 'https://nationalhospital.gov.ng/' },
+    { name: 'Aminu Kano Teaching Hospital', type: 'hospital', source: 'https://akth.org.ng/' },
+    { name: 'University College Hospital Ibadan', type: 'hospital', source: 'https://uch-ibadan.org.ng/' },
+  ],
+  [
+    { name: 'CHU Yalgado Ouédraogo', type: 'hospital', source: 'https://en.wikipedia.org/wiki/Yalgado_Ou%C3%A9draogo_Teaching_Hospital' },
+    { name: 'CHU de Bogodogo', type: 'hospital', source: 'https://en.wikipedia.org/wiki/Bogodogo_University_Hospital' },
+    { name: 'CHU Sourô Sanou', type: 'hospital', source: 'https://en.wikipedia.org/wiki/Sour%C3%B4_Sanou_University_Hospital' },
+  ],
+  [
+    { name: 'Tikur Anbessa Specialized Hospital', type: 'hospital', source: 'https://en.wikipedia.org/wiki/Tikur_Anbessa_Specialized_Hospital' },
+    { name: "St. Paul's Hospital Millennium Medical College", type: 'hospital', source: 'https://en.wikipedia.org/wiki/St._Paul%27s_Hospital_Millennium_Medical_College' },
+    { name: 'Gandhi Memorial Hospital', type: 'hospital', source: 'https://en.wikipedia.org/wiki/Gandhi_Memorial_Hospital' },
+    { name: 'Zewditu Memorial Hospital', type: 'hospital', source: 'https://en.wikipedia.org/wiki/Zewditu_Memorial_Hospital' },
+  ],
+  [
+    { name: 'Kenyatta National Hospital', type: 'hospital', source: 'https://knh.or.ke/' },
+    { name: 'Moi Teaching and Referral Hospital', type: 'hospital', source: 'https://mtrh.or.ke/' },
+    { name: 'Kibera South Health Centre', type: 'health_centre', source: 'https://www.msf.org.za/covid-19-east-africa' },
+    { name: 'Mathare North Health Centre', type: 'health_centre', source: 'https://afya360.co.ke/health-facility/mathare-north-health-centre/901' },
+  ],
+  [
+    { name: 'Chris Hani Baragwanath Academic Hospital', type: 'hospital', source: 'https://en.wikipedia.org/wiki/Chris_Hani_Baragwanath_Academic_Hospital' },
+    { name: 'Groote Schuur Hospital', type: 'hospital', source: 'https://en.wikipedia.org/wiki/Groote_Schuur_Hospital' },
+    { name: 'Steve Biko Academic Hospital', type: 'hospital', source: 'https://en.wikipedia.org/wiki/Steve_Biko_Academic_Hospital' },
+  ],
 ];
-const mapAnchors = [{ x: 30, y: 24 }, { x: 52, y: 46 }, { x: 68, y: 76 }];
-const facilities = districts.flatMap((district, di) => facilityNames[di].map((name, fi) => ({
-  id: `fac-${di + 1}${fi + 1}`, name, districtId: district.id,
-  type: (fi === 0 || fi === 5 ? 'hospital' : fi === 1 || fi === 3 ? 'health_centre' : 'clinic') as 'hospital' | 'health_centre' | 'clinic',
-  mapPosition: { x: mapAnchors[di].x + (fi % 3) * 7 - 7, y: mapAnchors[di].y + Math.floor(fi / 3) * 9 - 4 },
+const mapAnchors = [{ x: 22, y: 30 }, { x: 12, y: 18 }, { x: 62, y: 26 }, { x: 66, y: 52 }, { x: 46, y: 80 }];
+const facilities = districts.flatMap((district, di) => facilityRefs[di].map((ref, fi) => ({
+  id: `fac-${di + 1}${fi + 1}`, name: ref.name, districtId: district.id, type: ref.type,
+  mapPosition: { x: mapAnchors[di].x + (fi % 3) * 7 - 7, y: mapAnchors[di].y + Math.floor(fi / 3) * 9 - 4 + (fi % 3) * 3 + (fi % 2) * 2 },
+  nameReference: { country: district.name, source: ref.source, note: 'Real public facility name used as a reference placeholder; all operational figures in this demo are synthetic.' },
 })));
 const products = [
   { id: 'med-amox', name: 'Amoxicillin 500 mg', form: 'Capsule', unit: 'capsules', essential: true, coldChain: false, unitCostCents: 8, minRemainingShelfLifeDays: 60, shelfLifeDays: 540, priorityWeight: 1.1 },
@@ -74,13 +105,14 @@ const evidence = [
   { id: 'EV-004', title: 'Redistribution safeguards', category: 'Transfers', text: 'Transfer only the exact product on an explicit feasible route. Preserve donor buffer, check remaining shelf life after arrival, and require cold-chain capability for cold-chain products. Local authorization is mandatory.', source: 'StockSense illustrative demo guidance' },
   { id: 'EV-005', title: 'Data quality and provenance', category: 'Data governance', text: 'Track reporting freshness, consumption-history completeness, dataset version, and checksums. Distinguish missing from zero. Do not use real personal or government data in this demo workspace.', source: 'StockSense illustrative demo guidance' },
   { id: 'EV-006', title: 'AI and automation boundary', category: 'Responsible AI', text: 'This release has no connected LLM. Retrieval answers cite demo evidence and computed facts. Deterministic tools own arithmetic and constraints; no model may autonomously approve expenditure or create clinical instructions.', source: 'StockSense illustrative demo guidance' },
+  { id: 'EV-007', title: 'Facility names are real-world references, not real data', category: 'Data governance', text: 'Facility display names reference real public institutions in the Gates Foundation Africa focus countries (Nigeria, Burkina Faso, Ethiopia, Kenya, South Africa). Every stock, consumption, budget, and risk figure attached to them is synthetic. Names do not imply Foundation funding of that facility, nor describe its actual stock or performance.', source: 'StockSense illustrative demo guidance; see docs/FACILITY_NAMES.md' },
 ];
-const dataset: Dataset = { version: 'synthetic-2026.11.14-v2', asOf, country: 'Demo Republic', countryCode: 'DEMO', currency: 'USD', regions, districts, facilities, products, stocks, routes, evidence };
+const dataset: Dataset = { version: 'synthetic-2026.11.14-v3', asOf, country: 'Demo Republic (focus-country sandbox)', countryCode: 'DEMO', currency: 'USD', regions, districts, facilities, products, stocks, routes, evidence };
 const parsed = datasetSchema.parse(dataset);
 const json = JSON.stringify(parsed, null, 2) + '\n';
 const sha256 = createHash('sha256').update(json).digest('hex');
 const manifest: DatasetManifest = {
-  version: dataset.version, asOf, generator: 'scripts/generate-data.ts', seed: 511e8440,
+  version: dataset.version, asOf, generator: 'scripts/generate-data.ts', seed: 0x511e8440,
   sourceFile: 'data/synthetic/seed.json', sha256, synthetic: true,
   counts: { regions: regions.length, districts: districts.length, facilities: facilities.length, products: products.length, stockRecords: stocks.length, routes: routes.length, evidenceSnippets: evidence.length },
 };

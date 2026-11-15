@@ -6,7 +6,7 @@
 
 ## ADR-002 — Synthetic data only
 
-**Status:** accepted. **Decision:** fictional Demo Republic, fixed snapshot, deterministic generator, manifest checksum. **Why:** safe public portfolio demo without partner data agreements. **Consequence:** no real-world accuracy or impact claims; pilot requires governed ingestion.
+**Status:** accepted; name policy refined by ADR-013. **Decision:** synthetic Demo Republic operational envelope, fixed snapshot, deterministic generator, manifest checksum. **Why:** safe public portfolio demo without partner data agreements. **Consequence:** no real-world accuracy or impact claims; pilot requires governed ingestion.
 
 ## ADR-003 — Deterministic core before LLM
 
@@ -47,3 +47,11 @@
 ## ADR-012 — Clinical policy is a gated governance artifact
 
 **Status:** accepted. **Decision:** separate enforceable safety guardrails from locally approved prioritization weights. Synthetic demo weights are labeled; real-country allocation requires an approved jurisdiction-matched policy. Autonomous execution is always disabled. **Why:** clinical prioritization is a local governance decision, not an invented app default. **Consequence:** real-country planning fails closed until policy and data gates pass.
+
+## ADR-013 — Real facility names are references, not coverage claims
+
+**Status:** accepted. **Decision:** use real public facility names in the Foundation's documented Africa focus countries, with a per-facility `nameReference` source and persistent synthetic-data disclaimers. **Why:** the user asked for recognizable real facilities, but no verified Foundation facility roster was available publicly or in the connected workspace. **Consequence:** the app must not imply Foundation funding, real stock, or real performance; an authorized roster and aggregate data agreement are required before a real deployment.
+
+## ADR-014 — Calm Clinic four-way morphism blend
+
+**Status:** accepted. **Decision:** assign glassmorphism to chrome/overlays, neumorphism to controls/wells, claymorphism to cards/stats, and skeuomorphism to the role switch, audit ledger, map board, and sidebar. **Why:** the uploaded healthcare reference calls for soft clinical surfaces, but a decision-support workspace still needs dense, legible tables and clear status semantics. **Consequence:** one technique per layer; contrast, focus visibility, reduced motion, forced colors, and mobile overflow are release gates. See `design.md`.

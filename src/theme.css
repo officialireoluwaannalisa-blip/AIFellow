@@ -1,0 +1,167 @@
+/* StockSense "Calm Clinic" theme — see design.md.
+   Glass: chrome/overlays. Neumorphism: controls/wells. Clay: cards/stats.
+   Skeuomorphism: role switch, audit ledger, map board, lacquered sidebar.
+   Loaded after styles.css; preserves layout, semantics, and focus order. */
+
+:root {
+  --bg: #eef9f6;
+  --surface: #ffffff;
+  --sidebar: #17453a;
+  --text: #173132;
+  --muted: #4f625d;
+  --border: #d7e7de;
+  --green: #1f6c59;
+  --green-dark: #17453a;
+  --lime: #cfe8a2;
+  --red: #b3453c;
+  --amber: #80550e;
+  --blue: #33628c;
+  --radius: 22px;
+  --clay-shadow: 0 10px 24px rgba(23, 69, 58, .08), 0 2px 6px rgba(23, 69, 58, .05), inset 0 1px 0 rgba(255, 255, 255, .9);
+  --neu-shadow: 4px 4px 10px rgba(23, 69, 58, .10), -4px -4px 10px rgba(255, 255, 255, .85);
+  --neu-inset: inset 3px 3px 7px rgba(23, 69, 58, .09), inset -3px -3px 7px rgba(255, 255, 255, .9);
+  --glass-bg: rgba(255, 255, 255, .78);
+  --glass-border: rgba(255, 255, 255, .8);
+  --glass-shadow: 0 10px 30px rgba(23, 69, 58, .12);
+}
+
+body {
+  background:
+    radial-gradient(1100px 520px at 88% -8%, rgba(207, 232, 162, .28), transparent 60%),
+    radial-gradient(900px 480px at -10% 12%, rgba(111, 156, 133, .16), transparent 60%),
+    linear-gradient(180deg, #f2fbf7 0%, #edf6f0 55%, #e9f2ec 100%);
+  background-attachment: fixed;
+  color: var(--text);
+}
+
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible,
+textarea:focus-visible, summary:focus-visible, [tabindex]:focus-visible {
+  outline: 3px solid var(--green);
+  outline-offset: 3px;
+}
+.search-field:focus-within { outline: 3px solid var(--green); outline-offset: 2px; }
+
+/* Glassmorphism: persistent chrome and temporary overlays. */
+.topbar {
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  backdrop-filter: blur(14px) saturate(1.2);
+  border-bottom: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+.modal, .dashboard-dialog {
+  background: rgba(255, 255, 255, .88);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  backdrop-filter: blur(20px) saturate(1.2);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: 26px;
+}
+.modal-header, .dashboard-dialog-head { background: transparent; border-bottom: 1px solid rgba(23, 69, 58, .12); }
+.modal-backdrop, .dashboard-dialog::backdrop { background: rgba(23, 69, 58, .32); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
+.toast { background: rgba(23, 69, 58, .9); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, .25); border-radius: 16px; }
+
+/* Claymorphism: soft grouped surfaces, not a shadow on every object. */
+.card, .stat-card, .mini-stat, .dashboard-summary > div, .connection-card, .evidence-card,
+.pipeline-stages li, .detail-stats > div, .manifest-counts div, .certificate-grid > div {
+  border-radius: var(--radius);
+  border: 1px solid rgba(255, 255, 255, .9);
+  box-shadow: var(--clay-shadow);
+}
+.card { background: linear-gradient(160deg, #ffffff 0%, #f6fbf7 100%); }
+.stat-card, .dashboard-summary > div { background: linear-gradient(160deg, #ffffff 0%, #f0f8f2 100%); }
+.dashboard-summary { background: transparent; border: 0; gap: 14px; overflow: visible; }
+.stat-icon, .workspace-avatar, .brand-mark, .path-icon, .rank-number {
+  border-radius: 16px;
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, .9), inset 0 -2px 4px rgba(23, 69, 58, .08), 2px 3px 7px rgba(23, 69, 58, .08);
+}
+.badge, .pill { border-radius: 999px; box-shadow: inset 0 1px 2px rgba(255, 255, 255, .75), 1px 2px 5px rgba(23, 69, 58, .06); }
+.next-move-card { border-radius: 26px; box-shadow: var(--clay-shadow); }
+
+/* Neumorphism: tactile controls and recessed wells. */
+.button { border-radius: 999px; box-shadow: var(--neu-shadow); border: 1px solid rgba(255, 255, 255, .85); }
+.button.primary { background: linear-gradient(160deg, #2a7a63, #17453a); box-shadow: 4px 5px 12px rgba(23, 69, 58, .24), -3px -3px 9px rgba(255, 255, 255, .65), inset 0 1px 2px rgba(255, 255, 255, .25); }
+.button.secondary { background: linear-gradient(160deg, #ffffff, #edf8f1); color: #214640; }
+.button:active:not(:disabled) { box-shadow: var(--neu-inset); transform: none; }
+.button.lime { background: linear-gradient(160deg, #ddf0b4, #cfe8a2); box-shadow: var(--neu-shadow), inset 0 1px 2px rgba(255, 255, 255, .8); }
+select, input:not([type=range]), textarea, .search-field, .money-input {
+  border-radius: 14px;
+  border: 1px solid #d4e5db;
+  background: #f4faf6;
+  box-shadow: var(--neu-inset);
+}
+.search-field input, .money-input input { box-shadow: none; background: transparent; border: 0; }
+.icon-button { border-radius: 12px; box-shadow: var(--neu-shadow); background: linear-gradient(160deg, #ffffff, #edf6ef); color: var(--muted); }
+.icon-button:hover { box-shadow: var(--neu-inset); }
+.sidebar .icon-button { color: #d8e8dd; background: rgba(255, 255, 255, .08); box-shadow: none; }
+
+/* Skeuomorphism: a physical switch, paper ledger, pin board, and lacquered rail. */
+.role-switcher, .segmented, .filter-tabs {
+  background: #e3efe7;
+  border-radius: 999px;
+  padding: 6px;
+  box-shadow: var(--neu-inset);
+  border: 1px solid rgba(255, 255, 255, .7);
+}
+.role-switcher button, .segmented button, .filter-tabs button { border-radius: 999px; box-shadow: none; background: transparent; }
+.role-switcher button.selected, .segmented button.selected, .filter-tabs button.selected {
+  background: linear-gradient(160deg, #ffffff, #edf8f1);
+  box-shadow: 3px 4px 9px rgba(23, 69, 58, .14), -2px -2px 7px rgba(255, 255, 255, .9), inset 0 1px 2px rgba(255, 255, 255, .95);
+  color: #17453a;
+}
+.audit-timeline {
+  background:
+    repeating-linear-gradient(180deg, transparent 0 30px, rgba(23, 69, 58, .06) 30px 31px),
+    linear-gradient(180deg, #fffdf6, #fbf7ea);
+  border-radius: 16px;
+  border: 1px solid #eadfc6;
+  box-shadow: inset 0 2px 6px rgba(120, 96, 40, .10), 3px 5px 12px rgba(23, 69, 58, .07);
+  margin: 0 18px 16px;
+  padding: 10px 16px;
+}
+.audit-timeline li:before { background: #e0d4b4; }
+.audit-dot { background: #b3453c; border-color: #f6ecd6; box-shadow: 0 2px 3px rgba(120, 96, 40, .3); }
+.dashboard-map {
+  background:
+    radial-gradient(240px 140px at 70% 20%, rgba(207, 232, 162, .3), transparent 70%),
+    linear-gradient(160deg, #f7fbf4, #e8f2e6);
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, .9);
+  box-shadow: inset 0 3px 8px rgba(23, 69, 58, .10), 3px 5px 12px rgba(23, 69, 58, .07);
+}
+.map-facility { filter: drop-shadow(0 1.9px 1.2px rgba(23, 69, 58, .45)); }
+.progress-track { box-shadow: var(--neu-inset); background: #e3efe7; border-radius: 999px; }
+.progress-track span { border-radius: 999px; box-shadow: inset 0 1px 2px rgba(255, 255, 255, .5); }
+.sidebar { background: linear-gradient(180deg, #1a4c3e, #123c32); box-shadow: inset -2px 0 0 rgba(255, 255, 255, .06), 8px 0 26px rgba(23, 69, 58, .18); }
+.nav-item.active { box-shadow: inset 3px 0 0 var(--lime), inset 0 1px 3px rgba(255, 255, 255, .10), 3px 4px 10px rgba(0, 0, 0, .18); border-radius: 14px; }
+
+/* Honesty chrome and compact data surfaces. */
+.notice-strip { border-radius: 16px; box-shadow: inset 0 1px 2px rgba(255, 255, 255, .8), 2px 3px 8px rgba(23, 69, 58, .06); }
+.notice-strip a { color: var(--green-dark); text-decoration: underline; font-weight: 650; }
+.dashboard-controls { border-radius: 24px; box-shadow: var(--clay-shadow); border: 1px solid rgba(255, 255, 255, .9); background: linear-gradient(160deg, #ffffff, #f4faf6); }
+.dashboard-table tbody th { background: #fbfdfb; }
+.compact-table th { background: #f4faf6; color: var(--muted); }
+.compact-table tbody th { background: transparent; color: var(--text); }
+@media (max-width: 760px) {
+  .audit-timeline { margin: 0 14px 14px; }
+  .dashboard-summary { gap: 10px; }
+}
+@container (width < 380px) {
+  .compact-table tbody th { background: #f4faf6; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .button { transition: background-color .15s ease, color .15s ease; }
+  .button:active:not(:disabled) { box-shadow: var(--neu-inset); }
+}
+@media (forced-colors: active) {
+  .card, .stat-card, .mini-stat, .dashboard-summary > div, .dashboard-controls,
+  .button, .icon-button, .role-switcher, .segmented, .filter-tabs,
+  .audit-timeline, .dashboard-map, .modal, .dashboard-dialog, .topbar, .notice-strip {
+    background-image: none;
+    box-shadow: none;
+    border: 1px solid CanvasText;
+  }
+  .button.primary, .role-switcher button.selected, .segmented button.selected, .filter-tabs button.selected { background: Highlight; color: HighlightText; }
+  select, input:not([type=range]), textarea, .search-field, .money-input { background: Field; color: FieldText; box-shadow: none; }
+  button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible { outline-color: Highlight; }
+}

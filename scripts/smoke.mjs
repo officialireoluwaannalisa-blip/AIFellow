@@ -62,12 +62,12 @@ async function main() {
 
   cli(['find', 'role', 'link', 'click', '--name', 'Stockout risk']);
   cli(['wait', '--text', 'Risk register']);
-  cli(['find', 'label', 'Search facilities or medicines', 'fill', 'Northgate']);
+  cli(['find', 'label', 'Search facilities or medicines', 'fill', 'Lagos']);
   cli(['wait', '--fn', 'document.querySelectorAll(".risk-table tbody tr").length > 0']);
-  assert(cli(['get', 'text', '.risk-table']).includes('Northgate'), 'Risk search did not filter');
+  assert(cli(['get', 'text', '.risk-table']).includes('Lagos'), 'Risk search did not filter');
   cli(['focus', 'input[aria-label="Search facilities or medicines"]']);
   cli(['press', 'Control+a']); cli(['press', 'Backspace']);
-  cli(['select', 'select[aria-label="Filter by district"]', 'central']);
+  cli(['select', 'select[aria-label="Filter by district"]', 'ng']);
   cli(['wait', '--fn', 'document.querySelectorAll(".risk-table tbody tr").length > 0']);
   cli(['click', '.risk-table tbody tr:first-child button[aria-label^="Inspect"]']);
   cli(['wait', '--text', 'Why this label?']);

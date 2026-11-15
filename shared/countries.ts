@@ -1,4 +1,4 @@
-export type CountryCode = 'DEMO' | 'NG' | 'ET' | 'ZA' | 'KE';
+export type CountryCode = 'DEMO' | 'NG' | 'BF' | 'ET' | 'ZA' | 'KE';
 export interface PublicSource {
   id: string; name: string; url: string; kind: 'government_portal' | 'regulator' | 'health_authority';
   patientLevel: false; status: 'verify_endpoint' | 'public_reference'; notes: string;
@@ -23,6 +23,14 @@ export const COUNTRY_PROFILES: CountryProfile[] = [
     sources: [
       { id: 'ng-health', name: 'Federal Ministry of Health portal', url: 'https://health.gov.ng/', kind: 'health_authority', patientLevel: false, status: 'verify_endpoint', notes: 'Verify authorized aggregate LMIS/stock extracts and data-sharing terms before use.' },
       { id: 'ng-ndpc', name: 'Nigeria Data Protection Commission', url: 'https://ndpc.gov.ng/', kind: 'regulator', patientLevel: false, status: 'public_reference', notes: 'Confirm lawful basis, sensitive-data safeguards, and retention requirements.' },
+    ],
+  },
+  {
+    code: 'BF', name: 'Burkina Faso', currency: 'XOF', healthAuthority: 'Ministry of Health (verify current data custodian)',
+    dataProtection: 'Loi n°010-2004/AN on personal-data protection; verify current amendments and health-data rules', clinicalGovernance: 'requires_local_approval',
+    patientLevelAllowed: false, aggregateImportRequiresAuthorization: true,
+    sources: [
+      { id: 'bf-cil', name: 'Commission de l’Informatique et des Libertés (CIL)', url: 'https://www.cil.bf/', kind: 'regulator', patientLevel: false, status: 'public_reference', notes: 'Confirm lawful basis, current amendments, sensitive-data safeguards, and retention requirements with local counsel.' },
     ],
   },
   {

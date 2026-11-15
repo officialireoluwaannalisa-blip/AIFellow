@@ -27,6 +27,7 @@ export const districtSchema = z.object({ id, name: z.string().min(1).max(100), r
 export const facilitySchema = z.object({
   id, name: z.string().min(1).max(160), districtId: id, type: z.enum(['hospital', 'health_centre', 'clinic']),
   mapPosition: z.object({ x: z.number().min(0).max(100), y: z.number().min(0).max(100) }).strict().optional(),
+  nameReference: z.object({ country: z.string().min(1).max(100), source: z.string().url().max(300), note: z.string().min(1).max(300) }).strict().optional(),
 }).strict();
 export const routeSchema = z.object({
   fromFacilityId: id, toFacilityId: id, days: z.number().int().min(1).max(14), costCents: count,

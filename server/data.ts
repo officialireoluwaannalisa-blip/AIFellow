@@ -41,7 +41,7 @@ export function loadDataset(root = process.cwd()): LoadedData {
   const raw = readFileSync(resolve(root, 'data/synthetic/seed.json'), 'utf8');
   const manifest = JSON.parse(readFileSync(resolve(root, 'data/synthetic/manifest.json'), 'utf8')) as DatasetManifest;
   const hash = createHash('sha256').update(raw).digest('hex');
-  if (!manifest.synthetic || manifest.sha256 !== hash) throw new Error('Synthetic dataset checksum/provenance mismatch');
+  if (!manifest.synthetic || manifest.sha256 !== hash || !Number.isFinite(manifest.seed)) throw new Error('Synthetic dataset checksum/provenance mismatch');
   const dataset = datasetSchema.parse(JSON.parse(raw)) as Dataset;
   if (dataset.version !== manifest.version || dataset.asOf !== manifest.asOf) throw new Error('Dataset manifest version/date mismatch');
   return { dataset: { ...dataset, countryCode: dataset.countryCode ?? 'DEMO' }, manifest, hash, policy: DEMO_CLINICAL_POLICY, dataAuthorized: false, dataMode: 'synthetic' };

@@ -4,7 +4,7 @@
 
 StockSense helps a district planner move from stockout risk to a budget-aware action plan, then review and trace simulated procurement and cash release. It is inspired by the Gates Foundation AI Fellows (Africa) role, but is an independent demonstration—not an official foundation product or a claim of real-world impact.
 
-> **Demo only:** fictional facilities and synthetic data. No patient records, live payments, procurement writes, or connected LLM. Human review is required.
+> **Demo only:** real public facility names used as references, with synthetic operational data. Names are not a verified Foundation grantee roster. No patient records, live payments, procurement writes, or connected LLM. Human review is required. See [Facility names](docs/FACILITY_NAMES.md).
 
 ## What works
 
@@ -58,7 +58,9 @@ A facilitator-friendly walkthrough is in [Demo script](docs/DEMO_SCRIPT.md).
 |---|---|
 | [PRD](prd.md) | Users, scope, journeys, requirements, acceptance criteria |
 | [Dashboard](docs/DASHBOARD.md) | Role views, filters, explainability, audit, offline behavior |
-| [Dashboard design](docs/DASHBOARD_DESIGN.md) | Visual tokens, layout plan, self-critique |
+| [Design system](design.md) | Calm Clinic visual language, four-way morphism blend, tokens |
+| [Dashboard design](docs/DASHBOARD_DESIGN.md) | Dashboard layout plan and browser verification |
+| [Facility names](docs/FACILITY_NAMES.md) | Real-name references, sources, synthetic-data boundary |
 | [Architecture](docs/ARCHITECTURE.md) | Stack, modules, data flow, deployment boundary |
 | [API](docs/API.md) | Endpoints, validation, errors, examples |
 | [Data contract](docs/DATA_CONTRACT.md) | Schemas, units, provenance, quality gates |

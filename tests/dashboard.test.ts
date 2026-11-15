@@ -31,6 +31,18 @@ describe('dashboard shared engine', () => {
   it('falls back to district regions when no region level exists', () => {
     expect(dashboardRegions(smallDataset()).map((r) => r.id)).toEqual(['d1']);
   });
+  it('documents real facility names without turning them into operational claims', () => {
+    const { dataset, manifest } = loadDataset();
+    expect(Number.isFinite(manifest.seed)).toBe(true);
+    expect(dataset.facilities).toHaveLength(18);
+    for (const facility of dataset.facilities) {
+      expect(facility.nameReference).toBeDefined();
+      expect(facility.nameReference?.country).toBe(dataset.districts.find((d) => d.id === facility.districtId)?.name);
+      expect(() => new URL(facility.nameReference!.source)).not.toThrow();
+      expect(facility.nameReference?.note).toMatch(/synthetic/i);
+    }
+    expect(dataset.evidence.some((e) => e.id === 'EV-007' && /not imply Foundation funding/i.test(e.text))).toBe(true);
+  });
   it('builds a synthetic national dashboard with map coordinates and forecast horizons', async () => {
     const { dataset, hash } = loadDataset();
     const { runScenario } = await import('../shared/planner');

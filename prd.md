@@ -134,7 +134,7 @@ Full formulas and failure modes: [Model card](docs/MODEL_CARD.md).
 
 ## 8. Data requirements
 
-The demo uses fictional **Demo Republic**, three fictional districts, 18 facilities, five medicine product identifiers, and a fixed 2026-11-14 snapshot. Product names are illustrative; all quantities, prices, routes, and histories are synthetic. No personal data is collected.
+The demo uses a synthetic **Demo Republic (focus-country sandbox)** envelope, two regions, five country-labeled demo district groups, 18 real public facility name references, five medicine product identifiers, and a fixed 2026-11-14 snapshot. Facility names reference public institutions in the Gates Foundation’s Africa focus countries but are not a verified grantee roster. Product names are illustrative; all quantities, prices, routes, histories, and risk labels are synthetic. No personal data is collected. See `docs/FACILITY_NAMES.md`.
 
 Required entities: facilities, products, stock observations, consumption history, batches, inbound shipments, routes, and evidence snippets. Units and dates are explicit. Invalid structural records fail validation; stale or insufficient observations remain visible as quality issues and produce Unknown risk where appropriate.
 

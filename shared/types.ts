@@ -6,7 +6,8 @@ export type PlanStatus = 'draft' | 'approved';
 
 export interface Region { id: string; name: string }
 export interface District { id: string; name: string; regionId?: string }
-export interface Facility { id: string; name: string; districtId: string; type: 'hospital' | 'health_centre' | 'clinic'; mapPosition?: { x: number; y: number } }
+export interface FacilityNameReference { country: string; source: string; note: string }
+export interface Facility { id: string; name: string; districtId: string; type: 'hospital' | 'health_centre' | 'clinic'; mapPosition?: { x: number; y: number }; nameReference?: FacilityNameReference }
 export interface Product {
   id: string; name: string; form: string; unit: string; essential: boolean; coldChain: boolean;
   unitCostCents: number; minRemainingShelfLifeDays: number; shelfLifeDays: number; priorityWeight: number;

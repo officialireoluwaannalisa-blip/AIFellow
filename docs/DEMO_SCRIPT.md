@@ -10,7 +10,7 @@ Show Overview: facilities, Critical risks, projected stockout item-days, expiry 
 
 ## 2. Inspect the evidence (2 min)
 
-Open **Stockout risk**. Filter to Central Plateau or search a facility. Open an item.
+Open **Stockout risk**. Filter to the Nigeria demo district group or search for “Lagos”. Open an item.
 
 Point out:
 - usable stock vs quarantined/expired stock;

@@ -2,7 +2,7 @@
 
 ## Status and source
 
-All records are **synthetic**. `Demo Republic`, its districts, facilities, quantities, prices, routes, and consumption histories are fictional. Real medicine names are used only as recognizable product labels; nothing here is clinical guidance. The fixed analysis date is **2026-11-14**. Regenerate with `npm run data:generate`; the generator is deterministic and writes a manifest with SHA-256 checksums.
+All operational records are **synthetic**. The current seed is `synthetic-2026.11.14-v3` in a `Demo Republic (focus-country sandbox)` envelope. Facility display names are real public institutions used as name references; they are not a verified Foundation grantee roster. Quantities, prices, routes, consumption histories, batches, budgets, and risk labels are fictional. Real medicine names are recognizable product labels only; nothing here is clinical guidance. The fixed analysis date is **2026-11-14**. Regenerate with `npm run data:generate`; the generator is deterministic and writes a manifest with SHA-256 checksums. See [Facility names](FACILITY_NAMES.md).
 
 ## Entities
 
@@ -10,7 +10,7 @@ All records are **synthetic**. `Demo Republic`, its districts, facilities, quant
 - `version`: semantic dataset version.
 - `asOf`: ISO date used for all calculations.
 - `country`: display name.
-- `countryCode`: optional location code (`DEMO`, `NG`, `ET`, `ZA`, `KE`); defaults to `DEMO` for the synthetic snapshot.
+- `countryCode`: optional location code (`DEMO`, `NG`, `BF`, `ET`, `ZA`, `KE`); defaults to `DEMO` for the synthetic snapshot.
 - `currency`: `USD` for synthetic comparison only.
 - `regions` (optional), `districts`, `facilities`, `products`, `stocks`, `routes`, `evidence`.
 
@@ -18,7 +18,7 @@ All records are **synthetic**. `Demo Republic`, its districts, facilities, quant
 `regions[]` contains `id`, `name`. `districts[]` contains `id`, `name`, and optional `regionId` referencing a region. If no region level is supplied, the dashboard treats each district as its own region for filtering. Region IDs must be unique and references must resolve.
 
 ### Facility
-`id`, `name`, `districtId`, `type` (`hospital|health_centre|clinic`), and optional `mapPosition` (`x`, `y` in 0–100 schematic map space). IDs are stable within the demo. Map coordinates are illustrative only, not verified geography, and no personal identifiers are included.
+`id`, `name`, `districtId`, `type` (`hospital|health_centre|clinic`), optional `mapPosition` (`x`, `y` in 0–100 schematic map space), and optional `nameReference` (`country`, `source` URL, `note`). IDs are stable within the demo. Map coordinates are illustrative only, not verified geography. `nameReference` documents a real public facility name; it does not assert Foundation funding or real operational data. No personal identifiers are included.
 
 ### Product
 `id`, `name`, `form`, `unit`, `essential`, `coldChain`, `unitCostCents`, `minRemainingShelfLifeDays`, `shelfLifeDays`. Product identity includes the exact identifier; the planner never substitutes a different strength/form.
@@ -56,7 +56,7 @@ Expired and quarantined batches are unavailable. Projection consumes released ba
 
 ## Privacy and retention
 
-No patient-level fields, credentials, or real facility identifiers are accepted by the public demo. Operator-controlled authorized aggregate mode may contain real facility/product aggregates only after data-sharing authorization; it still rejects patient-level fields and direct identifiers. SQLite contains plan names, notes, statuses, settings, dashboard support requests, partner annotations, dashboard audit events, and fixed demo actor labels. Do not enter real sensitive information in plan notes. Local database retention/reset is operator-controlled; see [Operations](OPERATIONS.md).
+No patient-level fields or credentials are accepted by the public demo. Real facility names are allowed only as documented public name references with synthetic operational figures. Operator-controlled authorized aggregate mode may contain real facility/product aggregates only after data-sharing authorization; it still rejects patient-level fields and direct identifiers. SQLite contains plan names, notes, statuses, settings, dashboard support requests, partner annotations, dashboard audit events, and fixed demo actor labels. Do not enter real sensitive information in plan notes. Local database retention/reset is operator-controlled; see [Operations](OPERATIONS.md).
 
 ## Authorized aggregate ingestion contract
 

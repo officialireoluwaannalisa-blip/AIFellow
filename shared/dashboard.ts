@@ -169,10 +169,11 @@ export function buildDashboard(ctx: DashboardContext): DashboardData {
         critical: fr.filter((a) => a.risk === 'critical').length, watch: fr.filter((a) => a.risk === 'watch').length, unknown: fr.filter((a) => a.risk === 'unknown').length, records: fr.length };
     });
     const points = mapFacilities.filter((f) => f.x !== undefined && f.y !== undefined).map((f) => ({ x: f.x!, y: f.y! }));
+    const hull = convexHull(points);
     return { id: d.id, name: d.name, regionId: districtRegionId(dataset, d.id), risk: worstRisk(districtRows.map((a) => a.risk)),
       critical: districtRows.filter((a) => a.risk === 'critical').length, watch: districtRows.filter((a) => a.risk === 'watch').length,
       unknown: districtRows.filter((a) => a.risk === 'unknown').length, records: districtRows.length,
-      facilities: mapFacilities, polygon: points.length >= 3 ? padHull(convexHull(points)) : undefined };
+      facilities: mapFacilities, polygon: hull.length >= 3 ? padHull(hull) : undefined };
   });
 
   const scopedActions = (scenario?.selected ?? []).filter((a) => scopedFacilityIds.has(a.facilityId) && (!filters.productId || a.productId === filters.productId));

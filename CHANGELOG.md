@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.4.0 — 2026-11-14
+
+Real public facility name references and the Calm Clinic design system.
+
+### Added
+- 18 real public facility name references across Nigeria, Burkina Faso, Ethiopia, Kenya, and South Africa, each with a `nameReference` source and synthetic-data disclaimer.
+- Root `design.md` and `src/theme.css`: glass chrome/overlays, neumorphic controls, clay cards/stats, and skeuomorphic role switch, audit ledger, map board, and sidebar.
+- `docs/FACILITY_NAMES.md`, uploaded design inspiration asset, Burkina Faso location profile, and methodology name-reference boundary.
+
+### Changed
+- Synthetic seed `synthetic-2026.11.14-v3`; country-labeled demo district groups replace fictional districts. Operational figures remain synthetic.
+- Facility view hides irrelevant scope filters and shows a compact two-metric summary; leadership columns are balanced; compact map/forecast tables stay tabular in narrow desktop columns.
+- Contrast tokens, focus rings, mobile navigation visibility, and forced-colors fallbacks tightened.
+
+### Known limits
+- Public sources and the connected workspace did not provide a verified Foundation facility-by-facility roster. Names do not imply Foundation funding or real stock/performance.
+- The map remains schematic; role switching remains a demo simulation, not authenticated access control.
+
 ## 0.3.0 — 2026-11-14
 
 Role-based dashboard overview on the same data and exact MILP engine.

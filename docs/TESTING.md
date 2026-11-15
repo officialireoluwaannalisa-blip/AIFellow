@@ -50,6 +50,10 @@ The browser smoke test starts an isolated production server on port 3100 (overri
 - Cross-origin mutation rejection.
 - Plan persistence, idempotent submission, approval gate, stepwise transitions, stale-transition conflict, audit events, name/note validation.
 
+### Dashboard
+- Facility/district demo scope locks; Unknown is not on-track; commodity/search filters; region fallback; forecast horizons; budget ceiling; every intervention has a short explanation.
+- Every demo facility has a real-name reference source, matching country label, synthetic-data note, and finite manifest seed; EV-007 states names do not imply Foundation funding.
+
 ### Components
 - Distinct Unknown/Stable labels, chart text alternative, dialog Escape/focus restoration, actionable empty state.
 
@@ -68,12 +72,13 @@ The browser smoke test starts an isolated production server on port 3100 (overri
 
 - **Date:** 2026-11-14
 - `npm run typecheck`: pass
-- `npm test`: **47 tests passed** across 7 files
+- `npm test`: **48 tests passed** across 7 files
 - `npm run build`: pass
 - `npm run test:e2e`: pass (isolated production server + Chromium)
 - Mobile overflow check: pass at 390×844
 - `npm audit --omit=dev --audit-level=high`: 0 production vulnerabilities reported
-- Default synthetic scenario: HiGHS `Optimal`, gap 0; 52 selected actions, 2,499,966 USD cents, 113 candidates / 226 variables / 210 constraints; solve time approximately 3.2 s in the sandbox
+- Default synthetic scenario: HiGHS `optimal`, gap 0; 51 selected actions, 2,499,926 USD cents, 98 candidates / 196 variables / 195 constraints; solve time approximately 3.9 s in the sandbox
+- Accessibility: axe WCAG A/AA reports 0 violations on dashboard, overview, risks, planner, funding, data, and methodology; a solid-surface fallback audit also reports 0 contrast violations. See `docs/DASHBOARD_DESIGN.md`.
 
 These results verify the synthetic prototype's implementation, not real-world forecast accuracy, fairness, security readiness, or health impact.
 

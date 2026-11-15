@@ -31,7 +31,12 @@ function filtersFromParams(params: URLSearchParams, meta: Meta | null): Dashboar
 
 function NativeDialog({ title, onClose, children }: { title: string; onClose: () => void; children: ReactNode }) {
   const ref = useRef<HTMLDialogElement>(null);
-  useEffect(() => { const dialog = ref.current; dialog?.showModal(); return () => dialog?.close(); }, []);
+  useEffect(() => {
+    const dialog = ref.current;
+    const previous = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    dialog?.showModal();
+    return () => { dialog?.close(); previous?.focus(); };
+  }, []);
   return <dialog ref={ref} className="dashboard-dialog" aria-labelledby="dashboard-dialog-title" onCancel={(e) => { e.preventDefault(); onClose(); }} onClick={(e) => { if (e.target === ref.current) onClose(); }}>
     <div className="dashboard-dialog-head"><h2 id="dashboard-dialog-title">{title}</h2><button className="button secondary small" onClick={onClose}>Close</button></div>
     <div className="dashboard-dialog-body">{children}</div>
@@ -40,7 +45,7 @@ function NativeDialog({ title, onClose, children }: { title: string; onClose: ()
 
 function SummaryStrip({ data }: { data: DashboardData }) {
   const s = data.summary;
-  return <div className="dashboard-summary" aria-label="Scope summary">
+  return <div className="dashboard-summary" role="region" aria-label="Scope summary">
     <div><span>Medicine availability</span><strong>{s.knownCount ? `${s.availabilityPct}%` : '—'}</strong><small>{s.knownCount} known records with usable stock</small></div>
     <div><span>Budget planned</span><strong>{s.budgetUtilizationPct}%</strong><small>{money(s.plannedCostCents)} of {money(s.budgetCeilingCents)} ceiling</small></div>
     <div className="urgent"><span>Critical stockouts</span><strong>{number(s.criticalCount)}</strong><small>{number(s.watchCount)} watch · {number(s.unknownCount)} unknown</small></div>
@@ -55,11 +60,11 @@ function RiskMap({ data, onSelectDistrict }: { data: DashboardData; onSelectDist
       {districts.map((d) => <g key={d.id}>
         {d.polygon && <polygon points={d.polygon.map((p) => `${p.x},${p.y}`).join(' ')} className={`map-district map-${d.risk}`} onClick={() => onSelectDistrict(d.id)} />}
         {d.facilities.map((f) => f.x !== undefined && f.y !== undefined ? <circle key={f.id} cx={f.x} cy={f.y} r="1.6" className={`map-facility map-${f.risk}`}><title>{f.name}: {f.risk}</title></circle> : null)}
-        {d.polygon && <text x={d.polygon.reduce((s, p) => s + p.x, 0) / d.polygon.length} y={d.polygon.reduce((s, p) => s + p.y, 0) / d.polygon.length} className="map-label">{d.name}</text>}
+        {d.polygon && <text x={d.polygon.reduce((s, p) => s + p.x, 0) / d.polygon.length} y={Math.max(6, Math.min(...d.polygon.map((p) => p.y)) - 4)} className="map-label">{d.name}</text>}
       </g>)}
     </svg>}
-    <div className="table-wrap dashboard-table-region" tabIndex={0} role="region" aria-label="District risk table">
-      <table className="data-table dashboard-table"><caption className="sr-only">District risk counts</caption><thead><tr><th scope="col">District</th><th scope="col">Risk</th><th scope="col">Critical</th><th scope="col">Watch</th><th scope="col">Unknown</th></tr></thead>
+    <div className="table-wrap dashboard-table-region compact-table-region" tabIndex={0} role="region" aria-label="District risk table">
+      <table className="data-table compact-table"><caption className="sr-only">District risk counts</caption><thead><tr><th scope="col">District</th><th scope="col">Risk</th><th scope="col">Critical</th><th scope="col">Watch</th><th scope="col">Unknown</th></tr></thead>
         <tbody>{districts.map((d) => <tr key={d.id}><th scope="row"><button className="text-link" onClick={() => onSelectDistrict(d.id)}>{d.name}</button></th><td data-label="Risk"><RiskBadge risk={d.risk} /></td><td data-label="Critical">{d.critical}</td><td data-label="Watch">{d.watch}</td><td data-label="Unknown">{d.unknown}</td></tr>)}</tbody></table>
     </div>
     <div className="chart-legend"><span><i className="legend-dot bar-stable" />On track</span><span><i className="legend-dot bar-watch" />Watch</span><span><i className="legend-dot bar-critical" />Urgent</span><span><i className="legend-dot bar-unknown" />Unknown</span></div>
@@ -89,7 +94,7 @@ function Bottlenecks({ data }: { data: DashboardData }) {
 
 function Forecast({ data }: { data: DashboardData }) {
   return <Card title="Stockout-risk forecast" subtitle="Deterministic projection on the active snapshot">
-    <div className="table-wrap dashboard-table-region" tabIndex={0} role="region" aria-label="Forecast table"><table className="data-table dashboard-table"><caption className="sr-only">30, 60, and 90 day forecast</caption>
+    <div className="table-wrap dashboard-table-region compact-table-region" tabIndex={0} role="region" aria-label="Forecast table"><table className="data-table compact-table"><caption className="sr-only">30, 60, and 90 day forecast</caption>
       <thead><tr><th scope="col">Horizon</th><th scope="col">Critical</th><th scope="col">Watch</th><th scope="col">Unknown</th><th scope="col">Stockout item-days</th></tr></thead>
       <tbody>{data.forecast.map((f) => <tr key={f.horizonDays}><th scope="row">{f.horizonDays} days</th><td data-label="Critical">{f.critical}</td><td data-label="Watch">{f.watch}</td><td data-label="Unknown">{f.unknown}</td><td data-label="Stockout item-days">{number(f.stockoutDays)}</td></tr>)}</tbody></table></div>
   </Card>;
@@ -113,11 +118,11 @@ function Pipeline({ data }: { data: DashboardData }) {
   </Card>;
 }
 
-function RiskTable({ data }: { data: DashboardData }) {
+function RiskTable({ data, facilities }: { data: DashboardData; facilities: Facility[] }) {
   return <Card title="Predictive stockout-risk table" subtitle={`${data.riskRows.length} records in scope (first 100 shown)`} action={<Link className="text-link" to="/risks">Full register <ArrowRight size={15} /></Link>}>
     <div className="table-wrap dashboard-table-region" tabIndex={0} role="region" aria-label="Stockout risk table"><table className="data-table dashboard-table"><caption className="sr-only">Stockout risk by facility and medicine</caption>
       <thead><tr><th scope="col">Facility</th><th scope="col">Medicine</th><th scope="col">Cover</th><th scope="col">Risk</th><th scope="col">Gap</th></tr></thead>
-      <tbody>{data.riskRows.map((r) => <tr key={`${r.facilityId}:${r.productId}`}><th scope="row">{r.facilityName}<span className="cell-sub">{r.districtName}</span></th><td data-label="Medicine">{r.productName}</td><td data-label="Cover">{r.daysCover ?? '—'} days</td><td data-label="Risk"><RiskBadge risk={r.risk} /></td><td data-label="Gap">{number(r.needUnits)} {r.unit}</td></tr>)}</tbody></table></div>
+      <tbody>{data.riskRows.map((r) => { const ref = facilities.find((f) => f.id === r.facilityId)?.nameReference; return <tr key={`${r.facilityId}:${r.productId}`}><th scope="row">{r.facilityName}<span className="cell-sub">{r.districtName}{ref ? ' · real name, synthetic figures' : ''}</span></th><td data-label="Medicine">{r.productName}</td><td data-label="Cover">{r.daysCover ?? '—'} days</td><td data-label="Risk"><RiskBadge risk={r.risk} /></td><td data-label="Gap">{number(r.needUnits)} {r.unit}</td></tr>; })}</tbody></table></div>
   </Card>;
 }
 
@@ -128,7 +133,8 @@ function Alerts({ data }: { data: DashboardData }) {
 function FacilityPanel({ data, facilities, onAction }: { data: DashboardData; facilities: Facility[]; onAction: (kind: DashboardSupportRequest['kind'], productId?: string, referenceId?: string) => void }) {
   const facility = facilities.find((f) => f.id === data.filters.facilityId);
   return <>
-    <Card title={`My facility${facility ? `: ${facility.name}` : ''}`} subtitle="Risk-sorted stock list" action={<button className="button primary small" onClick={() => onAction('support')}><Send size={15} />Request support</button>}>
+    <Card title={`My facility${facility ? `: ${facility.name}` : ''}`} subtitle={`${data.summary.knownCount ? data.summary.availabilityPct : '—'}% availability · ${data.summary.criticalCount} critical · risk-sorted stock`} action={<button className="button primary small" onClick={() => onAction('support')}><Send size={15} />Request support</button>}>
+      {facility?.nameReference && <div className="notice-strip name-reference"><ShieldCheck size={16} /><span><strong>Real facility name, synthetic stock figures.</strong> Not a verified Foundation grantee. <a href={facility.nameReference.source} target="_blank" rel="noreferrer">Name source</a> · <Link to="/methodology">About names</Link></span></div>}
       <div className="table-wrap dashboard-table-region" tabIndex={0} role="region" aria-label="My facility stock"><table className="data-table dashboard-table facility-table"><caption className="sr-only">Facility stock</caption>
         <thead><tr><th scope="col">Medicine</th><th scope="col">Usable</th><th scope="col">Days cover</th><th scope="col">Risk</th><th scope="col">Action</th></tr></thead>
         <tbody>{data.facilityStock.map((r) => <tr key={r.productId}><th scope="row">{r.productName}</th><td data-label="Usable">{number(r.usableUnits)} {r.unit}</td><td data-label="Days cover">{r.daysCover ?? '—'}</td><td data-label="Risk"><RiskBadge risk={r.risk} /></td><td data-label="Action"><button className="button secondary small" onClick={() => onAction(r.risk === 'unknown' ? 'discrepancy' : 'support', r.productId)}>{r.risk === 'unknown' ? 'Report issue' : 'Request support'}</button></td></tr>)}</tbody></table></div>
@@ -181,7 +187,15 @@ export function Dashboard() {
   const [action, setAction] = useState<{ kind: DashboardSupportRequest['kind']; productId?: string; referenceId?: string } | null>(null);
   const [actionNote, setActionNote] = useState('');
   const [busy, setBusy] = useState(false);
+  const roleSwitcherRef = useRef<HTMLDivElement>(null);
   const toast = useToast();
+  useEffect(() => {
+    const switcher = roleSwitcherRef.current;
+    const selected = switcher?.querySelector<HTMLButtonElement>('button.selected');
+    if (!switcher || !selected) return;
+    const left = selected.getBoundingClientRect().left - switcher.getBoundingClientRect().left + switcher.scrollLeft - (switcher.clientWidth - selected.clientWidth) / 2;
+    switcher.scrollTo({ left: Math.max(0, left), behavior: 'auto' });
+  }, [filters.role]);
   useEffect(() => { const on = () => setOffline(false); const off = () => setOffline(true); window.addEventListener('online', on); window.addEventListener('offline', off); return () => { window.removeEventListener('online', on); window.removeEventListener('offline', off); }; }, []);
   useEffect(() => { if (!data) return; setCached(data); try { localStorage.setItem(`stocksense-dashboard:${filters.role}`, JSON.stringify(data)); } catch { /* storage unavailable */ } }, [data, filters.role]);
   useEffect(() => { if (data || !error) return; try { const raw = localStorage.getItem(`stocksense-dashboard:${filters.role}`); if (raw) setCached(JSON.parse(raw) as DashboardData); } catch { /* ignore */ } }, [error, data, filters.role]);
@@ -222,28 +236,30 @@ export function Dashboard() {
   const districts = meta.districts.filter((d) => !filters.regionId || (d.regionId ?? d.id) === filters.regionId);
   const facilities = meta.facilities.filter((f) => !filters.districtId || f.districtId === filters.districtId);
   return <div className={`dashboard dashboard-role-${filters.role}`}>
-    <header className="dashboard-header"><div><h1>Dashboard overview</h1><p>{role.description}</p></div>
-      <div className="dashboard-header-actions">{view.capabilities.canExportBriefing && <button className="button primary" onClick={exportBriefing} disabled={busy || offline}><Download size={16} />Export briefing</button>}<Link className="button secondary" to="/methodology"><FileText size={16} />Methodology</Link></div></header>
+    <header className="dashboard-header"><div><h1>Dashboard overview</h1><p>{filters.role === 'facility' ? 'Stock, deliveries, and one-tap support.' : role.description}</p></div>
+      {filters.role !== 'facility' && <div className="dashboard-header-actions">{view.capabilities.canExportBriefing && <button className="button primary" onClick={exportBriefing} disabled={busy || offline}><Download size={16} />Export briefing</button>}<Link className="button secondary" to="/methodology"><FileText size={16} />Methodology</Link></div>}</header>
     {offline && <div className="notice-strip warning" role="status"><AlertTriangle size={17} /><span>Offline mode: showing the last cached snapshot. Facility requests are queued locally; recommendations are not refreshed.</span></div>}
     {!offline && cached && !data && error && <div className="notice-strip warning"><AlertTriangle size={17} /><span>Showing cached snapshot: {error}</span></div>}
-    <div className="notice-strip"><ShieldCheck size={17} /><span><strong>Demo role simulation.</strong> {meta.manifest.synthetic ? 'All figures are synthetic.' : 'Authorized aggregate data.'} Role switching is not authenticated access control. Recommendations require human review.</span></div>
+    <div className="notice-strip"><ShieldCheck size={17} />{filters.role === 'facility' ? <span><strong>Demo role.</strong> Synthetic figures; the facility name is a public reference, not verified Foundation coverage. <Link to="/methodology">Boundaries</Link></span> : <span><strong>Demo role simulation.</strong> {meta.manifest.synthetic ? 'All figures are synthetic.' : 'Authorized aggregate data.'} Facility names are real public references, not a verified Foundation roster. Role switching is not access control; human review is required. <Link to="/methodology">Demo boundaries</Link></span>}</div>
     <section className="dashboard-controls" aria-label="Role and scope filters">
-      <div className="role-switcher" role="group" aria-label="Choose role view">{DASHBOARD_ROLES.map((r) => { const Icon = roleIcons[r.id]; return <button key={r.id} className={filters.role === r.id ? 'selected' : ''} aria-pressed={filters.role === r.id} onClick={() => update({ role: r.id })}><Icon size={16} /><span>{r.short}</span></button>; })}</div>
+      <div ref={roleSwitcherRef} className="role-switcher" role="group" aria-label="Choose role view">{DASHBOARD_ROLES.map((r) => { const Icon = roleIcons[r.id]; return <button key={r.id} className={filters.role === r.id ? 'selected' : ''} aria-pressed={filters.role === r.id} onClick={() => update({ role: r.id })}><Icon size={16} /><span>{r.short}</span></button>; })}</div>
       <div className="scope-filters">
-        <label>Country<select value={filters.countryCode ?? meta.countryCode} onChange={(e) => update({ countryCode: e.target.value })} disabled={filters.role === 'facility' || filters.role === 'district'}>{(countries?.countries ?? [{ code: meta.countryCode, name: meta.country, connectionState: 'synthetic_demo_active' }]).map((c) => <option key={c.code} value={c.code} disabled={c.connectionState === 'not_connected'}>{c.name}{c.connectionState === 'not_connected' ? ' (not connected)' : ''}</option>)}</select></label>
-        <label>Region<select value={filters.regionId ?? ''} onChange={(e) => update({ regionId: e.target.value || null })} disabled={filters.role === 'facility'}><option value="">All regions</option>{view.regions.map((r) => <option key={r.id} value={r.id}>{r.name}</option>)}</select></label>
-        <label>District<select value={filters.districtId ?? ''} onChange={(e) => update({ districtId: e.target.value || null })} disabled={filters.role === 'facility'}><option value="">All districts</option>{districts.map((d) => <option key={d.id} value={d.id}>{d.name}</option>)}</select></label>
-        <label>Facility<select value={filters.facilityId ?? ''} onChange={(e) => update({ facilityId: e.target.value || null })}><option value="">{filters.role === 'facility' ? 'My facility' : 'All facilities'}</option>{facilities.map((f) => <option key={f.id} value={f.id}>{f.name}</option>)}</select></label>
+        {filters.role !== 'facility' && <>
+          <label>Country<select value={filters.countryCode ?? meta.countryCode} onChange={(e) => update({ countryCode: e.target.value })} disabled={filters.role === 'district'}>{(countries?.countries ?? [{ code: meta.countryCode, name: meta.country, connectionState: 'synthetic_demo_active' }]).map((c) => <option key={c.code} value={c.code} disabled={c.connectionState === 'not_connected'}>{c.name}{c.connectionState === 'not_connected' ? ' (not connected)' : ''}</option>)}</select></label>
+          <label>Region<select value={filters.regionId ?? ''} onChange={(e) => update({ regionId: e.target.value || null })}><option value="">All regions</option>{view.regions.map((r) => <option key={r.id} value={r.id}>{r.name}</option>)}</select></label>
+          <label>District<select value={filters.districtId ?? ''} onChange={(e) => update({ districtId: e.target.value || null })}><option value="">All districts</option>{districts.map((d) => <option key={d.id} value={d.id}>{d.name}</option>)}</select></label>
+        </>}
+        <label className={filters.role === 'facility' ? 'facility-select' : undefined}>Facility<select value={filters.facilityId ?? ''} onChange={(e) => update({ facilityId: e.target.value || null })}><option value="">{filters.role === 'facility' ? 'Choose my facility' : 'All facilities'}</option>{facilities.map((f) => <option key={f.id} value={f.id}>{f.name}</option>)}</select></label>
         <label>Commodity<select value={filters.productId ?? ''} onChange={(e) => update({ productId: e.target.value || null })}><option value="">All medicines</option>{meta.products.map((p) => <option key={p.id} value={p.id}>{p.name}</option>)}</select></label>
         <label>Period<select value={filters.horizonDays} onChange={(e) => update({ horizonDays: Number(e.target.value) as 30 | 60 | 90 })}><option value={30}>Next 30 days</option><option value={60}>Next 60 days</option><option value={90}>Next 90 days</option></select></label>
-        <label className="dashboard-search">Search<span className="search-field"><Search size={15} /><input value={filters.q} onChange={(e) => update({ q: e.target.value })} placeholder="Facility, medicine, district" aria-label="Search dashboard" /></span></label>
+        {filters.role !== 'facility' && <label className="dashboard-search">Search<span className="search-field"><Search size={15} /><input value={filters.q} onChange={(e) => update({ q: e.target.value })} placeholder="Facility, medicine, district" aria-label="Search dashboard" /></span></label>}
       </div>
     </section>
     <div className="dashboard-scope-line"><RoleIcon size={16} /><strong>{view.summary.scopeLabel}</strong><span>As of {shortDate(view.summary.asOf)} · {view.summary.countryCode}</span>{loading && <span className="muted">Refreshing…</span>}</div>
-    <SummaryStrip data={view} />
+    {filters.role !== 'facility' && <SummaryStrip data={view} />}
     {filters.role === 'facility' ? <FacilityPanel data={view} facilities={meta.facilities} onAction={(kind, productId, referenceId) => { setAction({ kind, productId, referenceId }); setActionNote(''); }} /> : <>
-      <div className="dashboard-grid"><div>{filters.role !== 'partner' && <InterventionList data={view} onWhy={setWhy} onReview={(a) => { void post('/dashboard/audit', { role: filters.role, action: 'recommendation_reviewed', scope: a.facilityId, note: `${a.productName} for ${a.facilityName}` }).then(reload); }} />}{filters.role === 'partner' && <PartnerPanel data={view} countries={countries} onNote={async (note) => { await post('/dashboard/notes', { role: 'partner', countryCode: view.summary.countryCode, note }); toast('Note saved'); reload(); }} />}{(filters.role === 'supply_chain' || filters.role === 'district') && <RiskTable data={view} />}</div>
-        <div><RiskMap data={view} onSelectDistrict={(id) => update({ districtId: id })} /><Bottlenecks data={view} />{filters.role === 'leadership' && <BudgetPanel data={view} />}{filters.role !== 'partner' && <Forecast data={view} />}</div></div>
+      <div className="dashboard-grid"><div>{filters.role !== 'partner' && <InterventionList data={view} onWhy={setWhy} onReview={(a) => { void post('/dashboard/audit', { role: filters.role, action: 'recommendation_reviewed', scope: a.facilityId, note: `${a.productName} for ${a.facilityName}` }).then(reload); }} />}{filters.role === 'leadership' && <Bottlenecks data={view} />}{filters.role === 'partner' && <PartnerPanel data={view} countries={countries} onNote={async (note) => { await post('/dashboard/notes', { role: 'partner', countryCode: view.summary.countryCode, note }); toast('Note saved'); reload(); }} />}{(filters.role === 'supply_chain' || filters.role === 'district') && <RiskTable data={view} facilities={meta.facilities} />}</div>
+        <div><RiskMap data={view} onSelectDistrict={(id) => update({ districtId: id })} />{filters.role !== 'leadership' && <Bottlenecks data={view} />}{filters.role === 'leadership' && <BudgetPanel data={view} />}{filters.role !== 'partner' && <Forecast data={view} />}</div></div>
       {filters.role === 'supply_chain' && <><Pipeline data={view} /><Alerts data={view} /></>}
       {filters.role === 'district' && <><Alerts data={view} /><BudgetPanel data={view} /></>}
     </>}

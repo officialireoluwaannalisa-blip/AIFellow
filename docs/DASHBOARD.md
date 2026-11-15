@@ -9,7 +9,7 @@ The dashboard is the default workspace view (`/`). It reuses the same synthetic/
 | National/MoH leadership | Country, optional region/district drill-down | Summary strip, schematic risk map, top 5 interventions, bottlenecks, budget vs plan, 30/60/90 forecast | Export briefing, review recommendation |
 | Supply-chain & financing officers | Country/region/district/facility | Pipeline from saved demo plans, ranked interventions, expiry/redistribution alerts, risk table | Review recommendation, open planner/funding trace |
 | District health management team | Locked to a district (demo default: first district) | District map, facilities at risk, urgent actions, alerts, budget | Record district support request |
-| Facility users | Locked to a facility (demo default: first facility) | Risk-sorted stock, days cover, upcoming deliveries, recent receipts/requests | Request support, confirm receipt, report discrepancy, usage note |
+| Facility users | Locked to a facility (demo default: first facility) | Compact availability/critical subtitle, risk-sorted stock, days cover, upcoming deliveries, recent receipts/requests; irrelevant country/region/district/search filters hidden | Request support, confirm receipt, report discrepancy, usage note |
 | Foundation/partners | Active country; other profiles shown as not connected | Country comparison, goals, local prototype metrics, notes | Save annotation, export briefing |
 
 **Important:** role switching is a demo simulation. There is no authentication, identity provider, or production authorization boundary in this release. Server endpoints validate the declared demo role and scope, but a real pilot must replace this with authenticated RBAC before handling real government data.
@@ -32,7 +32,7 @@ Every ranked intervention has a short “Why this?” dialog plus the planner ra
 
 ## Data additions
 
-The synthetic seed now includes optional `regions`, district `regionId`, and facility `mapPosition` fields. These are schematic demo coordinates only. Authorized aggregate packs may supply real region/district structure; map coordinates remain optional. No real country financing, adoption, or outcome data is fabricated.
+The synthetic seed now includes optional `regions`, district `regionId`, facility `mapPosition`, and facility `nameReference` fields. Map coordinates are schematic only. Facility names are real public references with synthetic operational figures, not a verified Foundation grantee roster; see [Facility names](FACILITY_NAMES.md). Authorized aggregate packs may supply real region/district structure; map coordinates remain optional. No real country financing, adoption, or outcome data is fabricated. The visual language is documented in [design.md](../design.md).
 
 ## API
 

@@ -20,9 +20,9 @@ describe('read API', () => {
     expect(meta.body.manifest.sha256).toBe(hash); expect(meta.body.facilities).toHaveLength(18);
   });
   it('composes product, district, risk, and text filters', async () => {
-    const response = await request(app).get('/api/risks').query({ productId: 'med-amox', districtId: 'central', risk: 'critical', q: 'hospital', horizonDays: 14 }).expect(200);
+    const response = await request(app).get('/api/risks').query({ productId: 'med-amox', districtId: 'ng', risk: 'critical', q: 'hospital', horizonDays: 14 }).expect(200);
     expect(response.body.rows.length).toBeGreaterThan(0);
-    for (const row of response.body.rows) { expect(row.productId).toBe('med-amox'); expect(row.districtId).toBe('central'); expect(row.risk).toBe('critical'); }
+    for (const row of response.body.rows) { expect(row.productId).toBe('med-amox'); expect(row.districtId).toBe('ng'); expect(row.risk).toBe('critical'); }
   });
   it('validates scenario inputs and unknown scopes', async () => {
     await request(app).post('/api/scenarios/preview').send({ ...scenario, budgetCents: -1 }).expect(400);

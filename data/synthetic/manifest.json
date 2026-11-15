@@ -1,18 +1,18 @@
 {
-  "version": "synthetic-2026.11.14-v2",
+  "version": "synthetic-2026.11.14-v3",
   "asOf": "2026-11-14",
   "generator": "scripts/generate-data.ts",
-  "seed": null,
+  "seed": 1360954432,
   "sourceFile": "data/synthetic/seed.json",
-  "sha256": "f3bc6969807c40b82f9a5546791509d3299deb492f8b59e63865fb795fb603ed",
+  "sha256": "ac1af77eb0eac1703254e68ba12d3036907e0749a7a9086205152cb5c3b00613",
   "synthetic": true,
   "counts": {
     "regions": 2,
-    "districts": 3,
+    "districts": 5,
     "facilities": 18,
     "products": 5,
     "stockRecords": 90,
-    "routes": 90,
-    "evidenceSnippets": 6
+    "routes": 48,
+    "evidenceSnippets": 7
   }
 }

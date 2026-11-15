@@ -1,215 +1,315 @@
 {
-  "version": "synthetic-2026.11.14-v2",
+  "version": "synthetic-2026.11.14-v3",
   "asOf": "2026-11-14",
-  "country": "Demo Republic",
+  "country": "Demo Republic (focus-country sandbox)",
   "countryCode": "DEMO",
   "currency": "USD",
   "regions": [
     {
-      "id": "highlands",
-      "name": "Highland Region"
+      "id": "west",
+      "name": "West Africa"
     },
     {
-      "id": "coast",
-      "name": "Coastal Region"
+      "id": "east-south",
+      "name": "East & Southern Africa"
     }
   ],
   "districts": [
     {
-      "id": "north",
-      "name": "Northern Valley",
-      "regionId": "highlands"
+      "id": "ng",
+      "name": "Nigeria",
+      "regionId": "west"
     },
     {
-      "id": "central",
-      "name": "Central Plateau",
-      "regionId": "highlands"
+      "id": "bf",
+      "name": "Burkina Faso",
+      "regionId": "west"
     },
     {
-      "id": "south",
-      "name": "Southern Coast",
-      "regionId": "coast"
+      "id": "et",
+      "name": "Ethiopia",
+      "regionId": "east-south"
+    },
+    {
+      "id": "ke",
+      "name": "Kenya",
+      "regionId": "east-south"
+    },
+    {
+      "id": "za",
+      "name": "South Africa",
+      "regionId": "east-south"
     }
   ],
   "facilities": [
     {
       "id": "fac-11",
-      "name": "Northgate District Hospital",
-      "districtId": "north",
+      "name": "Lagos University Teaching Hospital",
+      "districtId": "ng",
       "type": "hospital",
       "mapPosition": {
-        "x": 23,
-        "y": 20
+        "x": 15,
+        "y": 26
+      },
+      "nameReference": {
+        "country": "Nigeria",
+        "source": "https://luth.gov.ng/",
+        "note": "Real public facility name used as a reference placeholder; all operational figures in this demo are synthetic."
       }
     },
     {
       "id": "fac-12",
-      "name": "Riverbend Health Centre",
-      "districtId": "north",
-      "type": "health_centre",
+      "name": "National Hospital Abuja",
+      "districtId": "ng",
+      "type": "hospital",
       "mapPosition": {
-        "x": 30,
-        "y": 20
+        "x": 22,
+        "y": 31
+      },
+      "nameReference": {
+        "country": "Nigeria",
+        "source": "https://nationalhospital.gov.ng/",
+        "note": "Real public facility name used as a reference placeholder; all operational figures in this demo are synthetic."
       }
     },
     {
       "id": "fac-13",
-      "name": "Pine Hills Clinic",
-      "districtId": "north",
-      "type": "clinic",
+      "name": "Aminu Kano Teaching Hospital",
+      "districtId": "ng",
+      "type": "hospital",
       "mapPosition": {
-        "x": 37,
-        "y": 20
+        "x": 29,
+        "y": 32
+      },
+      "nameReference": {
+        "country": "Nigeria",
+        "source": "https://akth.org.ng/",
+        "note": "Real public facility name used as a reference placeholder; all operational figures in this demo are synthetic."
       }
     },
     {
       "id": "fac-14",
-      "name": "Lakeside Health Centre",
-      "districtId": "north",
-      "type": "health_centre",
-      "mapPosition": {
-        "x": 23,
-        "y": 29
-      }
-    },
-    {
-      "id": "fac-15",
-      "name": "Eastfield Clinic",
-      "districtId": "north",
-      "type": "clinic",
-      "mapPosition": {
-        "x": 30,
-        "y": 29
-      }
-    },
-    {
-      "id": "fac-16",
-      "name": "Harmony District Hospital",
-      "districtId": "north",
+      "name": "University College Hospital Ibadan",
+      "districtId": "ng",
       "type": "hospital",
       "mapPosition": {
-        "x": 37,
-        "y": 29
+        "x": 15,
+        "y": 37
+      },
+      "nameReference": {
+        "country": "Nigeria",
+        "source": "https://uch-ibadan.org.ng/",
+        "note": "Real public facility name used as a reference placeholder; all operational figures in this demo are synthetic."
       }
     },
     {
       "id": "fac-21",
-      "name": "Central District Hospital",
-      "districtId": "central",
+      "name": "CHU Yalgado Ouédraogo",
+      "districtId": "bf",
       "type": "hospital",
       "mapPosition": {
-        "x": 45,
-        "y": 42
+        "x": 5,
+        "y": 14
+      },
+      "nameReference": {
+        "country": "Burkina Faso",
+        "source": "https://en.wikipedia.org/wiki/Yalgado_Ou%C3%A9draogo_Teaching_Hospital",
+        "note": "Real public facility name used as a reference placeholder; all operational figures in this demo are synthetic."
       }
     },
     {
       "id": "fac-22",
-      "name": "Sunrise Health Centre",
-      "districtId": "central",
-      "type": "health_centre",
+      "name": "CHU de Bogodogo",
+      "districtId": "bf",
+      "type": "hospital",
       "mapPosition": {
-        "x": 52,
-        "y": 42
+        "x": 12,
+        "y": 19
+      },
+      "nameReference": {
+        "country": "Burkina Faso",
+        "source": "https://en.wikipedia.org/wiki/Bogodogo_University_Hospital",
+        "note": "Real public facility name used as a reference placeholder; all operational figures in this demo are synthetic."
       }
     },
     {
       "id": "fac-23",
-      "name": "Green Valley Clinic",
-      "districtId": "central",
-      "type": "clinic",
-      "mapPosition": {
-        "x": 59,
-        "y": 42
-      }
-    },
-    {
-      "id": "fac-24",
-      "name": "Hilltop Health Centre",
-      "districtId": "central",
-      "type": "health_centre",
-      "mapPosition": {
-        "x": 45,
-        "y": 51
-      }
-    },
-    {
-      "id": "fac-25",
-      "name": "Market Road Clinic",
-      "districtId": "central",
-      "type": "clinic",
-      "mapPosition": {
-        "x": 52,
-        "y": 51
-      }
-    },
-    {
-      "id": "fac-26",
-      "name": "Unity District Hospital",
-      "districtId": "central",
+      "name": "CHU Sourô Sanou",
+      "districtId": "bf",
       "type": "hospital",
       "mapPosition": {
-        "x": 59,
-        "y": 51
+        "x": 19,
+        "y": 20
+      },
+      "nameReference": {
+        "country": "Burkina Faso",
+        "source": "https://en.wikipedia.org/wiki/Sour%C3%B4_Sanou_University_Hospital",
+        "note": "Real public facility name used as a reference placeholder; all operational figures in this demo are synthetic."
       }
     },
     {
       "id": "fac-31",
-      "name": "Coastal District Hospital",
-      "districtId": "south",
+      "name": "Tikur Anbessa Specialized Hospital",
+      "districtId": "et",
       "type": "hospital",
       "mapPosition": {
-        "x": 61,
-        "y": 72
+        "x": 55,
+        "y": 22
+      },
+      "nameReference": {
+        "country": "Ethiopia",
+        "source": "https://en.wikipedia.org/wiki/Tikur_Anbessa_Specialized_Hospital",
+        "note": "Real public facility name used as a reference placeholder; all operational figures in this demo are synthetic."
       }
     },
     {
       "id": "fac-32",
-      "name": "Palm Grove Health Centre",
-      "districtId": "south",
-      "type": "health_centre",
+      "name": "St. Paul's Hospital Millennium Medical College",
+      "districtId": "et",
+      "type": "hospital",
       "mapPosition": {
-        "x": 68,
-        "y": 72
+        "x": 62,
+        "y": 27
+      },
+      "nameReference": {
+        "country": "Ethiopia",
+        "source": "https://en.wikipedia.org/wiki/St._Paul%27s_Hospital_Millennium_Medical_College",
+        "note": "Real public facility name used as a reference placeholder; all operational figures in this demo are synthetic."
       }
     },
     {
       "id": "fac-33",
-      "name": "Seabreeze Clinic",
-      "districtId": "south",
-      "type": "clinic",
+      "name": "Gandhi Memorial Hospital",
+      "districtId": "et",
+      "type": "hospital",
       "mapPosition": {
-        "x": 75,
-        "y": 72
+        "x": 69,
+        "y": 28
+      },
+      "nameReference": {
+        "country": "Ethiopia",
+        "source": "https://en.wikipedia.org/wiki/Gandhi_Memorial_Hospital",
+        "note": "Real public facility name used as a reference placeholder; all operational figures in this demo are synthetic."
       }
     },
     {
       "id": "fac-34",
-      "name": "Lagoon Health Centre",
-      "districtId": "south",
-      "type": "health_centre",
-      "mapPosition": {
-        "x": 61,
-        "y": 81
-      }
-    },
-    {
-      "id": "fac-35",
-      "name": "Southpoint Clinic",
-      "districtId": "south",
-      "type": "clinic",
-      "mapPosition": {
-        "x": 68,
-        "y": 81
-      }
-    },
-    {
-      "id": "fac-36",
-      "name": "Bridgeview District Hospital",
-      "districtId": "south",
+      "name": "Zewditu Memorial Hospital",
+      "districtId": "et",
       "type": "hospital",
       "mapPosition": {
-        "x": 75,
+        "x": 55,
+        "y": 33
+      },
+      "nameReference": {
+        "country": "Ethiopia",
+        "source": "https://en.wikipedia.org/wiki/Zewditu_Memorial_Hospital",
+        "note": "Real public facility name used as a reference placeholder; all operational figures in this demo are synthetic."
+      }
+    },
+    {
+      "id": "fac-41",
+      "name": "Kenyatta National Hospital",
+      "districtId": "ke",
+      "type": "hospital",
+      "mapPosition": {
+        "x": 59,
+        "y": 48
+      },
+      "nameReference": {
+        "country": "Kenya",
+        "source": "https://knh.or.ke/",
+        "note": "Real public facility name used as a reference placeholder; all operational figures in this demo are synthetic."
+      }
+    },
+    {
+      "id": "fac-42",
+      "name": "Moi Teaching and Referral Hospital",
+      "districtId": "ke",
+      "type": "hospital",
+      "mapPosition": {
+        "x": 66,
+        "y": 53
+      },
+      "nameReference": {
+        "country": "Kenya",
+        "source": "https://mtrh.or.ke/",
+        "note": "Real public facility name used as a reference placeholder; all operational figures in this demo are synthetic."
+      }
+    },
+    {
+      "id": "fac-43",
+      "name": "Kibera South Health Centre",
+      "districtId": "ke",
+      "type": "health_centre",
+      "mapPosition": {
+        "x": 73,
+        "y": 54
+      },
+      "nameReference": {
+        "country": "Kenya",
+        "source": "https://www.msf.org.za/covid-19-east-africa",
+        "note": "Real public facility name used as a reference placeholder; all operational figures in this demo are synthetic."
+      }
+    },
+    {
+      "id": "fac-44",
+      "name": "Mathare North Health Centre",
+      "districtId": "ke",
+      "type": "health_centre",
+      "mapPosition": {
+        "x": 59,
+        "y": 59
+      },
+      "nameReference": {
+        "country": "Kenya",
+        "source": "https://afya360.co.ke/health-facility/mathare-north-health-centre/901",
+        "note": "Real public facility name used as a reference placeholder; all operational figures in this demo are synthetic."
+      }
+    },
+    {
+      "id": "fac-51",
+      "name": "Chris Hani Baragwanath Academic Hospital",
+      "districtId": "za",
+      "type": "hospital",
+      "mapPosition": {
+        "x": 39,
+        "y": 76
+      },
+      "nameReference": {
+        "country": "South Africa",
+        "source": "https://en.wikipedia.org/wiki/Chris_Hani_Baragwanath_Academic_Hospital",
+        "note": "Real public facility name used as a reference placeholder; all operational figures in this demo are synthetic."
+      }
+    },
+    {
+      "id": "fac-52",
+      "name": "Groote Schuur Hospital",
+      "districtId": "za",
+      "type": "hospital",
+      "mapPosition": {
+        "x": 46,
         "y": 81
+      },
+      "nameReference": {
+        "country": "South Africa",
+        "source": "https://en.wikipedia.org/wiki/Groote_Schuur_Hospital",
+        "note": "Real public facility name used as a reference placeholder; all operational figures in this demo are synthetic."
+      }
+    },
+    {
+      "id": "fac-53",
+      "name": "Steve Biko Academic Hospital",
+      "districtId": "za",
+      "type": "hospital",
+      "mapPosition": {
+        "x": 53,
+        "y": 82
+      },
+      "nameReference": {
+        "country": "South Africa",
+        "source": "https://en.wikipedia.org/wiki/Steve_Biko_Academic_Hospital",
+        "note": "Real public facility name used as a reference placeholder; all operational figures in this demo are synthetic."
       }
     }
   ],
@@ -1391,7 +1491,7 @@
       "leadTimeDays": 14
     },
     {
-      "facilityId": "fac-15",
+      "facilityId": "fac-21",
       "productId": "med-amox",
       "reportedAt": "2026-11-14",
       "usableUnits": 1583,
@@ -1428,13 +1528,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-15-med-amox-a",
+          "id": "batch-fac-21-med-amox-a",
           "quantity": 791,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-15-med-amox-b",
+          "id": "batch-fac-21-med-amox-b",
           "quantity": 792,
           "expiryDate": "2027-08-01",
           "status": "released"
@@ -1444,7 +1544,7 @@
       "leadTimeDays": 5
     },
     {
-      "facilityId": "fac-15",
+      "facilityId": "fac-21",
       "productId": "med-ors",
       "reportedAt": "2026-11-14",
       "usableUnits": 416,
@@ -1481,13 +1581,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-15-med-ors-a",
+          "id": "batch-fac-21-med-ors-a",
           "quantity": 208,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-15-med-ors-b",
+          "id": "batch-fac-21-med-ors-b",
           "quantity": 208,
           "expiryDate": "2027-08-31",
           "status": "released"
@@ -1497,7 +1597,7 @@
       "leadTimeDays": 5
     },
     {
-      "facilityId": "fac-15",
+      "facilityId": "fac-21",
       "productId": "med-oxy",
       "reportedAt": "2026-11-14",
       "usableUnits": 0,
@@ -1513,13 +1613,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-15-med-oxy-a",
+          "id": "batch-fac-21-med-oxy-a",
           "quantity": 0,
           "expiryDate": "2026-12-23",
           "status": "released"
         },
         {
-          "id": "batch-fac-15-med-oxy-b",
+          "id": "batch-fac-21-med-oxy-b",
           "quantity": 0,
           "expiryDate": "2027-09-30",
           "status": "released"
@@ -1529,7 +1629,7 @@
       "leadTimeDays": 5
     },
     {
-      "facilityId": "fac-15",
+      "facilityId": "fac-21",
       "productId": "med-act",
       "reportedAt": "2026-11-14",
       "usableUnits": 104,
@@ -1566,13 +1666,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-15-med-act-a",
+          "id": "batch-fac-21-med-act-a",
           "quantity": 52,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-15-med-act-b",
+          "id": "batch-fac-21-med-act-b",
           "quantity": 52,
           "expiryDate": "2027-10-30",
           "status": "released"
@@ -1582,7 +1682,7 @@
       "leadTimeDays": 5
     },
     {
-      "facilityId": "fac-15",
+      "facilityId": "fac-21",
       "productId": "med-ins",
       "reportedAt": "2026-11-14",
       "usableUnits": 147,
@@ -1619,13 +1719,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-15-med-ins-a",
+          "id": "batch-fac-21-med-ins-a",
           "quantity": 73,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-15-med-ins-b",
+          "id": "batch-fac-21-med-ins-b",
           "quantity": 74,
           "expiryDate": "2027-11-29",
           "status": "released"
@@ -1633,7 +1733,7 @@
       ],
       "inbound": [
         {
-          "id": "planned-fac-15-med-ins",
+          "id": "planned-fac-21-med-ins",
           "quantity": 221,
           "expectedDate": "2026-11-24",
           "expiryDate": "2027-09-30",
@@ -1643,7 +1743,7 @@
       "leadTimeDays": 5
     },
     {
-      "facilityId": "fac-16",
+      "facilityId": "fac-22",
       "productId": "med-amox",
       "reportedAt": "2026-11-13",
       "usableUnits": 830,
@@ -1680,13 +1780,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-16-med-amox-a",
+          "id": "batch-fac-22-med-amox-a",
           "quantity": 415,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-16-med-amox-b",
+          "id": "batch-fac-22-med-amox-b",
           "quantity": 415,
           "expiryDate": "2027-08-01",
           "status": "released"
@@ -1694,7 +1794,7 @@
       ],
       "inbound": [
         {
-          "id": "inbound-fac-16-med-amox",
+          "id": "inbound-fac-22-med-amox",
           "quantity": 461,
           "expectedDate": "2026-11-20",
           "expiryDate": "2027-09-10",
@@ -1704,7 +1804,7 @@
       "leadTimeDays": 8
     },
     {
-      "facilityId": "fac-16",
+      "facilityId": "fac-22",
       "productId": "med-ors",
       "reportedAt": "2026-11-13",
       "usableUnits": 1041,
@@ -1741,13 +1841,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-16-med-ors-a",
+          "id": "batch-fac-22-med-ors-a",
           "quantity": 364,
           "expiryDate": "2026-12-24",
           "status": "released"
         },
         {
-          "id": "batch-fac-16-med-ors-b",
+          "id": "batch-fac-22-med-ors-b",
           "quantity": 677,
           "expiryDate": "2027-08-31",
           "status": "released"
@@ -1757,7 +1857,7 @@
       "leadTimeDays": 8
     },
     {
-      "facilityId": "fac-16",
+      "facilityId": "fac-22",
       "productId": "med-oxy",
       "reportedAt": "2026-11-13",
       "usableUnits": 39,
@@ -1794,13 +1894,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-16-med-oxy-a",
+          "id": "batch-fac-22-med-oxy-a",
           "quantity": 19,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-16-med-oxy-b",
+          "id": "batch-fac-22-med-oxy-b",
           "quantity": 20,
           "expiryDate": "2027-09-30",
           "status": "released"
@@ -1810,7 +1910,7 @@
       "leadTimeDays": 8
     },
     {
-      "facilityId": "fac-16",
+      "facilityId": "fac-22",
       "productId": "med-act",
       "reportedAt": "2026-11-13",
       "usableUnits": 481,
@@ -1847,13 +1947,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-16-med-act-a",
+          "id": "batch-fac-22-med-act-a",
           "quantity": 240,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-16-med-act-b",
+          "id": "batch-fac-22-med-act-b",
           "quantity": 241,
           "expiryDate": "2027-10-30",
           "status": "released"
@@ -1861,7 +1961,7 @@
       ],
       "inbound": [
         {
-          "id": "inbound-fac-16-med-act",
+          "id": "inbound-fac-22-med-act",
           "quantity": 219,
           "expectedDate": "2026-11-20",
           "expiryDate": "2027-09-10",
@@ -1871,7 +1971,7 @@
       "leadTimeDays": 8
     },
     {
-      "facilityId": "fac-16",
+      "facilityId": "fac-22",
       "productId": "med-ins",
       "reportedAt": "2026-11-13",
       "usableUnits": 72,
@@ -1908,19 +2008,19 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-16-med-ins-a",
+          "id": "batch-fac-22-med-ins-a",
           "quantity": 36,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-16-med-ins-b",
+          "id": "batch-fac-22-med-ins-b",
           "quantity": 36,
           "expiryDate": "2027-11-29",
           "status": "released"
         },
         {
-          "id": "batch-fac-16-med-ins-q",
+          "id": "batch-fac-22-med-ins-q",
           "quantity": 3,
           "expiryDate": "2027-06-02",
           "status": "quarantined"
@@ -1930,7 +2030,7 @@
       "leadTimeDays": 8
     },
     {
-      "facilityId": "fac-21",
+      "facilityId": "fac-23",
       "productId": "med-amox",
       "reportedAt": "2026-11-12",
       "usableUnits": 2158,
@@ -1967,13 +2067,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-21-med-amox-a",
+          "id": "batch-fac-23-med-amox-a",
           "quantity": 755,
           "expiryDate": "2026-12-25",
           "status": "released"
         },
         {
-          "id": "batch-fac-21-med-amox-b",
+          "id": "batch-fac-23-med-amox-b",
           "quantity": 1403,
           "expiryDate": "2027-08-01",
           "status": "released"
@@ -1983,7 +2083,7 @@
       "leadTimeDays": 11
     },
     {
-      "facilityId": "fac-21",
+      "facilityId": "fac-23",
       "productId": "med-ors",
       "reportedAt": "2026-11-12",
       "usableUnits": 923,
@@ -2020,13 +2120,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-21-med-ors-a",
+          "id": "batch-fac-23-med-ors-a",
           "quantity": 461,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-21-med-ors-b",
+          "id": "batch-fac-23-med-ors-b",
           "quantity": 462,
           "expiryDate": "2027-08-31",
           "status": "released"
@@ -2036,7 +2136,7 @@
       "leadTimeDays": 11
     },
     {
-      "facilityId": "fac-21",
+      "facilityId": "fac-23",
       "productId": "med-oxy",
       "reportedAt": "2026-11-12",
       "usableUnits": 110,
@@ -2073,13 +2173,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-21-med-oxy-a",
+          "id": "batch-fac-23-med-oxy-a",
           "quantity": 55,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-21-med-oxy-b",
+          "id": "batch-fac-23-med-oxy-b",
           "quantity": 55,
           "expiryDate": "2027-09-30",
           "status": "released"
@@ -2089,7 +2189,7 @@
       "leadTimeDays": 11
     },
     {
-      "facilityId": "fac-21",
+      "facilityId": "fac-23",
       "productId": "med-act",
       "reportedAt": "2026-11-12",
       "usableUnits": 0,
@@ -2126,19 +2226,19 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-21-med-act-a",
+          "id": "batch-fac-23-med-act-a",
           "quantity": 0,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-21-med-act-b",
+          "id": "batch-fac-23-med-act-b",
           "quantity": 0,
           "expiryDate": "2027-10-30",
           "status": "released"
         },
         {
-          "id": "batch-fac-21-med-act-q",
+          "id": "batch-fac-23-med-act-q",
           "quantity": 13,
           "expiryDate": "2027-06-02",
           "status": "quarantined"
@@ -2148,7 +2248,7 @@
       "leadTimeDays": 11
     },
     {
-      "facilityId": "fac-21",
+      "facilityId": "fac-23",
       "productId": "med-ins",
       "reportedAt": "2026-11-12",
       "usableUnits": 28,
@@ -2185,13 +2285,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-21-med-ins-a",
+          "id": "batch-fac-23-med-ins-a",
           "quantity": 14,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-21-med-ins-b",
+          "id": "batch-fac-23-med-ins-b",
           "quantity": 14,
           "expiryDate": "2027-11-29",
           "status": "released"
@@ -2201,7 +2301,7 @@
       "leadTimeDays": 11
     },
     {
-      "facilityId": "fac-22",
+      "facilityId": "fac-31",
       "productId": "med-amox",
       "reportedAt": "2026-11-11",
       "usableUnits": 423,
@@ -2238,13 +2338,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-22-med-amox-a",
+          "id": "batch-fac-31-med-amox-a",
           "quantity": 211,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-22-med-amox-b",
+          "id": "batch-fac-31-med-amox-b",
           "quantity": 212,
           "expiryDate": "2027-08-01",
           "status": "released"
@@ -2252,7 +2352,7 @@
       ],
       "inbound": [
         {
-          "id": "planned-fac-22-med-amox",
+          "id": "planned-fac-31-med-amox",
           "quantity": 634,
           "expectedDate": "2026-11-24",
           "expiryDate": "2027-09-30",
@@ -2262,7 +2362,7 @@
       "leadTimeDays": 14
     },
     {
-      "facilityId": "fac-22",
+      "facilityId": "fac-31",
       "productId": "med-ors",
       "reportedAt": "2026-11-11",
       "usableUnits": 670,
@@ -2299,13 +2399,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-22-med-ors-a",
+          "id": "batch-fac-31-med-ors-a",
           "quantity": 335,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-22-med-ors-b",
+          "id": "batch-fac-31-med-ors-b",
           "quantity": 335,
           "expiryDate": "2027-08-31",
           "status": "released"
@@ -2313,7 +2413,7 @@
       ],
       "inbound": [
         {
-          "id": "inbound-fac-22-med-ors",
+          "id": "inbound-fac-31-med-ors",
           "quantity": 372,
           "expectedDate": "2026-11-22",
           "expiryDate": "2027-09-10",
@@ -2323,7 +2423,7 @@
       "leadTimeDays": 14
     },
     {
-      "facilityId": "fac-22",
+      "facilityId": "fac-31",
       "productId": "med-oxy",
       "reportedAt": "2026-11-11",
       "usableUnits": 493,
@@ -2360,19 +2460,19 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-22-med-oxy-a",
+          "id": "batch-fac-31-med-oxy-a",
           "quantity": 246,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-22-med-oxy-b",
+          "id": "batch-fac-31-med-oxy-b",
           "quantity": 247,
           "expiryDate": "2027-09-30",
           "status": "released"
         },
         {
-          "id": "batch-fac-22-med-oxy-q",
+          "id": "batch-fac-31-med-oxy-q",
           "quantity": 7,
           "expiryDate": "2027-06-02",
           "status": "quarantined"
@@ -2382,7 +2482,7 @@
       "leadTimeDays": 14
     },
     {
-      "facilityId": "fac-22",
+      "facilityId": "fac-31",
       "productId": "med-act",
       "reportedAt": "2026-11-11",
       "usableUnits": 141,
@@ -2419,13 +2519,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-22-med-act-a",
+          "id": "batch-fac-31-med-act-a",
           "quantity": 70,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-22-med-act-b",
+          "id": "batch-fac-31-med-act-b",
           "quantity": 71,
           "expiryDate": "2027-10-30",
           "status": "released"
@@ -2435,7 +2535,7 @@
       "leadTimeDays": 14
     },
     {
-      "facilityId": "fac-22",
+      "facilityId": "fac-31",
       "productId": "med-ins",
       "reportedAt": "2026-11-11",
       "usableUnits": 266,
@@ -2472,13 +2572,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-22-med-ins-a",
+          "id": "batch-fac-31-med-ins-a",
           "quantity": 133,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-22-med-ins-b",
+          "id": "batch-fac-31-med-ins-b",
           "quantity": 133,
           "expiryDate": "2027-11-29",
           "status": "released"
@@ -2486,7 +2586,7 @@
       ],
       "inbound": [
         {
-          "id": "inbound-fac-22-med-ins",
+          "id": "inbound-fac-31-med-ins",
           "quantity": 121,
           "expectedDate": "2026-11-22",
           "expiryDate": "2027-09-10",
@@ -2496,7 +2596,7 @@
       "leadTimeDays": 14
     },
     {
-      "facilityId": "fac-23",
+      "facilityId": "fac-32",
       "productId": "med-amox",
       "reportedAt": "2026-11-14",
       "usableUnits": 654,
@@ -2533,13 +2633,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-23-med-amox-a",
+          "id": "batch-fac-32-med-amox-a",
           "quantity": 327,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-23-med-amox-b",
+          "id": "batch-fac-32-med-amox-b",
           "quantity": 327,
           "expiryDate": "2027-08-01",
           "status": "released"
@@ -2549,7 +2649,7 @@
       "leadTimeDays": 5
     },
     {
-      "facilityId": "fac-23",
+      "facilityId": "fac-32",
       "productId": "med-ors",
       "reportedAt": "2026-11-14",
       "usableUnits": 1768,
@@ -2586,19 +2686,19 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-23-med-ors-a",
+          "id": "batch-fac-32-med-ors-a",
           "quantity": 884,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-23-med-ors-b",
+          "id": "batch-fac-32-med-ors-b",
           "quantity": 884,
           "expiryDate": "2027-08-31",
           "status": "released"
         },
         {
-          "id": "batch-fac-23-med-ors-q",
+          "id": "batch-fac-32-med-ors-q",
           "quantity": 20,
           "expiryDate": "2027-06-02",
           "status": "quarantined"
@@ -2608,7 +2708,7 @@
       "leadTimeDays": 5
     },
     {
-      "facilityId": "fac-23",
+      "facilityId": "fac-32",
       "productId": "med-oxy",
       "reportedAt": "2026-11-14",
       "usableUnits": 479,
@@ -2645,13 +2745,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-23-med-oxy-a",
+          "id": "batch-fac-32-med-oxy-a",
           "quantity": 239,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-23-med-oxy-b",
+          "id": "batch-fac-32-med-oxy-b",
           "quantity": 240,
           "expiryDate": "2027-09-30",
           "status": "released"
@@ -2661,7 +2761,7 @@
       "leadTimeDays": 5
     },
     {
-      "facilityId": "fac-23",
+      "facilityId": "fac-32",
       "productId": "med-act",
       "reportedAt": "2026-11-14",
       "usableUnits": 313,
@@ -2698,13 +2798,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-23-med-act-a",
+          "id": "batch-fac-32-med-act-a",
           "quantity": 156,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-23-med-act-b",
+          "id": "batch-fac-32-med-act-b",
           "quantity": 157,
           "expiryDate": "2027-10-30",
           "status": "released"
@@ -2714,7 +2814,7 @@
       "leadTimeDays": 5
     },
     {
-      "facilityId": "fac-23",
+      "facilityId": "fac-32",
       "productId": "med-ins",
       "reportedAt": "2026-11-14",
       "usableUnits": 0,
@@ -2751,13 +2851,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-23-med-ins-a",
+          "id": "batch-fac-32-med-ins-a",
           "quantity": 0,
           "expiryDate": "2026-12-27",
           "status": "released"
         },
         {
-          "id": "batch-fac-23-med-ins-b",
+          "id": "batch-fac-32-med-ins-b",
           "quantity": 0,
           "expiryDate": "2027-11-29",
           "status": "released"
@@ -2767,7 +2867,7 @@
       "leadTimeDays": 5
     },
     {
-      "facilityId": "fac-24",
+      "facilityId": "fac-33",
       "productId": "med-amox",
       "reportedAt": "2026-11-13",
       "usableUnits": 177,
@@ -2804,19 +2904,19 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-24-med-amox-a",
+          "id": "batch-fac-33-med-amox-a",
           "quantity": 88,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-24-med-amox-b",
+          "id": "batch-fac-33-med-amox-b",
           "quantity": 89,
           "expiryDate": "2027-08-01",
           "status": "released"
         },
         {
-          "id": "batch-fac-24-med-amox-q",
+          "id": "batch-fac-33-med-amox-q",
           "quantity": 30,
           "expiryDate": "2027-06-02",
           "status": "quarantined"
@@ -2826,7 +2926,7 @@
       "leadTimeDays": 8
     },
     {
-      "facilityId": "fac-24",
+      "facilityId": "fac-33",
       "productId": "med-ors",
       "reportedAt": "2026-11-13",
       "usableUnits": 348,
@@ -2863,13 +2963,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-24-med-ors-a",
+          "id": "batch-fac-33-med-ors-a",
           "quantity": 174,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-24-med-ors-b",
+          "id": "batch-fac-33-med-ors-b",
           "quantity": 174,
           "expiryDate": "2027-08-31",
           "status": "released"
@@ -2877,7 +2977,7 @@
       ],
       "inbound": [
         {
-          "id": "planned-fac-24-med-ors",
+          "id": "planned-fac-33-med-ors",
           "quantity": 522,
           "expectedDate": "2026-11-24",
           "expiryDate": "2027-09-30",
@@ -2887,7 +2987,7 @@
       "leadTimeDays": 8
     },
     {
-      "facilityId": "fac-24",
+      "facilityId": "fac-33",
       "productId": "med-oxy",
       "reportedAt": "2026-11-13",
       "usableUnits": 373,
@@ -2924,13 +3024,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-24-med-oxy-a",
+          "id": "batch-fac-33-med-oxy-a",
           "quantity": 186,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-24-med-oxy-b",
+          "id": "batch-fac-33-med-oxy-b",
           "quantity": 187,
           "expiryDate": "2027-09-30",
           "status": "released"
@@ -2938,7 +3038,7 @@
       ],
       "inbound": [
         {
-          "id": "inbound-fac-24-med-oxy",
+          "id": "inbound-fac-33-med-oxy",
           "quantity": 207,
           "expectedDate": "2026-11-20",
           "expiryDate": "2027-09-10",
@@ -2948,7 +3048,7 @@
       "leadTimeDays": 8
     },
     {
-      "facilityId": "fac-24",
+      "facilityId": "fac-33",
       "productId": "med-act",
       "reportedAt": "2026-11-13",
       "usableUnits": 1199,
@@ -2985,13 +3085,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-24-med-act-a",
+          "id": "batch-fac-33-med-act-a",
           "quantity": 419,
           "expiryDate": "2026-12-28",
           "status": "released"
         },
         {
-          "id": "batch-fac-24-med-act-b",
+          "id": "batch-fac-33-med-act-b",
           "quantity": 780,
           "expiryDate": "2027-10-30",
           "status": "released"
@@ -3001,7 +3101,7 @@
       "leadTimeDays": 8
     },
     {
-      "facilityId": "fac-24",
+      "facilityId": "fac-33",
       "productId": "med-ins",
       "reportedAt": "2026-11-13",
       "usableUnits": 91,
@@ -3038,13 +3138,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-24-med-ins-a",
+          "id": "batch-fac-33-med-ins-a",
           "quantity": 45,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-24-med-ins-b",
+          "id": "batch-fac-33-med-ins-b",
           "quantity": 46,
           "expiryDate": "2027-11-29",
           "status": "released"
@@ -3054,7 +3154,7 @@
       "leadTimeDays": 8
     },
     {
-      "facilityId": "fac-25",
+      "facilityId": "fac-34",
       "productId": "med-amox",
       "reportedAt": "2026-11-02",
       "usableUnits": 992,
@@ -3091,13 +3191,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-25-med-amox-a",
+          "id": "batch-fac-34-med-amox-a",
           "quantity": 496,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-25-med-amox-b",
+          "id": "batch-fac-34-med-amox-b",
           "quantity": 496,
           "expiryDate": "2027-08-01",
           "status": "released"
@@ -3105,7 +3205,7 @@
       ],
       "inbound": [
         {
-          "id": "inbound-fac-25-med-amox",
+          "id": "inbound-fac-34-med-amox",
           "quantity": 451,
           "expectedDate": "2026-11-21",
           "expiryDate": "2027-09-10",
@@ -3115,7 +3215,7 @@
       "leadTimeDays": 11
     },
     {
-      "facilityId": "fac-25",
+      "facilityId": "fac-34",
       "productId": "med-ors",
       "reportedAt": "2026-11-12",
       "usableUnits": 360,
@@ -3152,13 +3252,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-25-med-ors-a",
+          "id": "batch-fac-34-med-ors-a",
           "quantity": 180,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-25-med-ors-b",
+          "id": "batch-fac-34-med-ors-b",
           "quantity": 180,
           "expiryDate": "2027-08-31",
           "status": "released"
@@ -3168,7 +3268,7 @@
       "leadTimeDays": 11
     },
     {
-      "facilityId": "fac-25",
+      "facilityId": "fac-34",
       "productId": "med-oxy",
       "reportedAt": "2026-11-12",
       "usableUnits": 360,
@@ -3205,13 +3305,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-25-med-oxy-a",
+          "id": "batch-fac-34-med-oxy-a",
           "quantity": 125,
           "expiryDate": "2026-12-29",
           "status": "released"
         },
         {
-          "id": "batch-fac-25-med-oxy-b",
+          "id": "batch-fac-34-med-oxy-b",
           "quantity": 235,
           "expiryDate": "2027-09-30",
           "status": "released"
@@ -3221,7 +3321,7 @@
       "leadTimeDays": 11
     },
     {
-      "facilityId": "fac-25",
+      "facilityId": "fac-34",
       "productId": "med-act",
       "reportedAt": "2026-11-12",
       "usableUnits": 617,
@@ -3258,13 +3358,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-25-med-act-a",
+          "id": "batch-fac-34-med-act-a",
           "quantity": 308,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-25-med-act-b",
+          "id": "batch-fac-34-med-act-b",
           "quantity": 309,
           "expiryDate": "2027-10-30",
           "status": "released"
@@ -3274,7 +3374,7 @@
       "leadTimeDays": 11
     },
     {
-      "facilityId": "fac-25",
+      "facilityId": "fac-34",
       "productId": "med-ins",
       "reportedAt": "2026-11-12",
       "usableUnits": 60,
@@ -3311,13 +3411,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-25-med-ins-a",
+          "id": "batch-fac-34-med-ins-a",
           "quantity": 30,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-25-med-ins-b",
+          "id": "batch-fac-34-med-ins-b",
           "quantity": 30,
           "expiryDate": "2027-11-29",
           "status": "released"
@@ -3327,7 +3427,7 @@
       "leadTimeDays": 11
     },
     {
-      "facilityId": "fac-26",
+      "facilityId": "fac-41",
       "productId": "med-amox",
       "reportedAt": "2026-11-11",
       "usableUnits": 0,
@@ -3364,13 +3464,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-26-med-amox-a",
+          "id": "batch-fac-41-med-amox-a",
           "quantity": 0,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-26-med-amox-b",
+          "id": "batch-fac-41-med-amox-b",
           "quantity": 0,
           "expiryDate": "2027-08-01",
           "status": "released"
@@ -3380,7 +3480,7 @@
       "leadTimeDays": 14
     },
     {
-      "facilityId": "fac-26",
+      "facilityId": "fac-41",
       "productId": "med-ors",
       "reportedAt": "2026-11-11",
       "usableUnits": 101,
@@ -3417,13 +3517,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-26-med-ors-a",
+          "id": "batch-fac-41-med-ors-a",
           "quantity": 35,
           "expiryDate": "2026-12-30",
           "status": "released"
         },
         {
-          "id": "batch-fac-26-med-ors-b",
+          "id": "batch-fac-41-med-ors-b",
           "quantity": 66,
           "expiryDate": "2027-08-31",
           "status": "released"
@@ -3433,7 +3533,7 @@
       "leadTimeDays": 14
     },
     {
-      "facilityId": "fac-26",
+      "facilityId": "fac-41",
       "productId": "med-oxy",
       "reportedAt": "2026-11-11",
       "usableUnits": 90,
@@ -3470,13 +3570,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-26-med-oxy-a",
+          "id": "batch-fac-41-med-oxy-a",
           "quantity": 45,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-26-med-oxy-b",
+          "id": "batch-fac-41-med-oxy-b",
           "quantity": 45,
           "expiryDate": "2027-09-30",
           "status": "released"
@@ -3484,7 +3584,7 @@
       ],
       "inbound": [
         {
-          "id": "planned-fac-26-med-oxy",
+          "id": "planned-fac-41-med-oxy",
           "quantity": 135,
           "expectedDate": "2026-11-24",
           "expiryDate": "2027-09-30",
@@ -3494,7 +3594,7 @@
       "leadTimeDays": 14
     },
     {
-      "facilityId": "fac-26",
+      "facilityId": "fac-41",
       "productId": "med-act",
       "reportedAt": "2026-11-11",
       "usableUnits": 462,
@@ -3531,13 +3631,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-26-med-act-a",
+          "id": "batch-fac-41-med-act-a",
           "quantity": 231,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-26-med-act-b",
+          "id": "batch-fac-41-med-act-b",
           "quantity": 231,
           "expiryDate": "2027-10-30",
           "status": "released"
@@ -3545,7 +3645,7 @@
       ],
       "inbound": [
         {
-          "id": "inbound-fac-26-med-act",
+          "id": "inbound-fac-41-med-act",
           "quantity": 256,
           "expectedDate": "2026-11-22",
           "expiryDate": "2027-09-10",
@@ -3555,7 +3655,7 @@
       "leadTimeDays": 14
     },
     {
-      "facilityId": "fac-26",
+      "facilityId": "fac-41",
       "productId": "med-ins",
       "reportedAt": "2026-11-11",
       "usableUnits": 314,
@@ -3592,13 +3692,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-26-med-ins-a",
+          "id": "batch-fac-41-med-ins-a",
           "quantity": 157,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-26-med-ins-b",
+          "id": "batch-fac-41-med-ins-b",
           "quantity": 157,
           "expiryDate": "2027-11-29",
           "status": "released"
@@ -3608,7 +3708,7 @@
       "leadTimeDays": 14
     },
     {
-      "facilityId": "fac-31",
+      "facilityId": "fac-42",
       "productId": "med-amox",
       "reportedAt": "2026-11-14",
       "usableUnits": 252,
@@ -3645,13 +3745,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-31-med-amox-a",
+          "id": "batch-fac-42-med-amox-a",
           "quantity": 88,
           "expiryDate": "2026-12-31",
           "status": "released"
         },
         {
-          "id": "batch-fac-31-med-amox-b",
+          "id": "batch-fac-42-med-amox-b",
           "quantity": 164,
           "expiryDate": "2027-08-01",
           "status": "released"
@@ -3661,7 +3761,7 @@
       "leadTimeDays": 5
     },
     {
-      "facilityId": "fac-31",
+      "facilityId": "fac-42",
       "productId": "med-ors",
       "reportedAt": "2026-11-14",
       "usableUnits": 784,
@@ -3698,13 +3798,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-31-med-ors-a",
+          "id": "batch-fac-42-med-ors-a",
           "quantity": 392,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-31-med-ors-b",
+          "id": "batch-fac-42-med-ors-b",
           "quantity": 392,
           "expiryDate": "2027-08-31",
           "status": "released"
@@ -3712,7 +3812,7 @@
       ],
       "inbound": [
         {
-          "id": "inbound-fac-31-med-ors",
+          "id": "inbound-fac-42-med-ors",
           "quantity": 356,
           "expectedDate": "2026-11-19",
           "expiryDate": "2027-09-10",
@@ -3722,7 +3822,7 @@
       "leadTimeDays": 5
     },
     {
-      "facilityId": "fac-31",
+      "facilityId": "fac-42",
       "productId": "med-oxy",
       "reportedAt": "2026-11-14",
       "usableUnits": 167,
@@ -3759,13 +3859,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-31-med-oxy-a",
+          "id": "batch-fac-42-med-oxy-a",
           "quantity": 83,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-31-med-oxy-b",
+          "id": "batch-fac-42-med-oxy-b",
           "quantity": 84,
           "expiryDate": "2027-09-30",
           "status": "released"
@@ -3775,7 +3875,7 @@
       "leadTimeDays": 5
     },
     {
-      "facilityId": "fac-31",
+      "facilityId": "fac-42",
       "productId": "med-act",
       "reportedAt": "2026-11-14",
       "usableUnits": 1249,
@@ -3812,13 +3912,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-31-med-act-a",
+          "id": "batch-fac-42-med-act-a",
           "quantity": 624,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-31-med-act-b",
+          "id": "batch-fac-42-med-act-b",
           "quantity": 625,
           "expiryDate": "2027-10-30",
           "status": "released"
@@ -3828,7 +3928,7 @@
       "leadTimeDays": 5
     },
     {
-      "facilityId": "fac-31",
+      "facilityId": "fac-42",
       "productId": "med-ins",
       "reportedAt": "2026-11-14",
       "usableUnits": 333,
@@ -3865,13 +3965,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-31-med-ins-a",
+          "id": "batch-fac-42-med-ins-a",
           "quantity": 166,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-31-med-ins-b",
+          "id": "batch-fac-42-med-ins-b",
           "quantity": 167,
           "expiryDate": "2027-11-29",
           "status": "released"
@@ -3881,7 +3981,7 @@
       "leadTimeDays": 5
     },
     {
-      "facilityId": "fac-32",
+      "facilityId": "fac-43",
       "productId": "med-amox",
       "reportedAt": "2026-11-13",
       "usableUnits": 536,
@@ -3918,13 +4018,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-32-med-amox-a",
+          "id": "batch-fac-43-med-amox-a",
           "quantity": 268,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-32-med-amox-b",
+          "id": "batch-fac-43-med-amox-b",
           "quantity": 268,
           "expiryDate": "2027-08-01",
           "status": "released"
@@ -3934,7 +4034,7 @@
       "leadTimeDays": 8
     },
     {
-      "facilityId": "fac-32",
+      "facilityId": "fac-43",
       "productId": "med-ors",
       "reportedAt": "2026-11-13",
       "usableUnits": 0,
@@ -3971,13 +4071,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-32-med-ors-a",
+          "id": "batch-fac-43-med-ors-a",
           "quantity": 0,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-32-med-ors-b",
+          "id": "batch-fac-43-med-ors-b",
           "quantity": 0,
           "expiryDate": "2027-08-31",
           "status": "released"
@@ -3987,7 +4087,7 @@
       "leadTimeDays": 8
     },
     {
-      "facilityId": "fac-32",
+      "facilityId": "fac-43",
       "productId": "med-oxy",
       "reportedAt": "2026-11-13",
       "usableUnits": 52,
@@ -4024,13 +4124,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-32-med-oxy-a",
+          "id": "batch-fac-43-med-oxy-a",
           "quantity": 26,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-32-med-oxy-b",
+          "id": "batch-fac-43-med-oxy-b",
           "quantity": 26,
           "expiryDate": "2027-09-30",
           "status": "released"
@@ -4040,7 +4140,7 @@
       "leadTimeDays": 8
     },
     {
-      "facilityId": "fac-32",
+      "facilityId": "fac-43",
       "productId": "med-act",
       "reportedAt": "2026-11-13",
       "usableUnits": 254,
@@ -4077,13 +4177,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-32-med-act-a",
+          "id": "batch-fac-43-med-act-a",
           "quantity": 127,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-32-med-act-b",
+          "id": "batch-fac-43-med-act-b",
           "quantity": 127,
           "expiryDate": "2027-10-30",
           "status": "released"
@@ -4091,7 +4191,7 @@
       ],
       "inbound": [
         {
-          "id": "planned-fac-32-med-act",
+          "id": "planned-fac-43-med-act",
           "quantity": 381,
           "expectedDate": "2026-11-24",
           "expiryDate": "2027-09-30",
@@ -4101,7 +4201,7 @@
       "leadTimeDays": 8
     },
     {
-      "facilityId": "fac-32",
+      "facilityId": "fac-43",
       "productId": "med-ins",
       "reportedAt": "2026-11-13",
       "usableUnits": 277,
@@ -4138,13 +4238,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-32-med-ins-a",
+          "id": "batch-fac-43-med-ins-a",
           "quantity": 138,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-32-med-ins-b",
+          "id": "batch-fac-43-med-ins-b",
           "quantity": 139,
           "expiryDate": "2027-11-29",
           "status": "released"
@@ -4152,7 +4252,7 @@
       ],
       "inbound": [
         {
-          "id": "inbound-fac-32-med-ins",
+          "id": "inbound-fac-43-med-ins",
           "quantity": 154,
           "expectedDate": "2026-11-20",
           "expiryDate": "2027-09-10",
@@ -4162,7 +4262,7 @@
       "leadTimeDays": 8
     },
     {
-      "facilityId": "fac-33",
+      "facilityId": "fac-44",
       "productId": "med-amox",
       "reportedAt": "2026-11-12",
       "usableUnits": 1996,
@@ -4199,13 +4299,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-33-med-amox-a",
+          "id": "batch-fac-44-med-amox-a",
           "quantity": 998,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-33-med-amox-b",
+          "id": "batch-fac-44-med-amox-b",
           "quantity": 998,
           "expiryDate": "2027-08-01",
           "status": "released"
@@ -4215,7 +4315,7 @@
       "leadTimeDays": 11
     },
     {
-      "facilityId": "fac-33",
+      "facilityId": "fac-44",
       "productId": "med-ors",
       "reportedAt": "2026-11-12",
       "usableUnits": 210,
@@ -4252,13 +4352,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-33-med-ors-a",
+          "id": "batch-fac-44-med-ors-a",
           "quantity": 105,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-33-med-ors-b",
+          "id": "batch-fac-44-med-ors-b",
           "quantity": 105,
           "expiryDate": "2027-08-31",
           "status": "released"
@@ -4268,7 +4368,7 @@
       "leadTimeDays": 11
     },
     {
-      "facilityId": "fac-33",
+      "facilityId": "fac-44",
       "productId": "med-oxy",
       "reportedAt": "2026-11-12",
       "usableUnits": 440,
@@ -4305,13 +4405,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-33-med-oxy-a",
+          "id": "batch-fac-44-med-oxy-a",
           "quantity": 220,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-33-med-oxy-b",
+          "id": "batch-fac-44-med-oxy-b",
           "quantity": 220,
           "expiryDate": "2027-09-30",
           "status": "released"
@@ -4319,7 +4419,7 @@
       ],
       "inbound": [
         {
-          "id": "inbound-fac-33-med-oxy",
+          "id": "inbound-fac-44-med-oxy",
           "quantity": 200,
           "expectedDate": "2026-11-21",
           "expiryDate": "2027-09-10",
@@ -4329,7 +4429,7 @@
       "leadTimeDays": 11
     },
     {
-      "facilityId": "fac-33",
+      "facilityId": "fac-44",
       "productId": "med-act",
       "reportedAt": "2026-11-12",
       "usableUnits": 408,
@@ -4366,13 +4466,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-33-med-act-a",
+          "id": "batch-fac-44-med-act-a",
           "quantity": 204,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-33-med-act-b",
+          "id": "batch-fac-44-med-act-b",
           "quantity": 204,
           "expiryDate": "2027-10-30",
           "status": "released"
@@ -4382,7 +4482,7 @@
       "leadTimeDays": 11
     },
     {
-      "facilityId": "fac-33",
+      "facilityId": "fac-44",
       "productId": "med-ins",
       "reportedAt": "2026-11-12",
       "usableUnits": 808,
@@ -4419,19 +4519,19 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-33-med-ins-a",
+          "id": "batch-fac-44-med-ins-a",
           "quantity": 282,
           "expiryDate": "2027-01-02",
           "status": "released"
         },
         {
-          "id": "batch-fac-33-med-ins-b",
+          "id": "batch-fac-44-med-ins-b",
           "quantity": 526,
           "expiryDate": "2027-11-29",
           "status": "released"
         },
         {
-          "id": "batch-fac-33-med-ins-q",
+          "id": "batch-fac-44-med-ins-q",
           "quantity": 9,
           "expiryDate": "2027-06-02",
           "status": "quarantined"
@@ -4441,7 +4541,7 @@
       "leadTimeDays": 11
     },
     {
-      "facilityId": "fac-34",
+      "facilityId": "fac-51",
       "productId": "med-amox",
       "reportedAt": "2026-11-11",
       "usableUnits": 1269,
@@ -4478,13 +4578,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-34-med-amox-a",
+          "id": "batch-fac-51-med-amox-a",
           "quantity": 634,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-34-med-amox-b",
+          "id": "batch-fac-51-med-amox-b",
           "quantity": 635,
           "expiryDate": "2027-08-01",
           "status": "released"
@@ -4494,7 +4594,7 @@
       "leadTimeDays": 14
     },
     {
-      "facilityId": "fac-34",
+      "facilityId": "fac-51",
       "productId": "med-ors",
       "reportedAt": "2026-11-11",
       "usableUnits": 301,
@@ -4531,13 +4631,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-34-med-ors-a",
+          "id": "batch-fac-51-med-ors-a",
           "quantity": 150,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-34-med-ors-b",
+          "id": "batch-fac-51-med-ors-b",
           "quantity": 151,
           "expiryDate": "2027-08-31",
           "status": "released"
@@ -4547,7 +4647,7 @@
       "leadTimeDays": 14
     },
     {
-      "facilityId": "fac-34",
+      "facilityId": "fac-51",
       "productId": "med-oxy",
       "reportedAt": "2026-11-11",
       "usableUnits": 0,
@@ -4584,13 +4684,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-34-med-oxy-a",
+          "id": "batch-fac-51-med-oxy-a",
           "quantity": 0,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-34-med-oxy-b",
+          "id": "batch-fac-51-med-oxy-b",
           "quantity": 0,
           "expiryDate": "2027-09-30",
           "status": "released"
@@ -4600,7 +4700,7 @@
       "leadTimeDays": 14
     },
     {
-      "facilityId": "fac-34",
+      "facilityId": "fac-51",
       "productId": "med-act",
       "reportedAt": "2026-11-11",
       "usableUnits": 69,
@@ -4637,19 +4737,19 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-34-med-act-a",
+          "id": "batch-fac-51-med-act-a",
           "quantity": 24,
           "expiryDate": "2027-01-03",
           "status": "released"
         },
         {
-          "id": "batch-fac-34-med-act-b",
+          "id": "batch-fac-51-med-act-b",
           "quantity": 45,
           "expiryDate": "2027-10-30",
           "status": "released"
         },
         {
-          "id": "batch-fac-34-med-act-q",
+          "id": "batch-fac-51-med-act-q",
           "quantity": 11,
           "expiryDate": "2027-06-02",
           "status": "quarantined"
@@ -4659,7 +4759,7 @@
       "leadTimeDays": 14
     },
     {
-      "facilityId": "fac-34",
+      "facilityId": "fac-51",
       "productId": "med-ins",
       "reportedAt": "2026-11-11",
       "usableUnits": 120,
@@ -4696,13 +4796,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-34-med-ins-a",
+          "id": "batch-fac-51-med-ins-a",
           "quantity": 60,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-34-med-ins-b",
+          "id": "batch-fac-51-med-ins-b",
           "quantity": 60,
           "expiryDate": "2027-11-29",
           "status": "released"
@@ -4710,7 +4810,7 @@
       ],
       "inbound": [
         {
-          "id": "planned-fac-34-med-ins",
+          "id": "planned-fac-51-med-ins",
           "quantity": 75,
           "expectedDate": "2026-11-24",
           "expiryDate": "2027-09-30",
@@ -4720,7 +4820,7 @@
       "leadTimeDays": 14
     },
     {
-      "facilityId": "fac-35",
+      "facilityId": "fac-52",
       "productId": "med-amox",
       "reportedAt": "2026-11-14",
       "usableUnits": 898,
@@ -4757,13 +4857,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-35-med-amox-a",
+          "id": "batch-fac-52-med-amox-a",
           "quantity": 449,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-35-med-amox-b",
+          "id": "batch-fac-52-med-amox-b",
           "quantity": 449,
           "expiryDate": "2027-08-01",
           "status": "released"
@@ -4771,7 +4871,7 @@
       ],
       "inbound": [
         {
-          "id": "inbound-fac-35-med-amox",
+          "id": "inbound-fac-52-med-amox",
           "quantity": 499,
           "expectedDate": "2026-11-19",
           "expiryDate": "2027-09-10",
@@ -4781,7 +4881,7 @@
       "leadTimeDays": 5
     },
     {
-      "facilityId": "fac-35",
+      "facilityId": "fac-52",
       "productId": "med-ors",
       "reportedAt": "2026-11-14",
       "usableUnits": 1166,
@@ -4818,13 +4918,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-35-med-ors-a",
+          "id": "batch-fac-52-med-ors-a",
           "quantity": 583,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-35-med-ors-b",
+          "id": "batch-fac-52-med-ors-b",
           "quantity": 583,
           "expiryDate": "2027-08-31",
           "status": "released"
@@ -4834,7 +4934,7 @@
       "leadTimeDays": 5
     },
     {
-      "facilityId": "fac-35",
+      "facilityId": "fac-52",
       "productId": "med-oxy",
       "reportedAt": "2026-11-14",
       "usableUnits": 56,
@@ -4871,19 +4971,19 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-35-med-oxy-a",
+          "id": "batch-fac-52-med-oxy-a",
           "quantity": 19,
           "expiryDate": "2027-01-04",
           "status": "released"
         },
         {
-          "id": "batch-fac-35-med-oxy-b",
+          "id": "batch-fac-52-med-oxy-b",
           "quantity": 37,
           "expiryDate": "2027-09-30",
           "status": "released"
         },
         {
-          "id": "batch-fac-35-med-oxy-q",
+          "id": "batch-fac-52-med-oxy-q",
           "quantity": 6,
           "expiryDate": "2027-06-02",
           "status": "quarantined"
@@ -4893,7 +4993,7 @@
       "leadTimeDays": 5
     },
     {
-      "facilityId": "fac-35",
+      "facilityId": "fac-52",
       "productId": "med-act",
       "reportedAt": "2026-11-14",
       "usableUnits": 554,
@@ -4930,13 +5030,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-35-med-act-a",
+          "id": "batch-fac-52-med-act-a",
           "quantity": 277,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-35-med-act-b",
+          "id": "batch-fac-52-med-act-b",
           "quantity": 277,
           "expiryDate": "2027-10-30",
           "status": "released"
@@ -4944,7 +5044,7 @@
       ],
       "inbound": [
         {
-          "id": "inbound-fac-35-med-act",
+          "id": "inbound-fac-52-med-act",
           "quantity": 252,
           "expectedDate": "2026-11-19",
           "expiryDate": "2027-09-10",
@@ -4954,7 +5054,7 @@
       "leadTimeDays": 5
     },
     {
-      "facilityId": "fac-35",
+      "facilityId": "fac-52",
       "productId": "med-ins",
       "reportedAt": "2026-11-14",
       "usableUnits": 109,
@@ -4991,13 +5091,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-35-med-ins-a",
+          "id": "batch-fac-52-med-ins-a",
           "quantity": 54,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-35-med-ins-b",
+          "id": "batch-fac-52-med-ins-b",
           "quantity": 55,
           "expiryDate": "2027-11-29",
           "status": "released"
@@ -5007,7 +5107,7 @@
       "leadTimeDays": 5
     },
     {
-      "facilityId": "fac-36",
+      "facilityId": "fac-53",
       "productId": "med-amox",
       "reportedAt": "2026-11-13",
       "usableUnits": 2306,
@@ -5044,13 +5144,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-36-med-amox-a",
+          "id": "batch-fac-53-med-amox-a",
           "quantity": 1153,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-36-med-amox-b",
+          "id": "batch-fac-53-med-amox-b",
           "quantity": 1153,
           "expiryDate": "2027-08-01",
           "status": "released"
@@ -5060,7 +5160,7 @@
       "leadTimeDays": 8
     },
     {
-      "facilityId": "fac-36",
+      "facilityId": "fac-53",
       "productId": "med-ors",
       "reportedAt": "2026-11-13",
       "usableUnits": 1015,
@@ -5097,19 +5197,19 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-36-med-ors-a",
+          "id": "batch-fac-53-med-ors-a",
           "quantity": 355,
           "expiryDate": "2027-01-05",
           "status": "released"
         },
         {
-          "id": "batch-fac-36-med-ors-b",
+          "id": "batch-fac-53-med-ors-b",
           "quantity": 660,
           "expiryDate": "2027-08-31",
           "status": "released"
         },
         {
-          "id": "batch-fac-36-med-ors-q",
+          "id": "batch-fac-53-med-ors-q",
           "quantity": 18,
           "expiryDate": "2027-06-02",
           "status": "quarantined"
@@ -5119,7 +5219,7 @@
       "leadTimeDays": 8
     },
     {
-      "facilityId": "fac-36",
+      "facilityId": "fac-53",
       "productId": "med-oxy",
       "reportedAt": "2026-11-13",
       "usableUnits": 141,
@@ -5156,13 +5256,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-36-med-oxy-a",
+          "id": "batch-fac-53-med-oxy-a",
           "quantity": 70,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-36-med-oxy-b",
+          "id": "batch-fac-53-med-oxy-b",
           "quantity": 71,
           "expiryDate": "2027-09-30",
           "status": "released"
@@ -5172,7 +5272,7 @@
       "leadTimeDays": 8
     },
     {
-      "facilityId": "fac-36",
+      "facilityId": "fac-53",
       "productId": "med-act",
       "reportedAt": "2026-11-13",
       "usableUnits": 0,
@@ -5209,13 +5309,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-36-med-act-a",
+          "id": "batch-fac-53-med-act-a",
           "quantity": 0,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-36-med-act-b",
+          "id": "batch-fac-53-med-act-b",
           "quantity": 0,
           "expiryDate": "2027-10-30",
           "status": "released"
@@ -5225,7 +5325,7 @@
       "leadTimeDays": 8
     },
     {
-      "facilityId": "fac-36",
+      "facilityId": "fac-53",
       "productId": "med-ins",
       "reportedAt": "2026-11-13",
       "usableUnits": 37,
@@ -5262,13 +5362,13 @@
       ],
       "batches": [
         {
-          "id": "batch-fac-36-med-ins-a",
+          "id": "batch-fac-53-med-ins-a",
           "quantity": 18,
           "expiryDate": "2027-04-13",
           "status": "released"
         },
         {
-          "id": "batch-fac-36-med-ins-b",
+          "id": "batch-fac-53-med-ins-b",
           "quantity": 19,
           "expiryDate": "2027-11-29",
           "status": "released"
@@ -5304,22 +5404,6 @@
       "sameDistrict": true
     },
     {
-      "fromFacilityId": "fac-11",
-      "toFacilityId": "fac-15",
-      "days": 2,
-      "costCents": 15500,
-      "coldChainCapable": false,
-      "sameDistrict": true
-    },
-    {
-      "fromFacilityId": "fac-11",
-      "toFacilityId": "fac-16",
-      "days": 1,
-      "costCents": 18000,
-      "coldChainCapable": true,
-      "sameDistrict": true
-    },
-    {
       "fromFacilityId": "fac-12",
       "toFacilityId": "fac-11",
       "days": 2,
@@ -5341,22 +5425,6 @@
       "days": 2,
       "costCents": 15500,
       "coldChainCapable": false,
-      "sameDistrict": true
-    },
-    {
-      "fromFacilityId": "fac-12",
-      "toFacilityId": "fac-15",
-      "days": 1,
-      "costCents": 18000,
-      "coldChainCapable": true,
-      "sameDistrict": true
-    },
-    {
-      "fromFacilityId": "fac-12",
-      "toFacilityId": "fac-16",
-      "days": 2,
-      "costCents": 8000,
-      "coldChainCapable": true,
       "sameDistrict": true
     },
     {
@@ -5384,22 +5452,6 @@
       "sameDistrict": true
     },
     {
-      "fromFacilityId": "fac-13",
-      "toFacilityId": "fac-15",
-      "days": 2,
-      "costCents": 8000,
-      "coldChainCapable": true,
-      "sameDistrict": true
-    },
-    {
-      "fromFacilityId": "fac-13",
-      "toFacilityId": "fac-16",
-      "days": 1,
-      "costCents": 10500,
-      "coldChainCapable": false,
-      "sameDistrict": true
-    },
-    {
       "fromFacilityId": "fac-14",
       "toFacilityId": "fac-11",
       "days": 2,
@@ -5424,102 +5476,6 @@
       "sameDistrict": true
     },
     {
-      "fromFacilityId": "fac-14",
-      "toFacilityId": "fac-15",
-      "days": 1,
-      "costCents": 10500,
-      "coldChainCapable": false,
-      "sameDistrict": true
-    },
-    {
-      "fromFacilityId": "fac-14",
-      "toFacilityId": "fac-16",
-      "days": 2,
-      "costCents": 13000,
-      "coldChainCapable": true,
-      "sameDistrict": true
-    },
-    {
-      "fromFacilityId": "fac-15",
-      "toFacilityId": "fac-11",
-      "days": 1,
-      "costCents": 18000,
-      "coldChainCapable": true,
-      "sameDistrict": true
-    },
-    {
-      "fromFacilityId": "fac-15",
-      "toFacilityId": "fac-12",
-      "days": 2,
-      "costCents": 8000,
-      "coldChainCapable": true,
-      "sameDistrict": true
-    },
-    {
-      "fromFacilityId": "fac-15",
-      "toFacilityId": "fac-13",
-      "days": 1,
-      "costCents": 10500,
-      "coldChainCapable": false,
-      "sameDistrict": true
-    },
-    {
-      "fromFacilityId": "fac-15",
-      "toFacilityId": "fac-14",
-      "days": 2,
-      "costCents": 13000,
-      "coldChainCapable": true,
-      "sameDistrict": true
-    },
-    {
-      "fromFacilityId": "fac-15",
-      "toFacilityId": "fac-16",
-      "days": 1,
-      "costCents": 15500,
-      "coldChainCapable": true,
-      "sameDistrict": true
-    },
-    {
-      "fromFacilityId": "fac-16",
-      "toFacilityId": "fac-11",
-      "days": 2,
-      "costCents": 8000,
-      "coldChainCapable": true,
-      "sameDistrict": true
-    },
-    {
-      "fromFacilityId": "fac-16",
-      "toFacilityId": "fac-12",
-      "days": 1,
-      "costCents": 10500,
-      "coldChainCapable": false,
-      "sameDistrict": true
-    },
-    {
-      "fromFacilityId": "fac-16",
-      "toFacilityId": "fac-13",
-      "days": 2,
-      "costCents": 13000,
-      "coldChainCapable": true,
-      "sameDistrict": true
-    },
-    {
-      "fromFacilityId": "fac-16",
-      "toFacilityId": "fac-14",
-      "days": 1,
-      "costCents": 15500,
-      "coldChainCapable": true,
-      "sameDistrict": true
-    },
-    {
-      "fromFacilityId": "fac-16",
-      "toFacilityId": "fac-15",
-      "days": 2,
-      "costCents": 18000,
-      "coldChainCapable": false,
-      "sameDistrict": true
-    },
-    {
       "fromFacilityId": "fac-21",
       "toFacilityId": "fac-22",
       "days": 1,
@@ -5532,30 +5488,6 @@
       "toFacilityId": "fac-23",
       "days": 2,
       "costCents": 13000,
-      "coldChainCapable": true,
-      "sameDistrict": true
-    },
-    {
-      "fromFacilityId": "fac-21",
-      "toFacilityId": "fac-24",
-      "days": 1,
-      "costCents": 15500,
-      "coldChainCapable": false,
-      "sameDistrict": true
-    },
-    {
-      "fromFacilityId": "fac-21",
-      "toFacilityId": "fac-25",
-      "days": 2,
-      "costCents": 18000,
-      "coldChainCapable": true,
-      "sameDistrict": true
-    },
-    {
-      "fromFacilityId": "fac-21",
-      "toFacilityId": "fac-26",
-      "days": 1,
-      "costCents": 8000,
       "coldChainCapable": true,
       "sameDistrict": true
     },
@@ -5576,30 +5508,6 @@
       "sameDistrict": true
     },
     {
-      "fromFacilityId": "fac-22",
-      "toFacilityId": "fac-24",
-      "days": 2,
-      "costCents": 18000,
-      "coldChainCapable": true,
-      "sameDistrict": true
-    },
-    {
-      "fromFacilityId": "fac-22",
-      "toFacilityId": "fac-25",
-      "days": 1,
-      "costCents": 8000,
-      "coldChainCapable": true,
-      "sameDistrict": true
-    },
-    {
-      "fromFacilityId": "fac-22",
-      "toFacilityId": "fac-26",
-      "days": 2,
-      "costCents": 10500,
-      "coldChainCapable": false,
-      "sameDistrict": true
-    },
-    {
       "fromFacilityId": "fac-23",
       "toFacilityId": "fac-21",
       "days": 1,
@@ -5612,150 +5520,6 @@
       "toFacilityId": "fac-22",
       "days": 2,
       "costCents": 18000,
-      "coldChainCapable": true,
-      "sameDistrict": true
-    },
-    {
-      "fromFacilityId": "fac-23",
-      "toFacilityId": "fac-24",
-      "days": 1,
-      "costCents": 8000,
-      "coldChainCapable": true,
-      "sameDistrict": true
-    },
-    {
-      "fromFacilityId": "fac-23",
-      "toFacilityId": "fac-25",
-      "days": 2,
-      "costCents": 10500,
-      "coldChainCapable": false,
-      "sameDistrict": true
-    },
-    {
-      "fromFacilityId": "fac-23",
-      "toFacilityId": "fac-26",
-      "days": 1,
-      "costCents": 13000,
-      "coldChainCapable": true,
-      "sameDistrict": true
-    },
-    {
-      "fromFacilityId": "fac-24",
-      "toFacilityId": "fac-21",
-      "days": 2,
-      "costCents": 18000,
-      "coldChainCapable": true,
-      "sameDistrict": true
-    },
-    {
-      "fromFacilityId": "fac-24",
-      "toFacilityId": "fac-22",
-      "days": 1,
-      "costCents": 8000,
-      "coldChainCapable": true,
-      "sameDistrict": true
-    },
-    {
-      "fromFacilityId": "fac-24",
-      "toFacilityId": "fac-23",
-      "days": 2,
-      "costCents": 10500,
-      "coldChainCapable": false,
-      "sameDistrict": true
-    },
-    {
-      "fromFacilityId": "fac-24",
-      "toFacilityId": "fac-25",
-      "days": 1,
-      "costCents": 13000,
-      "coldChainCapable": true,
-      "sameDistrict": true
-    },
-    {
-      "fromFacilityId": "fac-24",
-      "toFacilityId": "fac-26",
-      "days": 2,
-      "costCents": 15500,
-      "coldChainCapable": true,
-      "sameDistrict": true
-    },
-    {
-      "fromFacilityId": "fac-25",
-      "toFacilityId": "fac-21",
-      "days": 1,
-      "costCents": 8000,
-      "coldChainCapable": true,
-      "sameDistrict": true
-    },
-    {
-      "fromFacilityId": "fac-25",
-      "toFacilityId": "fac-22",
-      "days": 2,
-      "costCents": 10500,
-      "coldChainCapable": false,
-      "sameDistrict": true
-    },
-    {
-      "fromFacilityId": "fac-25",
-      "toFacilityId": "fac-23",
-      "days": 1,
-      "costCents": 13000,
-      "coldChainCapable": true,
-      "sameDistrict": true
-    },
-    {
-      "fromFacilityId": "fac-25",
-      "toFacilityId": "fac-24",
-      "days": 2,
-      "costCents": 15500,
-      "coldChainCapable": true,
-      "sameDistrict": true
-    },
-    {
-      "fromFacilityId": "fac-25",
-      "toFacilityId": "fac-26",
-      "days": 1,
-      "costCents": 18000,
-      "coldChainCapable": false,
-      "sameDistrict": true
-    },
-    {
-      "fromFacilityId": "fac-26",
-      "toFacilityId": "fac-21",
-      "days": 2,
-      "costCents": 10500,
-      "coldChainCapable": false,
-      "sameDistrict": true
-    },
-    {
-      "fromFacilityId": "fac-26",
-      "toFacilityId": "fac-22",
-      "days": 1,
-      "costCents": 13000,
-      "coldChainCapable": true,
-      "sameDistrict": true
-    },
-    {
-      "fromFacilityId": "fac-26",
-      "toFacilityId": "fac-23",
-      "days": 2,
-      "costCents": 15500,
-      "coldChainCapable": true,
-      "sameDistrict": true
-    },
-    {
-      "fromFacilityId": "fac-26",
-      "toFacilityId": "fac-24",
-      "days": 1,
-      "costCents": 18000,
-      "coldChainCapable": false,
-      "sameDistrict": true
-    },
-    {
-      "fromFacilityId": "fac-26",
-      "toFacilityId": "fac-25",
-      "days": 2,
-      "costCents": 8000,
       "coldChainCapable": true,
       "sameDistrict": true
     },
@@ -5784,22 +5548,6 @@
       "sameDistrict": true
     },
     {
-      "fromFacilityId": "fac-31",
-      "toFacilityId": "fac-35",
-      "days": 2,
-      "costCents": 8000,
-      "coldChainCapable": true,
-      "sameDistrict": true
-    },
-    {
-      "fromFacilityId": "fac-31",
-      "toFacilityId": "fac-36",
-      "days": 1,
-      "costCents": 10500,
-      "coldChainCapable": false,
-      "sameDistrict": true
-    },
-    {
       "fromFacilityId": "fac-32",
       "toFacilityId": "fac-31",
       "days": 2,
@@ -5820,22 +5568,6 @@
       "toFacilityId": "fac-34",
       "days": 2,
       "costCents": 8000,
-      "coldChainCapable": true,
-      "sameDistrict": true
-    },
-    {
-      "fromFacilityId": "fac-32",
-      "toFacilityId": "fac-35",
-      "days": 1,
-      "costCents": 10500,
-      "coldChainCapable": false,
-      "sameDistrict": true
-    },
-    {
-      "fromFacilityId": "fac-32",
-      "toFacilityId": "fac-36",
-      "days": 2,
-      "costCents": 13000,
       "coldChainCapable": true,
       "sameDistrict": true
     },
@@ -5864,22 +5596,6 @@
       "sameDistrict": true
     },
     {
-      "fromFacilityId": "fac-33",
-      "toFacilityId": "fac-35",
-      "days": 2,
-      "costCents": 13000,
-      "coldChainCapable": true,
-      "sameDistrict": true
-    },
-    {
-      "fromFacilityId": "fac-33",
-      "toFacilityId": "fac-36",
-      "days": 1,
-      "costCents": 15500,
-      "coldChainCapable": true,
-      "sameDistrict": true
-    },
-    {
       "fromFacilityId": "fac-34",
       "toFacilityId": "fac-31",
       "days": 2,
@@ -5904,98 +5620,146 @@
       "sameDistrict": true
     },
     {
-      "fromFacilityId": "fac-34",
-      "toFacilityId": "fac-35",
+      "fromFacilityId": "fac-41",
+      "toFacilityId": "fac-42",
       "days": 1,
       "costCents": 15500,
-      "coldChainCapable": true,
+      "coldChainCapable": false,
       "sameDistrict": true
     },
     {
-      "fromFacilityId": "fac-34",
-      "toFacilityId": "fac-36",
+      "fromFacilityId": "fac-41",
+      "toFacilityId": "fac-43",
       "days": 2,
       "costCents": 18000,
-      "coldChainCapable": false,
-      "sameDistrict": true
-    },
-    {
-      "fromFacilityId": "fac-35",
-      "toFacilityId": "fac-31",
-      "days": 1,
-      "costCents": 10500,
-      "coldChainCapable": false,
-      "sameDistrict": true
-    },
-    {
-      "fromFacilityId": "fac-35",
-      "toFacilityId": "fac-32",
-      "days": 2,
-      "costCents": 13000,
       "coldChainCapable": true,
       "sameDistrict": true
     },
     {
-      "fromFacilityId": "fac-35",
-      "toFacilityId": "fac-33",
-      "days": 1,
-      "costCents": 15500,
-      "coldChainCapable": true,
-      "sameDistrict": true
-    },
-    {
-      "fromFacilityId": "fac-35",
-      "toFacilityId": "fac-34",
-      "days": 2,
-      "costCents": 18000,
-      "coldChainCapable": false,
-      "sameDistrict": true
-    },
-    {
-      "fromFacilityId": "fac-35",
-      "toFacilityId": "fac-36",
+      "fromFacilityId": "fac-41",
+      "toFacilityId": "fac-44",
       "days": 1,
       "costCents": 8000,
       "coldChainCapable": true,
       "sameDistrict": true
     },
     {
-      "fromFacilityId": "fac-36",
-      "toFacilityId": "fac-31",
-      "days": 2,
-      "costCents": 13000,
-      "coldChainCapable": true,
-      "sameDistrict": true
-    },
-    {
-      "fromFacilityId": "fac-36",
-      "toFacilityId": "fac-32",
-      "days": 1,
-      "costCents": 15500,
-      "coldChainCapable": true,
-      "sameDistrict": true
-    },
-    {
-      "fromFacilityId": "fac-36",
-      "toFacilityId": "fac-33",
+      "fromFacilityId": "fac-42",
+      "toFacilityId": "fac-41",
       "days": 2,
       "costCents": 18000,
-      "coldChainCapable": false,
+      "coldChainCapable": true,
       "sameDistrict": true
     },
     {
-      "fromFacilityId": "fac-36",
-      "toFacilityId": "fac-34",
+      "fromFacilityId": "fac-42",
+      "toFacilityId": "fac-43",
       "days": 1,
       "costCents": 8000,
       "coldChainCapable": true,
       "sameDistrict": true
     },
     {
-      "fromFacilityId": "fac-36",
-      "toFacilityId": "fac-35",
+      "fromFacilityId": "fac-42",
+      "toFacilityId": "fac-44",
       "days": 2,
       "costCents": 10500,
+      "coldChainCapable": false,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-43",
+      "toFacilityId": "fac-41",
+      "days": 1,
+      "costCents": 8000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-43",
+      "toFacilityId": "fac-42",
+      "days": 2,
+      "costCents": 10500,
+      "coldChainCapable": false,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-43",
+      "toFacilityId": "fac-44",
+      "days": 1,
+      "costCents": 13000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-44",
+      "toFacilityId": "fac-41",
+      "days": 2,
+      "costCents": 10500,
+      "coldChainCapable": false,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-44",
+      "toFacilityId": "fac-42",
+      "days": 1,
+      "costCents": 13000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-44",
+      "toFacilityId": "fac-43",
+      "days": 2,
+      "costCents": 15500,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-51",
+      "toFacilityId": "fac-52",
+      "days": 1,
+      "costCents": 18000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-51",
+      "toFacilityId": "fac-53",
+      "days": 2,
+      "costCents": 8000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-52",
+      "toFacilityId": "fac-51",
+      "days": 2,
+      "costCents": 8000,
+      "coldChainCapable": true,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-52",
+      "toFacilityId": "fac-53",
+      "days": 1,
+      "costCents": 10500,
+      "coldChainCapable": false,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-53",
+      "toFacilityId": "fac-51",
+      "days": 1,
+      "costCents": 10500,
+      "coldChainCapable": false,
+      "sameDistrict": true
+    },
+    {
+      "fromFacilityId": "fac-53",
+      "toFacilityId": "fac-52",
+      "days": 2,
+      "costCents": 13000,
       "coldChainCapable": true,
       "sameDistrict": true
     }
@@ -6042,6 +5806,13 @@
       "category": "Responsible AI",
       "text": "This release has no connected LLM. Retrieval answers cite demo evidence and computed facts. Deterministic tools own arithmetic and constraints; no model may autonomously approve expenditure or create clinical instructions.",
       "source": "StockSense illustrative demo guidance"
+    },
+    {
+      "id": "EV-007",
+      "title": "Facility names are real-world references, not real data",
+      "category": "Data governance",
+      "text": "Facility display names reference real public institutions in the Gates Foundation Africa focus countries (Nigeria, Burkina Faso, Ethiopia, Kenya, South Africa). Every stock, consumption, budget, and risk figure attached to them is synthetic. Names do not imply Foundation funding of that facility, nor describe its actual stock or performance.",
+      "source": "StockSense illustrative demo guidance; see docs/FACILITY_NAMES.md"
     }
   ]
 }
